@@ -1,0 +1,81 @@
+{-# LANGUAGE OverloadedStrings #-}
+{-# LANGUAGE RecordWildCards   #-}
+
+module Main (main) where
+
+import Miso
+import Miso.String (MisoString, ms)
+import qualified Data.Map as M
+import Language.Javascript.JSaddle.Warp (run)
+
+-- | Model
+type Model = Int
+
+-- | Actions
+data Action
+  = Increment
+  | Decrement
+  deriving (Show, Eq)
+
+-- | Entry point (for jsaddle-warp server)
+main :: IO ()
+main = run 3000 $ startApp App
+  { initialAction = Increment
+  , model         = 0
+  , update        = updateModel
+  , view          = viewModel
+  , events        = defaultEvents
+  , subs          = []
+  , mountPoint    = Nothing
+  , logLevel      = Off
+  }
+
+-- | Update function
+updateModel :: Action -> Model -> Effect Action Model
+updateModel action model = case action of
+  Increment -> noEff (model + 1)
+  Decrement -> noEff (model - 1)
+
+-- | View function
+viewModel :: Model -> View Action
+viewModel counter =
+  div_ [ style_ containerStyle ]
+    [ h1_ [] [ text "🍜 Simple Miso Counter (Warp)" ]
+    , div_ [ style_ counterStyle ] [ text (ms counter) ]
+    , div_ [ style_ buttonsStyle ]
+        [ button_ [ onClick Increment, style_ buttonStyle ] [ text "+" ]
+        , button_ [ onClick Decrement, style_ buttonStyle ] [ text "-" ]
+        ]
+    ]
+
+-- | Inline styles
+containerStyle, counterStyle, buttonsStyle, buttonStyle :: M.Map MisoString MisoString
+
+containerStyle = M.fromList
+  [ ("display", "flex")
+  , ("flex-direction", "column")
+  , ("align-items", "center")
+  , ("justify-content", "center")
+  , ("height", "100vh")
+  , ("font-family", "sans-serif")
+  ]
+
+counterStyle = M.fromList
+  [ ("font-size", "5rem")
+  , ("font-weight", "bold")
+  , ("margin", "1rem 0")
+  ]
+
+buttonsStyle = M.fromList
+  [ ("display", "flex")
+  , ("gap", "1rem")
+  ]
+
+buttonStyle = M.fromList
+  [ ("font-size", "2rem")
+  , ("width", "3rem")
+  , ("height", "3rem")
+  , ("border-radius", "50%")
+  , ("border", "none")
+  , ("cursor", "pointer")
+  ]
