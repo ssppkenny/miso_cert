@@ -40,17 +40,22 @@ executables:
   cert-exe:
     main:                Main.hs
     source-dirs:         app
-    ghc-options:
-    - -threaded
-    - -rtsopts
-    - -with-rtsopts=-N
     dependencies:
     - cert
     - containers
     - miso
     - text
+    - file-embed
+    - template-haskell
     - jsaddle
-    - jsaddle-warp
+    when:
+    - condition: '!arch(wasm32)'
+      ghc-options:
+      - -threaded
+      - -rtsopts
+      - -with-rtsopts=-N
+      dependencies:
+      - jsaddle-warp
 
 tests:
   cert-test:

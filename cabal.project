@@ -1,0 +1,9 @@
+packages:
+  .
+  ./miso
+
+allow-newer:
+  all:base
+
+flags: +template-haskell
+
