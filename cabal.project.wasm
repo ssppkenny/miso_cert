@@ -1,0 +1,12 @@
+-- cabal.project.wasm
+-- Used by the WASM build only:
+--   wasm32-wasi-cabal --project-file=cabal.project.wasm build exe:cert-exe
+
+packages: .
+
+-- Build miso WITHOUT its jsaddle backend.
+-- In the native/dev build miso is built with jsaddle (for jsaddle-warp).
+-- For the WASM target we use miso's built-in WASM/browser bindings instead.
+package miso
+  flags: -jsaddle
+

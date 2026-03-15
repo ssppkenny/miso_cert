@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Cert Quiz</title>
+  <style>
+    body { margin: 0; font-family: system-ui, sans-serif; }
+    #loading {
+      display: flex; align-items: center; justify-content: center;
+      height: 100vh; font-size: 1.2em; color: #6b7280;
+    }
+  </style>
+</head>
+<body>
+  <div id="loading">Loading quiz…</div>
+
+  <script type="module">
+    // ---------------------------------------------------------------------------
+    // GHC WASM loader
+    // The post-link step (see build-wasm.sh) produces ghc_wasm_jsffi.js next to
+    // the .wasm binary.  That file exports the JS-FFI bridge that GHC WASM uses
+    // to call browser APIs (DOM, localStorage, setTimeout, …).
+    // ---------------------------------------------------------------------------
+
+    // 1. Import the generated JS-FFI bridge.
+    const { default: ghcWasmJsFfi } = await import("./ghc_wasm_jsffi.js");
+
+    // 2. Fetch and compile the WASM binary.
+    const wasmModule = await WebAssembly.compileStreaming(
+      fetch("cert-exe.wasm")
+    );
+
+    // 3. Instantiate with the FFI imports that GHC generated.
+    const instance = await WebAssembly.instantiate(wasmModule, {
+      ghc_wasm_jsffi: ghcWasmJsFfi.imports,
+    });
+
+    // 4. Wire the exports back into the FFI bridge so callbacks work.
+    ghcWasmJsFfi.init(instance.exports);
+
+    // 5. Run static constructors (sets up the RTS).
+    instance.exports.__wasm_call_ctors();
+
+    // 6. Remove the loading indicator.
+    document.getElementById("loading").remove();
+
+    // 7. Start the Haskell main function (mounts the Miso app into <body>).
+    await instance.exports.hs_main();
+  </script>
+</body>
+</html>
+
