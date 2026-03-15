@@ -43,6 +43,8 @@ packages:
 # - git: https://github.com/commercialhaskell/stack.git
 #   commit: e7b331f14bcffb8367cd58fbfc8b40ec7642100a
 #
+
+system-ghc: true
 extra-deps:
   - miso-1.8.7.0
   - text-2.1.3

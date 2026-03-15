@@ -1,0 +1,720 @@
+1.  How many of the Duration, LocalDateTime, and LocalTime classes have the concept of a time zone?
+A.  None
+B.  One
+C.  Two
+D.  Three
+2.  How many lines does this print?
+System.out.print("""
+   "ape"
+   "baboon"
+   "gorilla"
+   """);
+A.  Three
+B.  Four
+C.  Five
+D.  The code does not compile.
+3.  Which of the following are not valid variable names? (Choose two.)
+A.  _
+B.  _blue
+C.  2blue
+D.  blue$
+E.  Blue
+4.  Which class has a getSeconds() method?
+A.  Only the Duration class
+B.  Only the Period class
+C.  Both the Duration and Period classes
+D.  Neither class
+5.  Most of the United States observes daylight saving time on March 13, 2022, by moving the clocks forward an hour at 2 a.m. What does the following code output?
+var localDate = LocalDate.of(2022, 3, 13);
+var localTime = LocalTime.of(1, 0);
+var zone = ZoneId.of("America/New_York");
+var z = ZonedDateTime.of(localDate, localTime, zone);
+var offset = z.getOffset();
+var duration = Duration.ofHours(3);
+var later = z.plus(duration);
+System.out.println(later.getHour() + " "
+   + offset.equals(later.getOffset()));
+A. 4 false
+B. 4 true
+C. 5 false
+D. 5 true
+E. 6 false
+F. 6 true
+G. None of the above
+6.  What is the value of tip after executing the following code snippet?
+int meal = 5;
+int tip = 2;
+var total = meal + (meal>6 ? tip++ : tip--);
+A.  1
+B.  2
+C.  3
+D.  7
+E.  None of the above
+7.  What does the following output?
+int year = 1874;
+int month = Month.MARCH;
+int day = 24;
+LocalDate date = LocalDate.of(year, month, day);
+System.out.println(date.isBefore(LocalDate.now()));
+A.  false
+B.  true
+C.  The code does not compile.
+D.  The code compiles but throws an exception at runtime.
+8.  What is the output of the following?
+12: var b = "12";
+13: b += "3";
+14: b.reverse();
+15: System.out.println(b.toString());
+A.  12
+B.  21
+C.  123
+D.  321
+E.  The code does not compile.
+9.  What is the output of the following?
+5: var line = new StringBuilder("-");
+6: var anotherLine = line.append("-");
+7: System.out.print(line == anotherLine);
+8: System.out.print(" ");
+9: System.out.print(line.length());
+A.  false 1
+B.  false 2
+C.  true 1
+D.  true 2
+E.  It does not compile.
+10.  Given that daylight saving time starts on March 13, 2022, at 2 a.m. and clocks jump from 1:59 a.m. to 03:00 a.m., which of the following can fill in the blank so the code doesn’t throw an exception?
+var localDate = LocalDate.of(2022, 3, 13);
+var localTime = LocalTime.of(____________);
+var zone = ZoneId.of("America/New_York");
+var z = ZonedDateTime.of(localDate, localTime, zone);
+A.  2, 0
+B.  3, 0
+C.  Either of the above will run without throwing an exception.
+D.  Both of these will cause an exception to be thrown.
+11.  Which statement is true of this text block?
+                                   var block = """
+                                      green
+                                        yellow
+                                   """;
+A.  There is only essential whitespace.
+B.  There is only incidental whitespace.
+C.  There is both essential and incidental whitespace.
+D.  The code does not compile.
+12.  What are the return types of cat, moose, and penguin, respectively?
+var cat = Math.ceil(65);
+var moose = Math.max(7,8);
+var penguin = Math.pow(2, 3);
+A.  double, double, double
+B.  double, int, double
+C.  double, int, int
+D.  int, double, double
+E.  int, int, double
+F.  int, int, int
+13.  What is the result of the following?
+11: var waffleDay = LocalDate.of(2022, Month.MARCH, 25);
+12: var period = Period.of(1, 6, 3);
+13: var later = waffleDay.plus(period);
+14: later.plusDays(1);
+15: var thisOne = LocalDate.of(2023, Month.SEPTEMBER, 28);
+16: var thatOne = LocalDate.of(2023, Month.SEPTEMBER, 29);
+17: System.out.println(later.isBefore(thisOne) + " " 
+18:    + later.isBefore(thatOne));
+A.  false false
+B.  false true
+C.  true true
+D.  true false
+E.  The code does not compile.
+14.  Which operators work with one or more boolean types? (Choose three.)
+A.  ^
+B.  ~
+C.  &
+D.  +
+E.  ||
+F.  @
+15.  What is a possible result of the following?
+var montyPythonDay = LocalDate.of(2023, Month.MAY, 10);
+var aprilFools = LocalDate.of(2023,  Month.APRIL, 1);
+var duration = Duration.ofDays(1);
+var result = montyPythonDay.minus(duration);
+System.out.println(result + " " + 
+aprilFools.isBefore(result));
+A.  2023-05-09 false
+B.  2023-05-09 true
+C.  The code does not compile.
+D.  None of the above.
+16.  What is the output of the following?
+5: var line = new String("-");
+6: var anotherLine = line.concat("-");
+7: System.out.print(line == anotherLine);
+8: System.out.print(" ");
+9: System.out.print(line.length());
+A.  false 1
+B.  false 2
+C.  true 1
+D.  true 2
+E.  Does not compile
+17.  How many of these lines contain a compiler error?
+public void pi() {
+   byte b = 3.14;
+   double d = 3.14;
+   float f = 3.14;
+   short s = 3.14;
+}
+A.  None
+B.  One
+C.  Two
+D.  Three
+E.  Four
+18.  In the United States, daylight saving time ends on November 6, 2022 at 02:00 a.m. and we repeat the previous hour. What is the output of the following?
+var localDate = LocalDate.of(2022, Month.NOVEMBER, 6);
+var localTime = LocalTime.of(1, 0);
+var zone = ZoneId.of("America/New_York");
+var z = ZonedDateTime.of(localDate, localTime, zone);
+var offset = z.getOffset();
+for (int i = 0; i < 6; i++) 
+   z.plusHours(1);
+System.out.print(z.getHour() + " "
+   + offset.equals(z.getOffset()));
+A.  5 false
+B.  5 true
+C.  6 false
+D.  6 true
+E.  7 false
+F.  7 true
+G.  None of the above
+19.  What does the following code output?
+var baa = 8;
+var bleat = ~baa;
+var sheep = ~bleat;
+System.out.printf(bleat + " " + sheep);
+A.  -8 8
+B.  -8 9
+C.  -9 8
+D.  -9 9
+E.  None of the above
+20.  The author of this method forgot to include the data type. Which of the following reference types can best fill in the blank to complete this method?
+public static void secret(______________ mystery) {
+   char ch = mystery.charAt(3);
+   mystery = mystery.insert(1, "more");
+   int num = mystery.length();
+}
+A.  String
+B.  StringBuilder
+C.  Both
+D.  Neither
+21.  LocalTime.of() has a number of overloads. Which of the following is not one of them?
+A.  LocalTime.of(int hour, int minute)
+B.  LocalTime.of(int hour, int minute, int second)
+C.  LocalTime.of(int hour, int minute, int second, int nanoOfSecond)
+D.  LocalTime.of(int hour, int minute, int second, int nanoOfSecond, int picoSeconds)
+22.  Which statements are true about the output of this code? (Choose three.)
+var text = """
+   ant  antelope \s \n
+   cat "kitten" \
+   seal sea lion
+   """;
+System.out.print(text);
+A.  It contains two quotes.
+B.  It contains eight quotes.
+C.  It is three lines.
+D.  One line is blank.
+E.  Two lines are blank.
+F.  The first line contains trailing whitespace.
+G.  The first line does not contain trailing whitespace.
+23.  Fill in the blanks: The operators !=,_____________,_____________,_____________, and ++ are listed in the same or increasing levels of operator precedence. (Choose two.)
+A.  ==, *, !
+B.  /, %, *
+C.  *, --, /
+D.  !, *, %
+E.  +=, &&, *
+F.  *, <, /
+24.  How many of the LocalDate, Period, and ZonedDate classes have a method to get the year?
+A.  None
+B.  One
+C.  Two
+D.  Three
+25.  Given the following Venn diagram and the boolean variables, apples, oranges, and bananas, which expression most closely represents the filled-in region of the diagram?
+A.  apples && oranges && !bananas
+B.  orange || (oranges && !bananas)
+C.  (apples || bananas) && oranges
+D.  oranges && apples
+E.  (apples || oranges) && !bananas
+F.  apples ^ oranges
+26.  What is a possible output of this code?
+var time = LocalTime.of(1,2,3,4);
+System.out.println(time);
+A.  01:02:03.4
+B.  01:02:03.000000004
+C.  01/01/1970 01:02:03.4
+D.  01/01/1970 01:02:03.000000004
+27.  What is the output of the following?
+var teams = new StringBuilder("333");
+teams.append(" 806");
+teams.append(" 1601");
+System.out.print(teams);
+A.  333
+B.  333 806 1601
+C.  The code compiles but outputs something else.
+D.  The code does not compile.
+28.  Which of the following local variable declarations does not compile?
+A.  double num1, int num2 = 0;
+B.  int num1, num2;
+C.  int num1, num2 = 0;
+D.  int num1 = 0, num2 = 0;
+E.  All of the above
+F.  None of the above
+29.  Which contains a constant named HOURS?
+A.  ChronoUnit
+B.  Duration
+C.  Instant
+D.  Period
+E.  None of the above
+30.  Which methods, when combined, match the functionality of the strip() method? (Choose two.)
+A.  stripAfter()
+B.  stripBefore()
+C.  stripEnding()
+D.  stripIndent()
+E.  stripLeaders()
+F.  stripTrailing()
+31.  The United States observes daylight saving time on March 13, 2022, by moving the clocks forward an hour at 2 a.m. What does the following code output?
+var localDate = LocalDate.of(2022, 3, 13);
+var localTime = LocalTime.of(13, 0);
+var zone = ZoneId.of("America/New_York");
+var z = ZonedDateTime.of(localDate, localTime, zone);
+var offset = z.getOffset();
+var duration = Duration.ofHours(3);
+var later = z.plus(duration);
+System.out.println(later.getHour() + " "
+   + offset.equals(later.getOffset()));
+A.  13 false
+B.  13 true
+C.  16 false
+D.  16 true
+E.  17 false
+F.  17 true
+G.  None of the above
+32.  Which of the following can fill in the blank so the code prints true?
+var happy = " :) - (: ";
+var really = happy.trim();
+var question = happy.substring(_____________________);
+System.out.println(really.equals(question));
+A.  0, happy.length() - 1
+B.  0, happy.length()
+C.  1, happy.length() - 1
+D.  1, happy.length()
+E.  None of the above
+33.  How many of the following lines contain a compiler error?
+double num1 = 2.718;
+double num2 = 2._718;
+double num3 = 2.7_1_8;
+double num4 = _2.718;
+A.  0
+B.  1
+C.  2
+D.  3
+E.  4
+34.  What is a possible result of the following?
+var montyPythonDay = LocalDate.of(2022, Month.MAY, 10);
+var time = LocalTime.of(5, 40);
+var dateTime = LocalDateTime.of(montyPythonDay, time);
+var duration = Duration.ofDays(1);
+var result = dateTime.minus(duration);
+System.out.println(result);
+A.  2022-05-09
+B.  2022-05-09T05:40
+C.  2022-05-10T05:40
+D.  The code does not compile.
+E.  None of the above.
+35.  What is true of the following code? (Choose two.)
+var numPigeons = Long._____________("100");
+System.out.println(numPigeons.toString());
+A.  When parseLong fills in the blank, the code does not compile.
+B.  When parseLong fills in the blank, the code throws an exception.
+C.  When parseLong fills in the blank, the output is 100.
+D.  When valueOf fills in the blank, the code does not compile.
+E.  When valueOf fills in the blank, the code throws an exception.
+F.  When valueOf fills in the blank, the output is 100.
+36.  What is the output of the following application?
+public class Airplane {
+   static int start = 2;
+   final int end;
+   public Airplane(int x) {
+      x = 4;
+      end = x;
+   }
+   public void fly(int distance) {
+      System.out.print(end-start+" ");
+      System.out.print(distance);
+   }
+   public static void main(String… start) {
+      new Airplane(10).fly(5);
+   } }
+A.  2 5
+B.  8 5
+C.  6 5
+D.  The code does not compile.
+E.  None of the above.
+37.  What is the output of the following?
+var date1 = LocalDate.of(2022, Month.MARCH, 3);
+var date2 = LocalDate.of(2022, Month.FEBRUARY, 31);
+System.out.println(date1.equals(date2));
+A.  false
+B.  true
+C.  The code does not compile.
+D.  The code compiles but throws an exception at runtime.
+38.  How many lines does this print?
+System.out.print("""
+   "ape"
+   "baboon"
+   "gorilla" """);
+A.  Three
+B.  Four
+C.  Five
+D.  The code does not compile.
+39.  What is the output of the following class?
+1: package rocket;
+2: public class Countdown {
+3:    public static void main(String[] blastOff) {
+4:       var builder = "54321";
+5:       builder = builder.substring(4);
+6:       System.out.println(builder.charAt(2));
+7:    } }
+A.  2
+B.  3
+C.  4
+D.  The code does not compile.
+E.  None of the above
+40.  In the United States, daylight saving time for 2022 starts at 2 a.m. on March 13th and ends at 2 a.m. on November 6th. Given the sequence in the following image, what time comes next on March 13th, July 4th, and November 6th, respectively?
+A.  01:00, 01:00, 01:00
+B.  01:00, 02:00, 01:00
+C.  01:00, 02:00, 03:00
+D.  02:00, 02:00, 02:00
+E.  03:00, 02:00, 01:00
+F.  03:00, 02:00, 03:00
+41.  What does the following code output?
+var baa = false;
+var bleat = ~baa;
+var sheep = ~bleat;
+System.out.printf(bleat + " " + sheep);
+A.  false false
+B.  false true
+C.  true false
+D.  true true
+E.  None of the above
+42.  What is a possible output of the following?
+var trainDay = LocalDate.of(2022, 5, 13);
+var time = LocalTime.of(10, 0);
+var zone = ZoneId.of("America/Los_Angeles");
+var zdt = ZonedDateTime.of(trainDay, time, zone);
+var instant = zdt.toInstant();
+instant = instant.plus(1, ChronoUnit.DAYS);
+System.out.println(instant);
+A.  2022-05-13T10:00-07:00[America/Los_Angeles]
+B.  2022-05-13T00:00:00Z
+C.  2022-05-13T17:00:00Z
+D.  2022-05-14T10:00-07:00[America/Los_Angeles]
+E.  2022-05-14T00:00:00Z
+F.  2022-05-14T17:00:00Z
+43.  What is the output of the following application?
+package transporter;
+public class Rematerialize {
+   public static void main(String[] input) {
+      int init = 11;
+      int split = 3;
+      int partA = init / split;
+      int partB = init % split;
+      int result = split * (partB + partA);
+      System.out.print(result);
+   } }
+A.  9
+B.  11
+C.  12
+D.  15
+E.  The code does not compile.
+F.  None of the above.
+44.  What is the output of the following code?
+var math = new Math();
+var sum = 0;
+sum += math.min(3, 5);
+sum += math.floor(1.8);
+sum += math.round(5.6);
+System.out.println(sum);
+A.  9
+B.  9.0
+C.  10
+D.  10.0
+E.  11
+F.  11.0
+G.  None of the above
+45.  What is the output of the following?
+var date = LocalDate.of(2022, Month.JULY, 17);
+var time = LocalTime.of(10, 0);
+var zone = ZoneId.of("America/New_York");
+var iceCreamDay = ZonedDateTime.of(date, time, zone);
+time = time.plusMonths(1);
+System.out.println(iceCreamDay.getMonthValue());
+A.  6
+B.  7
+C.  8
+D.  9
+E.  The code does not compile.
+46.  Which of these can replace isEmpty() and trim() to produce the same output? (Choose two.)
+String curious = "george likes bananas ";
+System.out.println(curious.isEmpty());
+System.out.println(curious.trim());
+A.  empty()
+B.  isBlank()
+C.  isMissing()
+D.  removeBlanks()
+E.  shorten()
+F.  strip()
+47.  What is the result of the following code?
+var sb = new StringBuilder("radical")
+   .insert(sb.length(), "robots");
+System.out.println(sb);
+A.  radicarobots
+B.  radicalrobots
+C.  radical robots
+D.  The code does not compile.
+E.  The code compiles but throws an exception at runtime.
+48.  Given the following code snippet, what is the value of dinner after it is executed?
+int time = 9;
+int day = 3;
+var dinner = ++time>= 10 ? day-- <= 2 
+   ? "Takeout" : "Salad" : "Leftovers";
+A.  Takeout
+B.  Leftovers
+C.  Salad
+D.  The code does not compile but would compile if parentheses were added.
+E.  None of the above.
+49.  What is the result of the following?
+11: var waffleDay = LocalDate.of(2022, Month.MARCH, 25);
+12: var period = Period.ofYears(1).ofMonths(6).ofDays(3);
+13: var later = waffleDay.plus(period);
+14: later.plusDays(1);
+15: var thisOne = LocalDate.of(2022, Month.SEPTEMBER, 28);
+16: var thatOne = LocalDate.of(2022, Month.SEPTEMBER, 29);
+17: System.out.println(later.isBefore(thisOne) + " " 
+18:    + later.isBefore(thatOne));
+A.  false false
+B.  false true
+C.  true true
+D.  true false
+E.  The code does not compile.
+50.  How many pairs of parentheses can be removed and have the code print 6?
+System.out.println((((1+1))*((1+2))));
+A.  None
+B.  One pair
+C.  Two pairs
+D.  Three pairs
+E.  Four pairs
+F.  Five pairs
+G.  None of the above
+51.  What is the output of the following?
+var teams = new String("694");
+teams.concat(" 1155");
+teams.concat(" 2265");
+teams.concat(" 2869");
+System.out.println(teams);
+A.  694
+B.  694 1155 2265 2869
+C.  The code compiles but outputs something else.
+D.  The code does not compile.
+52.  Which of the following is not a valid wrapper class?
+A.  Boolean
+B.  Char
+C.  Double
+D.  Integer
+E.  Long
+F.  All of these are valid wrapper classes.
+53.  What is the output of the following?
+var date = LocalDate.of(2022, Month.JULY, 17);
+var time = LocalTime.of(10, 0);
+var zone = ZoneId.of("America/New_York");
+var iceCreamDay = ZonedDateTime.of(date, time, zone);
+date = date.plusMonths(1);
+System.out.println(iceCreamDay.getMonthValue());
+A.  6
+B.  7
+C.  8
+D.  The code does not compile.
+E.  An exception is thrown at runtime.
+54.  How many of these lines print the same number?
+6:  var phrase = "prickly \nporcupine";
+7:  System.out.println(phrase.length());
+8:  System.out.println(phrase.indent(1).length());
+9:  System.out.println(phrase.indent(0).length());
+10: System.out.println(phrase.indent(-1).length());
+A.  Zero
+B.  One
+C.  Two
+D.  Three
+E.  Four
+F.  The code does not compile.
+55.  How many of the following lines compile?
+bool b = null;
+Bool bl = null;
+int i = null;
+Integer in = null;
+String s = null;
+A.  None
+B.  One
+C.  Two
+D.  Three
+E.  Four
+F.  Five
+56.  How many lines does this print?
+System.out.print(""" "ape"
+   "baboon"
+   "gorilla" 
+""");
+A.  Three
+B.  Four
+C.  Five
+D.  The code does not compile.
+57.  Which of the following can fill in the blank to make this code compile?
+public boolean isItMyBirthday(LocalDateTime dateTime) {
+   _______________________________________;
+   return now.getMonth() == dateTime.getMonth()
+      && now.getDayOfMonth() == dateTime.getDayOfMonth();
+}
+A.  LocalDate now = LocalDate.now()
+B.  LocalDate now = new LocalDate()
+C.  ZonedDate now = ZonedDate.now()
+D.  ZonedDate now = new ZonedDate()
+58.  How many of these print two lines?
+18: System.out.println("cheetah\ncub");
+19: System.out.println("cheetah\\ncub");
+20: System.out.println("cheetah\ncub".translateEscapes());
+21: System.out.println("cheetah\\ncub".translateEscapes());
+A.  Zero
+B.  One
+C.  Two
+D.  Three
+E.  Four
+F.  The code does not compile.
+59.  What is the output of the following code snippet?
+int height = 2, length = 3;
+boolean w = height> 1 | --length < 4;
+var x = height!=2 ? length++ : height;
+boolean z = height % length == 0;
+System.out.println(w + "-" + x + "-" + z);
+A.  true-2-true
+B.  false-2-false
+C.  true-2-false
+D.  true-3-false
+E.  true-3-true
+F.  false-3-false
+60.  How many backslashes can be removed without changing the value of the text block?
+12: var quotes = """
+13:    \"The Quotes that Could\"
+14:    \"\"\"
+15:    """;
+A.  Zero
+B.  One
+C.  Two
+D.  Three
+E.  Four
+F.  The code does not compile.
+61.  What is the output of the following?
+var date1 = LocalDate.of(2022, Month.MARCH, 3);
+var date2 = date1.plusDays(2).minusDays(1).minusDays(1);
+System.out.println(date1.equals(date2));
+A.  false
+B.  true
+C.  The code does not compile.
+D.  The code compiles but throws an exception at runtime.
+62.  What is the output of the following?
+1: public class Legos {
+2:    public static void main(String[] duplo) {
+3:       var sb = new StringBuilder();
+4:       sb.append("red");
+5:       sb.deleteCharAt(0);
+6:       sb.delete(1, 2);
+7:       System.out.println(sb);
+8:    } }
+A.  e
+B.  d
+C.  ed
+D.  The code does not compile.
+E.  None of the above.
+63.  How many of these lines compile?
+35: Boolean.valueOf("8").booleanValue();
+36: Character.valueOf('x').byteValue();
+37: Double.valueOf("9_.3").byteValue();
+38: Long.valueOf(88).byteValue();
+A.  None
+B.  One
+C.  Two
+D.  Three
+E.  Four
+64.  Which is a true statement?
+A.  If s.contains("abc") is true, then s.equals("abc") is also true.
+B.  If s.contains("abc") is true, then s.startsWith("abc") is also true.
+C.  If s.startsWith("abc") is true, then s.equals("abc") is also true.
+D.  If s.startsWith("abc") is true, then s.contains("abc") is also true.
+65.  What is a possible output of the following?
+var date = LocalDate.of(2022, 5, 13);
+var time = LocalTime.of(10, 0);
+var trainDay = LocalDateTime.of(date, time);
+var instant = trainDay.toInstant();
+instant = instant.plus(1, ChronoUnit.DAYS);
+System.out.println(instant);
+A.  2022-05-14T10:00-07:00[America/Los_Angeles]
+B.  2022-05-14T17:00:00Z
+C.  The code does not compile.
+D.  The code compiles but throws an exception at runtime.
+66.  Which statement is true of this text block?
+                                   var block = """
+                                      green
+                                        yellow
+                                      """;
+A.  There is only essential whitespace.
+B.  There is only incidental whitespace.
+C.  There is both essential and incidental whitespace.
+D.  The code does not compile.
+67.  What is the output of the following code snippet?
+boolean carrot = true;
+Boolean potato = false;
+var broccoli = true;
+carrot = carrot & potato;
+broccoli = broccoli ? !carrot : potato;
+potato = !broccoli ^ carrot;
+System.out.println(carrot + "," + potato + "," + broccoli);
+A.  true,false,true
+B.  true,true,true
+C.  false,false,false
+D.  false,true,true
+E.  false,false,true
+F.  The code does not compile.
+68.  Daylight saving time ends on November 6, 2022 at 2 a.m., when we repeat the hour. Suppose we have a ZonedDateTime that outputs 2012-11-06T01:00-04:00[America/New_York] when calling toString(). What is a possible value of the ZonedDateTime obtained by adding an hour to this value?
+A.  2022-11-06T01:00-04:00[America/New_York]
+B.  2022-11-06T02:00-04:00[America/New_York]
+C.  2022-11-06T01:00-05:00[America/New_York]
+D.  2022-11-06T02:00-05:00[America/New_York]
+69.  What is the output of the following class?
+1: package rocket;
+2: public class Countdown {
+3:    public static void main(String[] fuel) {
+4:       var builder = new StringBuilder("54321");
+5:       builder.substring(2);
+6:       System.out.println(builder.charAt(1));
+7:    } }
+A.  1
+B.  2
+C.  3
+D.  4
+E.  5
+F.  Does not compile
+70.  What is the output of the following code?
+var sum = 0.0;
+sum = sum + Math.min(3, 5);
+sum = sum + Math.floor(1.8);
+sum = sum + Math.round(5.6);
+System.out.println(sum);
+A.  9
+B.  9.0
+C.  10
+D.  10.0
+E.  11
+F.  11.0
+G.  None of the above
