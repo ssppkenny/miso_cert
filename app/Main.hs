@@ -80,9 +80,10 @@ startsWithLetterDot str =
 startsWithNumberDot :: String -> Bool
 startsWithNumberDot str =
   case span isDigit str of
-    ("", _)      -> False
-    (_, '.' : _) -> True
-    _            -> False
+    ("", _)              -> False
+    (_, '.' : ' '  : _) -> True   -- "N.  A." format
+    (_, '.' : '\t' : _) -> True
+    _                    -> False
 
 splitByAString :: [String] -> [[String]]
 splitByAString [] = []
