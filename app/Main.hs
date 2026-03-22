@@ -8,7 +8,7 @@ import Miso
 import qualified Miso.CSS as CSS
 import Miso.Html.Element
 import Miso.Html.Event (onClick)
-import Miso.Html.Property (checked_, class_, name_, type_)
+import Miso.Html.Property (checked_, class_, name_, src_, type_)
 
 import Control.Monad.State.Class (get, modify, put)
 import Data.Char (isDigit, isUpper, toLower)
@@ -20,8 +20,8 @@ import Text.Read (readMaybe)
 
 -- ── Storage key ────────────────────────────────────────────────────────────
 
-storageKey :: MisoString
-storageKey = "cert-quiz-answers"
+storageKey :: Int -> MisoString
+storageKey n = ms $ "cert-quiz-ch" <> show n
 
 -- ── Domain types ───────────────────────────────────────────────────────────
 
@@ -34,14 +34,30 @@ data Question = Question
   }
   deriving (Show, Eq)
 
+data AppPage
+  = ChapterSelectionPage
+  | LoadingPage
+  | QuizPage
+  | ResultsPage
+  deriving (Show, Eq)
+
+data ChapterInfo = ChapterInfo
+  { chapterNum :: Int
+  , chapterName :: MisoString
+  }
+  deriving (Show, Eq)
+
 data Model = Model
   { questionsList :: [Question]
   , currentQuestion :: Int
   , selectedAnswers :: M.Map Int (S.Set Char)
   , correctAnswers :: M.Map Int (S.Set Char)
   , explanations :: M.Map Int String
-  , showResults :: Bool
+  , appPage :: AppPage
   , loadingError :: Maybe MisoString
+  , availableChapters :: [ChapterInfo]
+  , currentChapter :: Maybe Int
+  , chapterImages :: S.Set String   -- filenames present: "25.png", "142_A.png", …
   }
   deriving (Show, Eq)
 
@@ -53,8 +69,11 @@ initialModel =
     , selectedAnswers = M.empty
     , correctAnswers = M.empty
     , explanations = M.empty
-    , showResults = False
+    , appPage = ChapterSelectionPage
     , loadingError = Nothing
+    , availableChapters = []
+    , currentChapter = Nothing
+    , chapterImages = S.empty
     }
 
 data Action
@@ -62,12 +81,17 @@ data Action
   | PrevQuestion
   | ToggleAnswer Char
   | StartFetch
-  | GotQuestionsText String
-  | GotAnswersText String String
+  | GotChapterList String
+  | SelectChapter Int
+  | GotQuestionsText Int String
+  | GotAnswersText Int String String
+  | GotImageList String            -- image manifest text (empty = none)
   | FetchFailed String
   | LoadSavedAnswers String
   | Evaluate
   | BackToQuiz
+  | BackToChapterSelection
+  | ResetAnswers
   | NoOp
   deriving (Show, Eq)
 
@@ -187,6 +211,23 @@ parseExplanations ls = M.fromList $ go ls
         allLines = firstBit : contLines
      in unwords $ filter (not . null) $ map (dropWhile (== ' ')) allLines
 
+-- ── Chapter list parsing ───────────────────────────────────────────────────
+
+parseChapterList :: String -> [ChapterInfo]
+parseChapterList s = mapMaybe parseLine (filter (not . null) (lines s))
+ where
+  parseLine l = case break (== ':') l of
+    (numStr, ':' : name) ->
+      (\n -> ChapterInfo n (ms (trim name))) <$> (readMaybe numStr :: Maybe Int)
+    _ -> Nothing
+  trim = dropWhile (== ' ') . reverse . dropWhile (== ' ') . reverse
+
+-- ── Image manifest parsing ─────────────────────────────────────────────────
+
+-- | Parse images.txt — one filename per line (e.g. "25.png", "142_A.png").
+parseImageList :: String -> S.Set String
+parseImageList = S.fromList . filter (not . null) . lines
+
 -- ── Multiple-choice detection ──────────────────────────────────────────────
 
 detectMultiple :: String -> Bool
@@ -262,17 +303,26 @@ updateModel :: Action -> Effect parent Model Action
 updateModel = \case
   StartFetch ->
     getText
-      "/questions2.txt"
+      "/resources/chapters.txt"
       []
-      (\resp -> GotQuestionsText (fromMisoString (body resp)))
-      ((\_ -> FetchFailed "Failed to load questions2.txt") :: Response MisoString -> Action)
-  GotQuestionsText questTxt ->
+      (\resp -> GotChapterList (fromMisoString (body resp)))
+      ((\_ -> FetchFailed "Failed to load chapters.txt") :: Response MisoString -> Action)
+  GotChapterList txt ->
+    modify $ \m -> m{availableChapters = parseChapterList txt, appPage = ChapterSelectionPage}
+  SelectChapter n -> do
+    modify $ \m -> m{appPage = LoadingPage, loadingError = Nothing}
     getText
-      "/answers2.txt"
+      (ms $ "/resources/chapter" <> show n <> "/questions.txt")
       []
-      (\resp -> GotAnswersText questTxt (fromMisoString (body resp)))
-      ((\_ -> FetchFailed "Failed to load answers2.txt") :: Response MisoString -> Action)
-  GotAnswersText questTxt ansTxt -> do
+      (\resp -> GotQuestionsText n (fromMisoString (body resp)))
+      ((\_ -> FetchFailed $ "Failed to load questions for chapter " <> show n) :: Response MisoString -> Action)
+  GotQuestionsText n questTxt ->
+    getText
+      (ms $ "/resources/chapter" <> show n <> "/answers.txt")
+      []
+      (\resp -> GotAnswersText n questTxt (fromMisoString (body resp)))
+      ((\_ -> FetchFailed $ "Failed to load answers for chapter " <> show n) :: Response MisoString -> Action)
+  GotAnswersText n questTxt ansTxt -> do
     let mylines = lines questTxt
         questions = readQuestions mylines
         ans = readAnswers mylines
@@ -280,18 +330,30 @@ updateModel = \case
         qs = buildQuiz questions ans codes
         correct = parseCorrectAnswers (lines ansTxt)
         expls = parseExplanations (lines ansTxt)
-        newModel =
+    m <- get
+    let newModel =
           initialModel
             { questionsList = qs
             , correctAnswers = correct
             , explanations = expls
+            , appPage = QuizPage
+            , availableChapters = availableChapters m
+            , currentChapter = Just n
             }
     put newModel
+    -- fetch image manifest; on error just deliver an empty list
+    getText
+      (ms $ "/resources/chapter" <> show n <> "/images.txt")
+      []
+      (\resp -> GotImageList (fromMisoString (body resp)))
+      ((\_ -> GotImageList "") :: Response MisoString -> Action)
     io $ do
-      result <- (getLocalStorage storageKey :: IO (Either MisoString String))
+      result <- (getLocalStorage (storageKey n) :: IO (Either MisoString String))
       return $ case result of
         Right raw -> LoadSavedAnswers raw
         Left _ -> LoadSavedAnswers ""
+  GotImageList txt ->
+    modify $ \m -> m{chapterImages = parseImageList txt}
   FetchFailed err ->
     modify $ \m -> m{loadingError = Just (ms err)}
   LoadSavedAnswers raw ->
@@ -324,9 +386,23 @@ updateModel = \case
             newAnswers = M.insert qid newSet (selectedAnswers m)
          in do
               put m{selectedAnswers = newAnswers}
-              io_ $ setLocalStorage storageKey (serializeAnswers newAnswers :: String)
-  Evaluate -> modify $ \m -> m{showResults = True}
-  BackToQuiz -> modify $ \m -> m{showResults = False}
+              case currentChapter m of
+                Just n -> io_ $ setLocalStorage (storageKey n) (serializeAnswers newAnswers :: String)
+                Nothing -> pure ()
+  Evaluate -> modify $ \m -> m{appPage = ResultsPage}
+  BackToQuiz -> modify $ \m -> m{appPage = QuizPage}
+  BackToChapterSelection ->
+    modify $ \m ->
+      initialModel
+        { availableChapters = availableChapters m
+        , appPage = ChapterSelectionPage
+        }
+  ResetAnswers -> do
+    m <- get
+    put m{selectedAnswers = M.empty}
+    case currentChapter m of
+      Just n -> io_ $ removeLocalStorage (storageKey n)
+      Nothing -> pure ()
   NoOp -> pure ()
 
 -- ── Helpers ────────────────────────────────────────────────────────────────
@@ -350,20 +426,73 @@ questionIsCorrect m q =
 
 viewModel :: Model -> View Model Action
 viewModel m
-  | showResults m = viewResults m
   | Just err <- loadingError m =
       div_
         [CSS.style_ containerSt]
         [ h1_ [CSS.style_ headingSt] ["Error"]
         , p_ [CSS.style_ ["color" =: "#dc2626"]] [text err]
+        , button_ [onClick BackToChapterSelection, CSS.style_ btnSt] ["← Back to Chapters"]
         ]
-  | null (questionsList m) = div_ [CSS.style_ containerSt] [p_ [] ["Loading…"]]
-  | isOnLastPage m = viewLastPage m
-  | otherwise = case currentQuestionData m of
-      Nothing -> div_ [CSS.style_ containerSt] [p_ [] ["Loading…"]]
-      Just q -> viewQuizPage m q
+  | otherwise = case appPage m of
+      ChapterSelectionPage -> viewChapterSelection m
+      LoadingPage ->
+        div_ [CSS.style_ containerSt] [p_ [] ["Loading…"]]
+      ResultsPage -> viewResults m
+      QuizPage
+        | null (questionsList m) ->
+            div_ [CSS.style_ containerSt] [p_ [] ["Loading…"]]
+        | isOnLastPage m -> viewLastPage m
+        | otherwise -> case currentQuestionData m of
+            Nothing -> div_ [CSS.style_ containerSt] [p_ [] ["Loading…"]]
+            Just q -> viewQuizPage m q
+
+-- ── Chapter selection page ──────────────────────────────────────────────────
+
+viewChapterSelection :: Model -> View Model Action
+viewChapterSelection m =
+  div_
+    [CSS.style_ containerSt]
+    [ h1_ [CSS.style_ headingSt] ["Java Certification Quiz"]
+    , p_ [CSS.style_ countSt] ["Choose a chapter to start the quiz"]
+    , if null (availableChapters m)
+        then p_ [] ["Loading chapters…"]
+        else div_ [CSS.style_ chapterGridSt] (map renderChapterCard (availableChapters m))
+    ]
+
+renderChapterCard :: ChapterInfo -> View Model Action
+renderChapterCard ci =
+  div_
+    [ CSS.style_ chapterCardSt
+    , onClick (SelectChapter (chapterNum ci))
+    ]
+    [ div_ [CSS.style_ chapterNumSt] [text $ ms $ "Chapter " <> show (chapterNum ci)]
+    , div_ [CSS.style_ chapterNameSt] [text (chapterName ci)]
+    ]
 
 -- ── Quiz page ──────────────────────────────────────────────────────────────
+
+-- | Render a quiz image that auto-hides if the file is missing.
+-- The JS in index.html captures 'error' events on elements with data-quiz-img.
+-- keyProp ensures each unique URL is a fresh DOM element, preventing stale
+-- display:none (set by the error handler) from persisting across navigation.
+quizImg :: String -> [CSS.Style] -> View Model Action
+quizImg url st =
+  img_
+    [ src_ (ms url)
+    , textProp "data-quiz-img" "1"
+    , keyProp (ms url)
+    , CSS.style_ st
+    ]
+
+-- | Image URL for a question (e.g. /resources/chapter3/24.png)
+questionImgUrl :: Int -> Int -> String
+questionImgUrl chap qid =
+  "/resources/chapter" <> show chap <> "/" <> show qid <> ".png"
+
+-- | Image URL for an answer option (e.g. /resources/chapter3/142_D.png)
+optionImgUrl :: Int -> Int -> Char -> String
+optionImgUrl chap qid opt =
+  "/resources/chapter" <> show chap <> "/" <> show qid <> "_" <> [opt] <> ".png"
 
 viewQuizPage :: Model -> Question -> View Model Action
 viewQuizPage m q =
@@ -383,6 +512,11 @@ viewQuizPage m q =
     , if questionCode q == ""
         then text ""
         else pre_ [CSS.style_ codeSt] [text (questionCode q)]
+    , let imgFile = show (questionId q) <> ".png"
+      in case currentChapter m of
+           Just n | S.member imgFile (chapterImages m) ->
+             quizImg (questionImgUrl n (questionId q)) questionImgSt
+           _ -> text ""
     , if isMultiple q
         then p_ [CSS.style_ hintSt] ["(Select all that apply)"]
         else text ""
@@ -391,6 +525,8 @@ viewQuizPage m q =
         [CSS.style_ navSt]
         [ button_ [onClick PrevQuestion, CSS.style_ btnSt] ["← Previous"]
         , button_ [onClick NextQuestion, CSS.style_ btnSt] ["Next →"]
+        , button_ [onClick BackToChapterSelection, CSS.style_ chapterBtnSt] ["⊞ Chapters"]
+        , button_ [onClick ResetAnswers, CSS.style_ resetBtnSt] ["↺ Reset"]
         , button_ [onClick Evaluate, CSS.style_ evalBtnSt] ["✓ Evaluate"]
         ]
     ]
@@ -423,6 +559,8 @@ viewLastPage m =
         , div_
             [CSS.style_ navSt]
             [ button_ [onClick PrevQuestion, CSS.style_ btnSt] ["← Previous"]
+            , button_ [onClick BackToChapterSelection, CSS.style_ chapterBtnSt] ["⊞ Chapters"]
+            , button_ [onClick ResetAnswers, CSS.style_ resetBtnSt] ["↺ Reset"]
             , button_ [onClick Evaluate, CSS.style_ evalBtnSt] ["✓ Evaluate Answers"]
             ]
         ]
@@ -450,7 +588,9 @@ viewResults m =
         , div_ [CSS.style_ resultGridSt] (map (renderResultCell m) qs)
         , div_
             [CSS.style_ navSt]
-            [button_ [onClick BackToQuiz, CSS.style_ btnSt] ["← Back to Quiz"]]
+            [ button_ [onClick BackToQuiz, CSS.style_ btnSt] ["← Back to Quiz"]
+            , button_ [onClick BackToChapterSelection, CSS.style_ chapterBtnSt] ["⊞ Chapters"]
+            ]
         ]
 
 renderResultCell :: Model -> Question -> View Model Action
@@ -498,13 +638,19 @@ renderOption m q (opt, labelText) =
       rowSt
         | isChecked = ("background" =: "#e8f4fd") : rowBaseSt
         | otherwise = rowBaseSt
+      optImg =
+        let imgFile = show (questionId q) <> "_" <> [opt] <> ".png"
+        in case currentChapter m of
+             Just n | S.member imgFile (chapterImages m) ->
+               quizImg (optionImgUrl n (questionId q) opt) optionImgSt
+             _ -> text ""
    in div_
         [CSS.style_ rowSt]
         [ div_
             [CSS.style_ inputCellSt]
             [input_ [type_ inType, name_ rName, checked_ isChecked, onClick (ToggleAnswer opt)]]
         , div_ [CSS.style_ letterCellSt] [text $ ms [opt]]
-        , div_ [CSS.style_ textCellSt] [text labelText]
+        , div_ [CSS.style_ textCellSt] [text labelText, optImg]
         ]
 
 -- ── Styles ─────────────────────────────────────────────────────────────────
@@ -690,3 +836,77 @@ cellDetailSt = ["font-size" =: "0.75em", "color" =: "#6b7280", "margin-top" =: "
 cellHintSt :: St
 cellHintSt =
   ["font-size" =: "0.75em", "color" =: "#9ca3af", "margin-top" =: "4px", "cursor" =: "help"]
+
+chapterGridSt :: St
+chapterGridSt =
+  [ "display" =: "grid"
+  , "grid-template-columns" =: "repeat(auto-fill, minmax(220px, 1fr))"
+  , "gap" =: "16px"
+  , "margin-top" =: "24px"
+  ]
+
+chapterCardSt :: St
+chapterCardSt =
+  [ "background" =: "#f0f7ff"
+  , "border" =: "2px solid #1a56db"
+  , "border-radius" =: "10px"
+  , "padding" =: "20px 24px"
+  , "cursor" =: "pointer"
+  , "transition" =: "background 0.15s"
+  ]
+
+chapterNumSt :: St
+chapterNumSt =
+  [ "font-size" =: "0.85em"
+  , "font-weight" =: "600"
+  , "color" =: "#1a56db"
+  , "margin-bottom" =: "6px"
+  ]
+
+chapterNameSt :: St
+chapterNameSt =
+  [ "font-size" =: "1.05em"
+  , "font-weight" =: "700"
+  , "color" =: "#222"
+  ]
+
+chapterBtnSt :: St
+chapterBtnSt =
+  [ "padding" =: "10px 24px"
+  , "font-size" =: "1em"
+  , "cursor" =: "pointer"
+  , "background" =: "#6b7280"
+  , "color" =: "#fff"
+  , "border" =: "none"
+  , "border-radius" =: "6px"
+  ]
+
+resetBtnSt :: St
+resetBtnSt =
+  [ "padding" =: "10px 24px"
+  , "font-size" =: "1em"
+  , "cursor" =: "pointer"
+  , "background" =: "#dc2626"
+  , "color" =: "#fff"
+  , "border" =: "none"
+  , "border-radius" =: "6px"
+  ]
+
+questionImgSt :: St
+questionImgSt =
+  [ "max-width" =: "100%"
+  , "display" =: "block"
+  , "margin" =: "0 0 16px"
+  , "border-radius" =: "6px"
+  , "border" =: "1px solid #d0d7de"
+  ]
+
+optionImgSt :: St
+optionImgSt =
+  [ "max-width" =: "340px"
+  , "display" =: "block"
+  , "margin" =: "6px 0 2px"
+  , "border-radius" =: "4px"
+  , "border" =: "1px solid #d0d7de"
+  ]
+

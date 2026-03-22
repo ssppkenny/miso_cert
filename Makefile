@@ -17,10 +17,10 @@ build:
 	wasm32-wasi-cabal build
 	rm -rf public
 	cp -r static public
-	cp questions1.txt public/
-	cp questions2.txt public/
-	cp answers1.txt public/
-	cp answers2.txt public/
+	for dir in resources/chapter*/; do \
+		find "$$dir" -maxdepth 1 -name '*.png' | sed 's|.*/||' | sort > "$$dir"images.txt; \
+	done
+	cp -r resources public/
 	$(eval my_wasm=$(shell wasm32-wasi-cabal list-bin cert-exe | tail -n 1))
 	$(shell wasm32-wasi-ghc --print-libdir)/post-link.mjs --input $(my_wasm) --output public/ghc_wasm_jsffi.js
 	cp -v $(my_wasm) public/app.wasm
