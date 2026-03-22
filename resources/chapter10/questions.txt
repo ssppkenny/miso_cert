@@ -1,0 +1,401 @@
+1.  How many of Connection, Driver, DriverManager, PreparedStatement, and ResultSet are JDBC interfaces included with the JDK?
+A.  None
+B.  One
+C.  Two
+D.  Three
+E.  Four
+F.  Five
+2.  Which of these can replace the following line of code without changing the behavior?
+void updateRecord(PreparedStatement stmt) throws SQLException {
+   stmt.setString(2, null);
+}
+A.  stmt.setNull(2);
+B.  stmt.setNull(2, null);
+C.  stmt.setNull(2, Types.VARCHAR);
+D.  None of the above
+3.  What must be the first characters of a database URL?
+A.  db,
+B.  db:
+C.  jdbc,
+D.  jdbc:
+E.  None of the above
+4.  Which is responsible for getting a connection to the database?
+A.  Driver
+B.  Connection
+C.  PreparedStatement
+D.  Statement
+E.  ResultSet
+5.  Which of these obtains a Connection?
+A.  Connection.getConnection(url)
+B.  Driver.getConnection(url)
+C.  DriverManager.getConnection(url)
+D.  new Connection(url)
+E.  None of the above
+6.  Which method in DriverManager is overloaded to allow passing a username and password?
+A.  conn()
+B.  connect()
+C.  forName()
+D.  getStatement()
+E.  open()
+F.  None of the above
+7.  What is the output if the animals database exists and contains an empty names table?
+var url = "jdbc:hsqldb:file:animals";
+var sql = "SELECT count(*) FROM names";
+try (var conn = DriverManager.getConnection(url);
+   var stmt = conn.prepareStatement(sql,
+      ResultSet.TYPE_SCROLL_INSENSITIVE,
+      ResultSet.CONCUR_UPDATABLE);
+   var rs = stmt.executeQuery()) {
+   System.out.println(rs.getInt(1));
+}
+A.  0
+B.  1
+C.  The code does not compile.
+D.  The code compiles but throws an exception at runtime.
+8.  Consider the three methods execute(), executeQuery(), and executeUpdate(). of these methods is/are allowed to run a DELETE SQL of these methods is/are allowed to run an UPDATE SQL Fill in the blanks: statement while statement.
+A.  None, one
+B.  One, none
+C.  One, one
+D.  One, two
+E.  Two, two
+F.  Three, three
+9.  Suppose the pandas table has one row with the name Mei Xiang and the location DC. What does the following code output?
+var url = "jdbc:hsqldb:file:mammals";
+var sql = "SELECT name FROM pandas WHERE location = 'DC'";
+try (var conn = DriverManager.getConnection(url);    // s1
+   var stmt = conn.prepareStatement(sql);            // s2
+   var rs = stmt.executeQuery()) {
+   if (rs.next())
+      System.out.println(rs.getString("name"));
+   else
+      System.out.println("No match");
+}
+A.  Mei Xiang
+B.  No match
+C.  The code does not compile due to line s1.
+D.  The code does not compile due to line s2.
+E.  The code does not compile due to another line.
+F.  The code throws an exception at runtime.
+10.  Suppose we have a peacocks table with two columns: name and rating. What does the fol- lowing code output if the table is empty?
+var url = "jdbc:hsqldb:file:birds";
+var sql = "SELECT name FROM peacocks WHERE name = ?";
+try (var conn = DriverManager.getConnection(url);
+   var stmt = conn.prepareStatement(sql)) {       // s1
+   stmt.setString(1, "Feathers");
+   stmt.setString(2, "Nice");
+   boolean result = stmt.execute();               // s2
+   System.out.println(result);
+}
+A.  false
+B.  true
+C.  The code does not compile due to line s1.
+D.  The code does not compile due to line s2.
+E.  The code does not compile due to another line.
+F.  The code throws an exception at runtime.
+11.  Suppose we have an empty bunny table with two columns: name and color. What is the state of the table after running this code?
+var url = "jdbc:hsqldb:file:rabbits";
+var sql = "INSERT INTO bunny(name, color) VALUES (?, ?)";
+try (var conn = DriverManager.getConnection(url);
+   var stmt = conn.prepareStatement(sql)) {  // s1
+   stmt.setString(1, "Daisy");
+   stmt.setString(2, "Brown");
+   stmt.executeUpdate();
+   stmt.setString(1, "Cinna");
+   stmt.setString(2, "Brown");
+   stmt.executeUpdate();
+}
+A.  It has one row.
+B.  It has two rows, and the color is Brown in both.
+C.  The code does not compile due to line s1.
+D.  The code does not compile due to another line.
+E.  The code throws an exception at runtime.
+12.  Suppose cats is an empty table. Where can conn.rollback() be inserted so that the table remains empty?
+try (var conn = DriverManager.getConnection(url)) {
+   String insert = "INSERT INTO cats VALUES (? ,?)";
+   try (var stmt = conn.prepareStatement(insert,
+      ResultSet.TYPE_FORWARD_ONLY,
+      ResultSet.CONCUR_READ_ONLY)) {
+      stmt.setInt(1, 1);
+      stmt.setString(2, "Kitty");
+      stmt.executeUpdate();
+      // line x
+   }
+   // line y
+   conn.commit();
+}
+A.  Line x
+B.  Line y
+C.  Either line x or y
+D.  None of the above
+13.  Given the books table in the figure and the following method, which option prints the value 379? title character vararg(255) num_pages integer Beginning Java Advanced Java
+void printNumPages(Connection conn) throws SQLException {
+   var sql = """
+             SELECT *
+             FROM books
+             WHERE title = 'Beginning Java'""";
+   var ps = conn.prepareStatement(sql);
+   var rs = ps.executeQuery();
+   if(rs.next())
+      System.out.print(
+}
+);
+A.  rs.getInt(1)
+B.  rs.getInt(2)
+C.  rs.getInteger(1)
+D.  rs.getInteger(2)
+14.  Given the books table in the previous question and the following code, which lines would you add to successfully insert a row? (Choose two.)
+var url = "jdbc:hsqldb:file:library";
+var sql = "INSERT INTO books (title,num_pages) VALUES(?,?)";
+try (var conn = DriverManager.getConnection(url);
+     var stmt = conn.prepareStatement(sql,
+        ResultSet.TYPE_SCROLL_INSENSITIVE,
+        ResultSet.CONCUR_UPDATABLE)) {
+  // INSERT CODE HERE
+  stmt.executeUpdate();
+}
+A.  stmt.setObject(0, "Intermediate Java");
+B.  stmt.setObject(1, "Intermediate Java");
+C.  stmt.setObject(1, 500);
+D.  stmt.setObject(2, 500);
+15.  Given the books table from the previous two questions and the following method, which option prints Advanced Java?
+void printTitle(Connection conn) throws SQLException {
+   var sql = """
+             SELECT title
+             FROM books
+             WHERE num_pages > 500""";
+   var ps = conn.prepareStatement(sql);
+   var rs = ps.executeQuery();
+   if(rs.next())
+      System.out.print(
+}
+);
+A.  rs.getString()
+B.  rs.getString("0")
+C.  rs.getString("1")
+D.  rs.getString("title")
+16.  Suppose we have a stored procedure named summon that has one OUT parameter named superpower that always returns the value fly. Fill in the blank so that the output is fly.
+var sql = "{call summon(?)}";
+try (var conn = DriverManager.getConnection(url);
+   var cs = conn.prepareCall(sql)) {
+   cs.
+   var rs = cs.
+(1, Types.VARCHAR);
+();
+   System.out.println(cs.getString("superpower"));
+}
+A.  registerOutParameter and execute
+B.  registerOutParameter and executeQuery
+C.  setOutParameter and execute
+D.  setOutParameter and executeQuery
+E.  None of the above
+17.  Suppose cats is an empty table. Where can conn.rollback(sp) be inserted so that exactly one row is in the table?
+try (var conn = DriverManager.getConnection(url)) {
+   conn.setAutoCommit(false);
+   String insert = "INSERT INTO cats VALUES (?,?)";
+   Savepoint sp = null;
+   try (var stmt = conn.prepareStatement(insert)) {
+      stmt.setInt(1, 1);
+      stmt.setString(2, "Kitty");
+      stmt.executeUpdate();
+      // line x
+   }
+   sp = conn.setSavepoint();
+   try (var stmt = conn.prepareStatement(insert)) {
+      stmt.setInt(1, 2);
+      stmt.setString(2, "Beverly");
+      stmt.executeUpdate();
+      // line y
+    }
+    conn.commit();
+}
+A.  Line x
+B.  Line y
+C.  Either line x or y
+D.  The code does not compile.
+E.  The code throws an exception.
+18.  Assuming the animals database exists and contains one empty table named names, what is the output of the following?
+var url = "jdbc:hsqldb:file:animals";
+var sql = "SELECT * FROM names";
+try (var conn = new Connection(url);      // s1
+   var stmt = conn.prepareStatement(sql); // s2
+   var rs = stmt.executeQuery()) {        // s3
+   if (rs.next())
+      System.out.println(rs.getString(1));
+   }
+}
+A.  The code terminates successfully without any output.
+B.  The code does not compile due to line s1.
+C.  The code does not compile due to line s2.
+D.  The code does not compile due to line s3.
+E.  None of the above.
+19.  What is the correct order to close database resources?
+A.  Connection then PreparedStatement then ResultSet
+B.  Connection then ResultSet then PreparedStatement
+C.  PreparedStatement then Connection then ResultSet
+D.  PreparedStatement then ResultSet then Connection
+E.  ResultSet then PreparedStatement then Connection
+F.  None of the above
+20.  Assuming the animals database exists and contains one empty table named names, what is the output of the following?
+var url = "jdbc:hsqldb:file:animals";
+var sql = "SELECT * FROM names";
+try (var conn = DriverManager.getConnection(url);   // s1
+   var stmt = conn.prepareStatement(sql);           // s2
+   var rs = stmt.executeQuery()) {                  // s3
+   if (rs.next())
+      System.out.println(rs.getString(1));
+   }
+}
+A.  The code terminates successfully without any output.
+B.  The code does not compile due to line s1.
+C.  The code does not compile due to line s2.
+D.  The code does not compile due to line s3.
+E.  None of the above.
+21.  Suppose we have a bunny table with two columns: name and color. What does the following code output if the table is empty?
+var url = "jdbc:hsqldb:file:rabbits";
+var sql = "SELECT count(*) FROM bunny WHERE color = ? and name = ?";
+try (var conn = DriverManager.getConnection(url);
+   var stmt = conn.prepareStatement(sql)) {  // s1
+   stmt.setString(1, "White");
+   try (var rs = stmt.executeQuery()) {      // s2
+      if (rs.next())
+         System.out.println(rs.getInt(1));
+   }
+}
+A.  0
+B.  1
+C.  The code does not compile due to line s1.
+D.  The code does not compile due to line s2.
+E.  The code does not compile due to another line.
+F.  The code throws an exception at runtime.
+22.  Suppose the pandas table has one row with the name Mei Xiang and the location DC. What does the following code output?
+var url = "jdbc:hsqldb:file:mammals";
+var sql = "SELECT name FROM pandas WHERE location = ?";
+try (var conn = DriverManager.getConnection(url);  // s1
+   var stmt = conn.prepareStatement(sql)) {        // s2
+   stmt.setString(1, "DC");
+   try (var rs = stmt.executeQuery()) {
+      if (rs.next())
+         System.out.println(rs.getString("name"));
+      else
+         System.out.println("No match");
+   } }
+A.  Mei Xiang
+B.  No match
+C.  The code does not compile due to line s1.
+D.  The code does not compile due to line s2.
+E.  The code does not compile due to another line.
+F.  The code throws an exception at runtime.
+23.  Suppose we have a stored procedure named increment that has one INOUT parameter named num. The num parameter always returns a number 1 larger than the one passed in. Which options fill in the blank so the output is 7? (Choose two.)
+var sql = "{call increment(?)}";
+try (var conn = DriverManager.getConnection(url);
+   var cs = conn.prepareCall(sql)) {
+   // Input parameter
+   cs.
+(1, 6);
+   // Output parameter
+   cs.
+   var rs = cs.execute();
+(1, Types.VARCHAR);
+   System.out.println(cs.getString("num"));
+}
+A.  registerInParameter
+B.  registerInOutParameter
+C.  registerOutParameter
+D.  setInt
+E.  setInOutParameter
+F.  setOutParameter
+24.  Which is true if the animals database exists and contains an empty names table?
+var url = "jdbc:hsqldb:file:animals";
+var sql = "SELECT COUNT(*) FROM names";
+try (var conn = DriverManager.getConnection(url);
+    var stmt = conn.prepareStatement(sql,
+       ResultSet.TYPE_FORWARD_ONLY,
+       ResultSet.CONCUR_READ_ONLY);
+    var rs = stmt.executeQuery()) {
+    rs.next();                          // r1
+    System.out.println(rs.getInt(1));   // r2
+}
+A.  The code compiles and prints 0 without error.
+B.  The code compiles and prints 1 without error.
+C.  The code does not compile.
+D.  The code compiles but throws an exception at runtime on line r1.
+E.  The code compiles but throws an exception at runtime on line r2.
+25.  Suppose we have an empty bunny table with two columns: name and color. What is the state of the table after running this code?
+var url = "jdbc:hsqldb:file:rabbits";
+var sql = "INSERT INTO bunny(name, color) VALUES (?, ?)";
+try (var conn = DriverManager.getConnection(url);
+   var stmt = conn.prepareStatement(sql)) {  // s1
+   stmt.setString(1, "Hoppy");
+   stmt.setString(2, "Brown");
+   stmt.executeUpdate();
+   stmt.setString(1, "Daisy");
+   stmt.executeUpdate();
+}
+A.  Only one row has the color Brown set.
+B.  It has two rows and the color is Brown in both.
+C.  The code does not compile due to line s1.
+D.  The code does not compile due to line s2.
+E.  The code does not compile due to another line.
+F.  The code throws an exception at runtime.
+26.  Suppose cats is an empty table. How many rows are in this table when the code has completed?
+try (var conn = DriverManager.getConnection(url)) {
+   conn.setAutoCommit(false);
+   String insert = "INSERT INTO cats VALUES (? ,?)";
+   try (var stmt = conn.prepareStatement(insert)) {
+      stmt.setInt(1, 1);
+      stmt.setString(2, "Kitty");
+      stmt.executeUpdate();
+   }
+   var sp = conn.setSavepoint();
+   conn.rollback();
+   try (var stmt = conn.prepareStatement(insert)) {
+      stmt.setInt(1, 2);
+      stmt.setString(2, "Beverly");
+      stmt.executeUpdate();
+    }
+    conn.commit();
+}
+A.  Zero
+B.  One
+C.  Two
+D.  The code does not compile.
+E.  The code throws an exception.
+27.  Which is true of a PreparedStatement?
+A.  It has a method to change the bind variable to a different character other than the ? character. B.
+C.  It can be used only for SELECT statements. It can be used only for UPDATE statements.
+D.  All of these are true.
+E.  None of these are true.
+28.  Suppose we have a peacocks table with two columns: name and rating. What does the fol- lowing code output if the table is empty?
+var url = "jdbc:hsqldb:file::birds";
+var sql = "SELECT name FROM peacocks WHERE name = ?";
+try (var conn = DriverManager.getConnection(url);
+   var stmt = conn.prepareStatement(sql)) {    // s1
+   stmt.setString(1, "Feathers");
+   System.out.println(stmt.executeUpdate());   // s2
+}
+A.  false
+B.  true
+C.  The code does not compile due to line s1.
+D.  The code does not compile due to line s2.
+E.  The code does not compile due to another line.
+F.  The code throws an exception at runtime.
+29.  Which of the following statements about Connection methods are true? (Choose two.)
+A.  rollback() is ignored while autocommit mode is set to false.
+B.  rollback() is ignored while autocommit mode is set to true.
+C.  When not in autocommit mode, calling setAutoCommit(true) causes the data to be immediately committed.
+D.  When not in autocommit mode, calling setAutoCommit(true) creates a SavePoint.
+E.  When not in autocommit mode, calling setAutoCommit(true) rolls back any out- standing changes.
+F.  When not in autocommit mode, calling setAutoCommit(true) throws an exception.
+30.  What is the most likely outcome of this code if the bunny table is empty?
+var url = "jdbc:hsqldb:file:rabbits";
+var sql = "INSERT INTO bunny(name, color) VALUES (?, ?)";
+try (var conn = DriverManager.getConnection(url);
+   var stmt = conn.createStatement()) {
+   stmt.setString(1, "Hoppy");
+   stmt.setString(2, "Brown");
+   stmt.executeUpdate(sql);
+}
+A.  One row is in the table.
+B.  Two rows are in the table.
+C.  The code does not compile.
+D.  The code throws a SQLException. Chapter Implementing Localization THE OCP EXAM TOPICS COVERED IN THIS PRACTICE TEST INCLUDE THE FOLLOWING: ✓ Implementing Localization ■ Implement localization using locales, resource bundles, parse and format messages, dates, times, and numbers including currency and percentage values
