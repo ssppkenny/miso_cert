@@ -90,7 +90,7 @@ C.  /found/../keys/./lost/blue.txt and keys
 D.  /lost/blue.txt and /lost/blue.txt/./found/../keys
 E.  The code does not compile.
 F.  None of the above.
-7.  Fill in the blanks: Writer is a(n) that related stream classes .
+7.  Fill in the blanks: Writer is a(n) ______________ that related stream classes extend. The ______________ methods read or write values across multiple classes.
 A.  concrete class, extend
 B.  abstract class, extend
 C.  abstract class, implement D.

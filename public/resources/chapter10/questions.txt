@@ -52,7 +52,7 @@ A.  0
 B.  1
 C.  The code does not compile.
 D.  The code compiles but throws an exception at runtime.
-8.  Consider the three methods execute(), executeQuery(), and executeUpdate(). of these methods is/are allowed to run a DELETE SQL of these methods is/are allowed to run an UPDATE SQL Fill in the blanks: statement while statement.
+8.  Consider the three methods execute(), executeQuery(), and executeUpdate(). ______________ of these methods is/are allowed to run a DELETE SQL statement while ______________ of these methods is/are allowed to run an UPDATE SQL statement. Fill in the blanks:
 A.  None, one
 B.  One, none
 C.  One, one

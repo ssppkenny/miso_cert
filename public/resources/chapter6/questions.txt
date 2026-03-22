@@ -11,7 +11,7 @@ B.  - >
 C.  {}
 D.  Parameter data type(s)
 E.  None of the above
-3.  Fill in the blanks: The functional interface does not take any inputs, while the functional interface does not return any data.
+3.  Fill in the blanks: The ______________ functional interface does not take any inputs, while the ______________ functional interface does not return any data.
 A.  IntConsumer, LongSupplier
 B.  IntSupplier, Function
 C.  Supplier, DoubleConsumer
@@ -1038,7 +1038,7 @@ C.  (c,m) - > {long c=4; return c+m;}
 D.  (Integer d, Integer r) - > (Long)r+d
 E.  All of these can be passed to the method.
 F.  None of the above.
-94.  Fill in the blank: is the only functional interface that does not involve double, int, or long.
+94.  Fill in the blank: ______________ is the only functional interface that does not involve double, int, or long.
 A.  BooleanSupplier
 B.  CharPredicate
 C.  FloatUnaryOperator
@@ -1123,7 +1123,7 @@ C.  peek()
 D.  sorted()
 E.  filter()
 F.  None of the above
-103.  The functional interface has an apply() method, while the functional interface has an applyAsDouble() method. (Choose two.)
+103.  The ______________ functional interface has an apply() method, while the ______________ functional interface has an applyAsDouble() method. (Choose two.)
 A.  BiConsumer
 B.  BiFunction
 C.  BiPredicate
