@@ -1,132 +1,137 @@
-1.  Which of the following are considered locales? (Choose three.)
+1.   Which of the following are considered locales? (Choose three.)
 A.  Cultural region
 B.  Local address
 C.  City
 D.  Time zone region
 E.  Political region
 F.  Geographical region
-2.  What is the result of the following?
-LocalDateTime pi = LocalDateTime.of(2022, 3, 14, 1, 59);
-var formatter = DateTimeFormatter.ofPattern("M.ddhhmm");
-System.out.println(formatter.format(pi));
+2.   What is the result of the following?
+     LocalDateTime pi = LocalDateTime.of(2022, 3, 14, 1, 59);
+     var formatter = DateTimeFormatter.ofPattern("M.ddhhmm");
+     System.out.println(formatter.format(pi));
 A.  2.140159
 B.  3.140159
 C.  59.140102
 D.  59.140103
 E.  The code does not compile.
 F.  The code compiles but throws an exception at runtime.
-3.  Assuming the key green is in all five of the files referenced in the options, which file will the following code use for the resource bundle?
-Locale.setDefault(new Locale("en", "US"));
-var rb = ResourceBundle.getBundle("Colors", new Locale("fr"));
-System.out.print(rb.getString("green"));
+3.   Assuming the key green is in all five of the files referenced in the options, which file will the
+     following code use for the resource bundle?
+     Locale.setDefault(new Locale("en", "US"));
+     var rb = ResourceBundle.getBundle("Colors", new Locale("fr"));
+     System.out.print(rb.getString("green"));
 A.  Colors_default.properties
 B.  Colors.properties
 C.  Colors_en.properties
 D.  Colors_US.properties
 E.  Colors_en_US.properties
-4.  Assuming the following method is called with a double value of 1_900_000.0, which values are printed? (Choose two.)
-public void payBill(double t) {
-   var nf1 = NumberFormat.getCompactNumberInstance(
-      Locale.getDefault(), Style.LONG);
-   var nf2 = NumberFormat.getCompactNumberInstance();
-   System.out.println(nf1.format(t));
-   System.out.println(nf2.format(t));
-}
+4.   Assuming the following method is called with a double value of 1_900_000.0, which
+     values are printed? (Choose two.)
+     public void payBill(double t) {
+        var nf1 = NumberFormat.getCompactNumberInstance(
+           Locale.getDefault(), Style.LONG);
+        var nf2 = NumberFormat.getCompactNumberInstance();
+        System.out.println(nf1.format(t));
+        System.out.println(nf2.format(t));
+     }
 A.  1M
-B.  1.9 million
+B.  1.9million
 C.  2M
 D.  1.900M
-E.  2 million
-F.  1 million
-5.  What is the output of the following code snippet?
-var d = LocalDateTime.parse("2022- 01- 21T12:00:00",
-   DateTimeFormatter.ISO_LOCAL_DATE);
-System.out.print(d.format(DateTimeFormatter.ISO_LOCAL_TIME));
+E.  2million
+F.  1million
+5.   What is the output of the following code snippet?
+     var d = LocalDateTime.parse("2022-01-__________21T12:00:00",
+        DateTimeFormatter.ISO_LOCAL_DATE);
+     System.out.print(d.format(DateTimeFormatter.ISO_LOCAL_TIME));
 A.  00:00:00
 B.  12:00:00
 C.  2022- 01- 21
 D.  2022- 01- 22
 E.  The code does not compile.
 F.  An exception is thrown at runtime.
-6.  Fill in the blank with the option that allows the code snippet to compile and print a message without throwing an exception at runtime.
-var x = LocalDate.of(2022, 3, 1);
-var y = LocalDateTime.of(2022, 3, 1, 5, 55);
-var f = DateTimeFormatter.ofPattern("MMMM' at 'h' o'clock'");
-System.out.print(
-);
+6.   Fill in the blank with the option that allows the code snippet to compile and print a message
+     without throwing an exception at runtime.
+     var x = LocalDate.of(2022, 3, 1);
+     var y = LocalDateTime.of(2022, 3, 1, 5, 55);
+     var f = DateTimeFormatter.ofPattern("MMMM' at 'h' o'clock'");
+     System.out.print(__________);
 A.  f.formatDate(x)
 B.  f.formatDate(y)
 C.  f.format(x)
 D.  f.format(y)
 E.  The code does not compile regardless of what is placed in the blank.
 F.  None of the above.
-7.  What does the following program print?
-import java.time.*;
-import java.time.format.*;
-public class PolarBear {
-   public static void main(String[] args) {
-      LocalDate polarBearDay = LocalDate.of(2022, 2, 27);
-      var formatter = DateTimeFormatter.ofPattern("yyyy dd MMM");
-      System.out.println(polarBearDay.format(formatter));
-   } }
-A.  2022 27 Jan
-B.  2022 27 Feb
-C.  2022 Jan 27
-D.  2022 Feb 27
-E.  None of the above
-8.  Which of the following are valid locale formats? (Choose two.)
+7.   What does the following program print?
+     import java.time.*;
+     import java.time.format.*;
+     public class PolarBear {
+        public static void main(String[] args) {
+           LocalDate polarBearDay = LocalDate.of(2022, 2, 27);
+           var formatter = DateTimeFormatter.ofPattern("yyyy dd MMM");
+8.   Which of the following are valid locale formats? (Choose two.)
 A.  hi
 B.  IN_hi
 C.  hi_IN
 D.  HI_IN
 E.  in_hi
 F.  IN
-9.  Assuming the key indigo is in all five of the files referenced in the options, which file will the following code use for the resource bundle?
-Locale loc = new Locale("fr", "CH");
-Locale.setDefault(new Locale("it", "CH"));
-ResourceBundle rb = ResourceBundle.getBundle("Colors", loc);
-rb.getString("Indigo");
+9.   Assuming the key indigo is in all five of the files referenced in the options, which file will
+     the following code use for the resource bundle?
+     Locale loc = new Locale("fr", "CH");
+     Locale.setDefault(new Locale("it", "CH"));
+     ResourceBundle rb = ResourceBundle.getBundle("Colors", loc);
+     rb.getString("Indigo");
 A.  Colors_default.properties
 B.  Colors_en_US.properties
 C.  Colors_CH.properties
 D.  Colors_en.properties
 E.  Colors_es.properties
 F.  None of the above
-10.  For currency, the United States uses the $ symbol, the UK uses the £ symbol, and Germany uses the € symbol. Given this information, what is the expected output of the following code snippet?
-Locale.setDefault(Locale.US);
-Locale.setDefault(Category.FORMAT, Locale.GERMANY);
-System.out.print(NumberFormat.getCurrencyInstance(Locale.UK)
-   .format(1.1));
+10. For currency, the United States uses the $ symbol, the UK uses the £ symbol, and Germany
+     uses the  symbol. Given this information, what is the expected output of the following
+     code snippet?
+     Locale.setDefault(Locale.US);
+     Locale.setDefault(Category.FORMAT, Locale.GERMANY);
+     System.out.print(NumberFormat.getCurrencyInstance(Locale.UK)
+        .format(1.1));
 A.  $1.10
-B.  1,10€
+B.  1,10
 C.  £1.10
 D.  The code does not compile.
 E.  An exception is thrown at runtime.
-F.  The output cannot be determined without knowing the locale of the system where it will be run.
+F.  The output cannot be determined without knowing the locale of the system where it will
+          be run.
 11.  Which correctly fills in the blank to print 2022- 01- 15?
-LocalDate hatDay = LocalDate.of(2022, Month.JANUARY, 15);
-DateFormatter f = DateFormatter.ISO_DATE;
-System.out.println(
-);
+     LocalDate hatDay = LocalDate.of(2022, Month.JANUARY, 15);
+     DateFormatter f = DateFormatter.ISO_DATE;
+     System.out.println(________________________________);
 A.  f.format(hatDate)
 B.  hatDay.format(f)
 C.  Both of the above
 D.  Neither of the above
-12.  Given the following four properties files, what does this code print? Cars_en.properties Cars.properties engine=engine horses=241 engine=moteur country=earth road=highway Cars_en_US.properties Cars_fr_FR.properties country=US horses=45 country=France road=autoroute
-Locale.setDefault(new Locale("en"));
-var rb = ResourceBundle.getBundle("Cars",
-   new Locale("de", "DE"));
-var r1 = rb.getString("engine");
-var r2 = rb.getString("horses");
-var r3 = rb.getString("country");
-System.out.print(r1+ " " + r2 + " " + r3);
+12. Given the following four properties files, what does this code print?
+                           Cars_en.properties      Cars.properties
+     _______________________ engine=engine___________engine=moteur
+     _______________________ horses=241______________country=earth
+     _______________________________________________ road=highway
+                           Cars_en_US.properties   Cars_fr_FR.properties
+     _______________________ country=US______________country=France
+     _______________________ horses=45_______________road=autoroute
+     Locale.setDefault(new Locale("en"));
+     var rb = ResourceBundle.getBundle("Cars",
+        new Locale("de", "DE"));
+     var r1 = rb.getString("engine");
+     var r2 = rb.getString("horses");
+     var r3 = rb.getString("country");
+     System.out.print(r1+ " " + r2 + " " + r3);
 A.  null null null
 B.  engine 241 US
 C.  moteur 45 US
 D.  engine 241 earth
 E.  moteur 241 earth
 F.  An exception is thrown at runtime.
-13.  Given the four properties files in Question 12, what does this code print?
+13. Given the four properties files in Question 12, what does this code print?
 Locale.setDefault(new Locale("en", "US"));
 var rb = ResourceBundle.getBundle("Cars",
    new Locale("fr", "FR"));
@@ -135,12 +140,12 @@ var s2 = rb.getString("horses");
 var s3 = rb.getString("engine");
 System.out.print(s1+ " " + s2 + " " + s3);
 A.  France null engine
-B.  France 241 moteur
-C.  France 45 moteur
+B.  France 241moteur
+C.  France 45moteur
 D.  France 241 engine
 E.  France 45 engine
 F.  An exception is thrown at runtime.
-14.  Given the four properties files in Question 12, what does this code print?
+14. Given the four properties files in Question 12, what does this code print?
 Locale.setDefault(new Locale("ja","JP"));
 var rb = ResourceBundle.getBundle("Cars",
    new Locale("fr", "FR"));
@@ -154,100 +159,104 @@ C.  engine highway France
 D.  moteur highway France
 E.  moteur highway US
 F.  An exception is thrown at runtime.
-15.  Which of the following correctly define a Locale instance? (Choose three.)
+15. Which of the following correctly define a Locale instance? (Choose three.)
 A.  Locale.get("it")
 B.  new Locale("it")
 C.  Locale.get(Locale.ITALIAN)
 D.  new Locale.Builder().setLanguage("it").build()
 E.  Locale.of("it")
 F.  Locale.ITALIAN
-16.  Assuming the key turquoise is in all five of the files referenced in the options, which file will the following code use for the resource bundle?
-Locale loc = new Locale("zh", "CN");
-Locale.setDefault(new Locale("en", "US"));
-ResourceBundle rb = ResourceBundle.getBundle("Colors", loc);
-rb.getString("turquoise");
+16. Assuming the key turquoise is in all five of the files referenced in the options, which file
+     will the following code use for the resource bundle?
+     Locale loc = new Locale("zh", "CN");
+     Locale.setDefault(new Locale("en", "US"));
+     ResourceBundle rb = ResourceBundle.getBundle("Colors", loc);
+     rb.getString("turquoise");
 A.  Colors_en.properties
 B.  Colors_CN.properties
 C.  Colors.properties
 D.  Colors_default.properties
 E.  Colors_en_CN.properties
 F.  None of the above
-17.  What format pattern would you pass to a DateTimeFormatter so it creates hour and minute output such as 02:33?
+17.  What format pattern would you pass to a DateTimeFormatter so it creates hour and
+     minute output such as 02:33?
 A.  HH:MM
 B.  HH:mm
 C.  hh:MM
 D.  hh:mm
 E.  None of the above
-18.  Assuming the following method is called with a double value of 123_456.789, which value is printed?
-public void printReceipt(double t) {
-   var formatter = NumberFormat.getCompactNumberInstance(
-      Locale.getDefault(), Style.SHORT);
-   System.out.print(formatter.format(t));
-}
+18. Assuming the following method is called with a double value of 123_456.789, which
+     value is printed?
+     public void printReceipt(double t) {
+        var formatter = NumberFormat.getCompactNumberInstance(
+           Locale.getDefault(), Style.SHORT);
+        System.out.print(formatter.format(t));
+     }
 A.  123,456.789
 B.  123.456 thousand
 C.  123.456K
 D.  124K
 E.  123 thousand
 F.  123K
-19.  For what values of pattern will the following print <02.1> <06.9> <10,00>? (Choose two.)
-String pattern = "
-var message = DoubleStream.of(2.1, 6.923, 1000)
-   .mapToObj(v - > new DecimalFormat(pattern).format(v))
-   .collect(Collectors.joining("> <"));
-System.out.print("<" + message + ">");
-";
+19. For what values of pattern will the following print <02.1> <06.9> <10,00>? (Choose two.)
+ String pattern = "__________";
+ var message = DoubleStream.of(2.1, 6.923, 1000)
+    .mapToObj(v -> new DecimalFormat(pattern).format(v))
+    .collect(Collectors.joining("> <"));
+ System.out.print("<" + message + ">");
 A.  ##,00.##
 B.  ##,00.#
 C.  0,00.#
 D.  #,00.#
 E.  0,00.0
 F.  #,##.#
-20.  Which of the following are not valid Locale formats? (Choose two.)
+20. Which of the following are not valid Locale formats? (Choose two.)
 A.  nl_BE
 B.  fr_CA
 C.  uk_ua
 D.  CR
 E.  no
 F.  ro_RO
-21.  What is the result of running this code?
-12: LocalDate pieDay = LocalDate.of(2022, Month.JANUARY, 23);
-13: LocalTime midnight = LocalTime.of(0, 0);
-14: LocalDateTime pieTime = LocalDateTime.of(pieDay, midnight); 15:
-16: DateTimeFormatter f = DateTimeFormatter
-17:    .ofLocalizedDate(FormatStyle.SHORT);
-18: f.format(pieDay);
-19: f.format(pieTime);
-20: f.format(midnight);
+21. What is the result of running this code?
+ 12: LocalDate pieDay = LocalDate.of(2022, Month.JANUARY, 23);
+ 13: LocalTime midnight = LocalTime.of(0, 0);
+ 14: LocalDateTime pieTime = LocalDateTime.of(pieDay, midnight); 15:
+ 16: DateTimeFormatter f = DateTimeFormatter
+ 17:    .ofLocalizedDate(FormatStyle.SHORT);
+ 18: f.format(pieDay);
+ 19: f.format(pieTime);
+ 20: f.format(midnight);
 A.  The code runs successfully.
 B.  The code throws an exception on line 18.
 C.  The code throws an exception on line 19.
 D.  The code throws an exception on line 20.
 E.  The code does not compile.
-22.  For currency, the United States uses the $ symbol, the UK uses the £ symbol, and Germany uses the € symbol. Given this information, what is the expected output of the following code snippet?
+22. For currency, the United States uses the $ symbol, the UK uses the £ symbol, and Germany
+uses the  symbol. Given this information, what is the expected output of the following code snippet?
 Locale.setDefault(Locale.US);
 Locale.setDefault(Category.FORMAT, Locale.GERMANY);
 Locale.setDefault(Category.DISPLAY, Locale.UK);
 System.out.print(NumberFormat.getCurrencyInstance()
    .format(6.95));
 A.  $6.95
-B.  6,95 €
+B.  6,95
 C.  £6.95
 D.  The code does not compile.
 E.  An exception is thrown at runtime.
-F.  The output cannot be determined without knowing the locale of the system where it will be run.
-23.  What is the output of the following code snippet?
+F.  The output cannot be determined without knowing the locale of the system where it will
+     be run.
+23. What is the output of the following code snippet?
 var x = LocalDate.of(2022, 3, 1);
 var y = LocalDateTime.of(2022, 1, 1, 2, 55);
-var f = DateTimeFormatter.ofPattern("'yyyy- MM'");
+var f = DateTimeFormatter.ofPattern("'yyyy-MM'");
 System.out.print(f.format(x) + " " + f.format(y));
-A.  2022- 03 2022- 01
-B.  2022- 01 2022- 03
-C.  2022- 02 2022- 00
-D.  yyyy- MM yyyy- MM
+A.  2022- 03  2022- 01
+B.  2022- 01  2022- 03
+C.  2022- 02  2022- 00
+D.  yyyy- MM  yyyy- MM
 E.  The code does not compile.
 F.  An exception is thrown at runtime.
-24.  Given the following two properties files, what does the loadPod() method output? container.properties name=generic number=2 container_en.properties name=Ship type=container
+24. Given the following two properties files, what does the loadPod() method output? container.properties name=generic number=2 container_en.properties name=Ship type=container
 void loadPod() {
    new Locale.Builder()
       .setLanguage("en")
@@ -260,10 +269,11 @@ void loadPod() {
 A.  Ship container
 B.  generic container
 C.  generic null
-D.  The output cannot be determined without knowing the locale of the system where it will be run.
+D.  The output cannot be determined without knowing the locale of the system where it will
+     be run.
 E.  An exception is thrown at runtime.
 F.  None of the above.
-25.  Given the two properties files from Question 24, what does the following method output?
+25. Given the two properties files from Question 24, what does the following method output?
 void loadContainer() {
    Locale.setDefault(new Locale("en"));
    var rb = ResourceBundle.getBundle("container");
@@ -274,10 +284,11 @@ void loadContainer() {
 A.  Ship container
 B.  generic container
 C.  generic null
-D.  The output cannot be determined without knowing the locale of the system where it will be run.
+D.  The output cannot be determined without knowing the locale of the system where it will
+     be run.
 E.  An exception is thrown at runtime.
 F.  None of the above.
-26.  Given the two properties files from Question 24, what does the following method output?
+26. Given the two properties files from Question 24, what does the following method output?
 void loadControlPlane() {
    Locale.setDefault(new Locale("en_US"));
    var rb = ResourceBundle.getBundle("container");
@@ -288,37 +299,39 @@ void loadControlPlane() {
 A.  Ship container
 B.  generic container
 C.  generic null
-D.  The output cannot be determined without knowing the locale of the system where it will be run.
+D.  The output cannot be determined without knowing the locale of the system where it will
+          be run.
 E.  An exception is thrown at runtime.
 F.  None of the above.
 27.  Which correctly fills in the blank to print 2022- 01- 15?
-LocalDate hatDay = LocalDate.of(2022, Month.JANUARY, 15);
-DateTimeFormatter f = DateTimeFormatter.ISO_DATE;
-System.out.println(
-);
+     LocalDate hatDay = LocalDate.of(2022, Month.JANUARY, 15);
+     DateTimeFormatter f = DateTimeFormatter.ISO_DATE;
+     System.out.println(__________);
 A.  f.format(hatDay)
 B.  hatDay.format(f)
 C.  f.formatDate(hatDay)
 D.  hatDay.formatDate(f)
 E.  f.format(hatDay) and hatDay.format(f)
 F.  f.formatDate(hatDay) and hatDay.formatDate(f)
-28.  Assuming the Forest.properties file is the only resource file available, what is the output of calling the hike() method? Forest.properties
-trees=evergreen {0}
-animals=squirrels
-static void hike() {
-   Locale.setDefault(new Locale.Builder()
-      .setLanguage("en").build());
-   var rb = ResourceBundle
-      .getBundle("Forest", new Locale("fr"));
-   System.out.print(MessageFormat.format("trees","pretty"));
-}
+28. Assuming the Forest.properties file is the only resource file available, what is the
+     output of calling the hike() method?
+     Forest.properties
+     trees=evergreen {0}
+     animals=squirrels
+     static void hike() {
+        Locale.setDefault(new Locale.Builder()
+           .setLanguage("en").build());
+        var rb = ResourceBundle
+           .getBundle("Forest", new Locale("fr"));
+        System.out.print(MessageFormat.format("trees","pretty"));
+     }
 A.  trees
 B.  trees pretty
 C.  trees {0}
 D.  trees null
 E.  The code does not compile.
 F.  An exception is thrown at runtime.
-29.  What does the following print?
+29. What does the following print?
 import java.time.*;
 import java.time.format.*;
 public class Cat {
@@ -332,7 +345,7 @@ A.  Holiday: 2022 29 Sept
 B.  Holiday: 2022 29 Oct
 C.  The code does not compile.
 D.  The code compiles but throws an exception at runtime.
-30.  Which of the following is not an expected output printed by the following code?
+30. Which of the following is not an expected output printed by the following code?
 double p = 1_909.2;
 var nf1 = NumberFormat.getCompactNumberInstance(Locale.getDefault());
 var nf2 = NumberFormat.getCompactNumberInstance(
@@ -346,4 +359,4 @@ A.  1909.2
 B.  2K
 C.  2 thousand
 D.  All of the above will be printed.
-E.  None of the above, as the code does not compile. Chapter Practice Exam 1 This chapter contains 50 questions and is designed to simulate a real 1Z0- 829 exam. While previous chapters were focused on a specific set of objectives, this chapter covers all of the objectives on the exam. We recommend you take this exam only after you score well on the questions in the individual chapters. For this chapter, you should try to simulate the real exam expe- rience as much as possible. This means setting aside 90 minutes of uninterrupted time to complete the test, as well as not looking at any reference material while taking the exam. If you don’t know an answer to a question, complete it as best you can and move on to the next question, just as you would on a real exam. Remember, the exam permits writing material, such as a white- board. If you do not have a whiteboard handy, you can just use blank sheets of paper and a pencil. If you do well on this test, then you are hopefully ready to take the real exam. With that said, good luck!
+E.  None of the above, as the code does not compile.
