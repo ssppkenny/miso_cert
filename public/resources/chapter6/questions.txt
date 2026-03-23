@@ -370,6 +370,11 @@ E.  The code does not compile.
        checkPrices(prices,
              p -> {
                 String result = p<5 ? "Correct" : "Too high";
+A.  Consumer
+B.  Consumer<Integer>
+C.  DoubleConsumer
+D.  Supplier<Double>
+E.  None of the above
 40. Which of the following is not a valid lambda expression?
 A.  (Integer j, k) -> 5
 B.  (p,q) -> p+q
@@ -716,13 +721,18 @@ C.  Only mapToObject
 D.  Both map and mapToInt
 E.  Both map and mapToObject
 F.  map, mapToInt, and mapToObject
-              68. What does the following do? (Choose two.)
+68. What does the following do? (Choose two.)
      public class Player {
         interface Basket {
            boolean needToAim(double angle);
         }
         static void prepare(double angle, Basket t) {
            boolean ready = t.needToAim(angle);  // k1
+A.  If any compiler errors are fixed, it prints true.
+B.  If any compiler errors are fixed, it prints false.
+C.  It compiles without issue.
+D.  It doesnt compile due to line k1.
+E.  It doesnt compile due to line k2.
 69. Which statements about the following code are correct?
      var data = List.of(1,2,3);
      int f = data.parallelStream()
@@ -1055,6 +1065,11 @@ F.  None of the above
            double deposit = 1.5;
            creditUnion.savingsInCents +=
               ConvertToCents.f.applyAsInt(deposit);  // j1
+A.  100
+B.  200
+C.  250
+D.  The code does not compile because of line j1.
+E.  None of the above.
 99. Which statements about stateful lambda expressions are correct? (Choose two.)
 A.  Stateful lambda expressions should be avoided on both serial and parallel streams.
 B.  Stateful lambda expressions should be avoided only on serial streams.

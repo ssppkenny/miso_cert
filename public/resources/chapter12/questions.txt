@@ -8,6 +8,12 @@
                 .map((a, b) -> a -__________b)___________________// c3
                 .filter(x -> !x.isEmpty())_________________// c4
                 .get();
+A.  The code compiles and outputs 1.
+B.  The code compiles and outputs 8.
+C.  The first compiler error is on line c1.
+D.  The first compiler error is on line c2.
+E.  The first compiler error is on line c3.
+F.  The first compiler error is on line c4.
 2.   Which statements about the following class are correct? (Choose two.)
      package knowledge;
      class InformationException extends Exception {}
@@ -46,10 +52,22 @@ F.  # Updated code by Patti
         stmt.setString(1, "DC");
         var rs = stmt.executeQuery()) {
         if (rs.next())
+A.  Mei Xiang
+B.  No match
+C.  The code does not compile due to line s1.
+D.  The code does not compile due to line s2.
+E.  The code does not compile due to another line.
+F.  The code throws an exception at runtime.
 5.   What does the following code print? // Hare.java
      package com.animal;
      public class Hare {
         void init() {
+A.  init- hare- tortoise
+B.  init- hare
+C.  The first line with a compiler error is line x1.
+D.  The first line with a compiler error is line x2.
+E.  The code does not compile due to a different line.
+F.  The code throws an exception.
 6.   Which of the following lambda expressions can be passed to a method that takes IntUnaryOperator as an argument? (Choose three.)
 A.  v -> {System.out.print(Hello!); return 2%1;}
 B.  (Integer w) -> w.intValue()
@@ -120,6 +138,11 @@ F.  The code compiles but throws an exception at runtime.
         }
         static void prepare(double angle, Basket t) {
            boolean ready = t.needToAim(angle);  // k1
+A.  It prints true.
+B.  It prints false.
+C.  It doesnt compile due to line k1.
+D.  It doesnt compile due to line k2.
+E.  It doesnt compile due to another line.
 13. What does ServiceLocator.load(ChocolateLab.class) return?
 A.  Collection
 B.  List
@@ -159,6 +182,11 @@ F.  3, 0, 2, 1, 1
            LocalDateTime pi = LocalDateTime.of(2022, 3, 14, 1, 59);
            DateTimeFormatter formatter = DateTimeFormatter
               .ofPattern("m.ddhh'MM'");
+A.  3.140159
+B.  3.1401MM
+C.  59.140103
+D.  59.1401MM
+E.  None of the above
 18. Suppose cats is an empty table. How many rows are in this table when the code has completed?
      10: try (var conn = DriverManager.getConnection(url)) {
      11:    conn.setAutoCommit(false);
@@ -415,6 +443,11 @@ public class TieShoes {
    public void tie() {
       try {
          if (shoes.__________) {
+A.  lock()
+B.  tryLock()
+C.  tryLock(10)
+D.  The code does not compile regardless of what is placed in the blank.
+E.  None of the above.
 33. What is the output of the following program?
 var bed = List.of((short)2,(short)5);
 var pillow = bed.parallelStream().reduce(0,
@@ -683,6 +716,11 @@ F.  The code does not compile.
      package com.animals;
      public class Hopper {
         protected void hop() {
+A.  The code prints hop once.
+B.  The code prints hop twice.
+C.  The first compiler error is on line p1.
+D.  The first compiler error is on line p2.
+E.  The first compiler error is on line p3.
 48. Given the following class, how many lines contain compilation errors?
      1:  import java.io.*;
      2:  class StungException extends Exception {}

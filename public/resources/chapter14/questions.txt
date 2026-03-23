@@ -18,6 +18,12 @@ F.  An assignment operator returns a value that is equal to the value of the exp
                  sb.deleteCharAt(0);
                  sb.delete(1, 1);
               }
+A.  r
+B.  e
+C.  ed
+D.  red
+E.  The code does not compile.
+F.  The code compiles but throws an exception at runtime.
 3.      Which line of code belongs in a service locator?
 A.  ServiceLoader<Mouse> sl = ServiceLoader.load(Mouse.class);
 B.  ServiceLoader<Mouse> sl = ServiceLoader.loader(Mouse.class);
@@ -68,6 +74,12 @@ F.  None of the above.
            var hide = Stream.of(true, false, true);
            Predicate<Boolean> pred = b -> b;
            var found = hide.filter(pred).__________(pred);
+A.  Only anyMatch
+B.  Only allMatch
+C.  Both anyMatch and allMatch
+D.  Only noneMatch
+E.  Both noneMatch and anyMatch
+F.  The code does not compile with any of these options.
 7.   Suppose you have a consumer that calls the lion() method within a Lion service. You have four distinct modules: consumer, service locator, service provider, and service provider interface. If you add a parameter to the lion() method, how many of the modules require recompilation?
 A.  Zero
 B.  One
@@ -163,6 +175,12 @@ F.  Five
     public static void swing(int... beats)
           throws ClassCastException {
        try {
+A.  145
+B.  1045
+C.  24, followed by a stack trace
+D.  245
+E.  The code does not compile because of line p1.
+F.  The code does not compile because of line p2.
 15. What is the output of the following application?
 1:  interface HasHue {String getHue();}
 2:  enum COLORS implements HasHue {
@@ -379,6 +397,12 @@ F.
      public boolean passed() {
         return super.passed();
      }
+A.  boolean passed() { return part1.pass && part2.pass; }
+B.  boolean passed() { return part1.passed() && part2.passed(); }
+C.  private boolean passed() { return super.passed(); }
+D.  public boolean passed() { return part1.passed() && part2.passed(); }
+E.  public boolean passed() { return part1.pass && part2.pass; }
+F.  public boolean passed() { return super.passed(); }
 27.  How many of these lines print false? 23: var smart = """ 24:    barn owl\n\n 25:    wise
      26:    """;
      27: var clever = """
@@ -599,6 +623,12 @@ F.
 .map(Entry::getValue)
 .map(List::stream)
 .sorted(Comparator.reverseOrder())
+A.  .filter(s -> s.contains(" ")) .collect(Collectors.toSet()) .stream() .entrySet() .stream() .filter(e -> e.getKey()) .map(Entry::getValue) .flatMap(List::stream) .sorted(Comparator.reverseOrder())
+B.  .filter(s -> s.contains(" ")) .collect(Collectors.toUnmodifiableSet()) .stream() .entrySet() .stream() .filter(e -> e.getKey()) .map(Entry::getValue) .flatMap(List::stream) .sorted(Comparator.reverseOrder())
+C.  .collect(Collectors.toUnmodifiableSet()) .stream() .collect(Collectors.groupingBy(s -> s.contains(" "))) .entrySet() .stream() .filter(e -> e.getKey()) .map(Entry::getValue) .map(List::stream) .sorted(Comparator.reverseOrder())
+D.  .collect(Collectors.toSet()) .stream() .collect(Collectors.groupingBy(s -> s.contains(" "))) .entrySet() .stream() .filter(e -> e.getKey()) .map(Entry::getValue) .flatMap(List::stream) .sorted(Comparator.reverseOrder())
+E.  .filter(s -> s.contains(" ")) .collect(Collectors.toUnmodifiableSet()) .stream() .collect(Collectors.groupingBy(s -> s.contains(" "))) .entrySet() .stream() .filter(e - > e.getKey()) .map(Entry::getValue) .map(List::stream) .sorted(Comparator.reverseOrder())
+F.  .collect(Collectors.toUnmodifiableSet()) .stream() .collect(Collectors.groupingBy(s -> s.contains(" "))) .entrySet() .stream() .filter(e -> e.getKey()) .map(Entry::getValue) .map(List::stream) .sorted(Comparator.reverseOrder())
 38. What is the output of the following code snippet?
 LocalDate dogDay = LocalDate.of(2022,8,26);
 var x = DateTimeFormatter.ISO_DATE;
@@ -684,6 +714,12 @@ class Coin {
       var sides = Side.values();
       for (var s : sides)
          for (int i=sides.length; i>0 ; i-=2)
+A.  One
+B.  Two
+C.  Four
+D.  The code does not compile.
+E.  The code compiles but throws an exception at runtime.
+F.  The code compiles but enters an infinite loop at runtime.
 44. What is the minimum number of lines that need to be removed to make this code compile and be able to be implemented as a lambda expression?
 @FunctionalInterface
 public interface Play {
@@ -742,6 +778,12 @@ F.  An exception is thrown at runtime.
         } }
      public class Sing extends Music {
         public void make()__________{
+A.  throws FileNotFoundException
+B.  throws NumberFormatException
+C.  throws Exception
+D.  throws SQLException
+E.  throws Throwable
+F.  Placing nothing in the blank
 48. Given the application shown here, which lines do not compile? (Choose three.)
      package furryfriends;
      interface Friend {
@@ -757,6 +799,12 @@ F.  An exception is thrown at runtime.
         }
         public static void main(String[] adoption) {
            Friend friend = new Dog();__________________// h4
+A.  Line h1
+B.  Line h2
+C.  Line h3
+D.  Line h4
+E.  Line h5
+F.  Line h6
 49. What is the output of the following?
 1: package reader;
 2: import java.util.stream.*;

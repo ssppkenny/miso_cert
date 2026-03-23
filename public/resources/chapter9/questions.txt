@@ -144,6 +144,13 @@ F.  None of the above.
            try (var o = new ObjectInputStream(
                  new FileInputStream("healthy.txt"))) {
               var v = (Vegetable) o.readObject();
+A.  1,Red
+B.  2,Green
+C.  2,null
+D.  3,Purple
+E.  4,null
+F.  null,null
+G.  None of the above
 11.  Why does Console readPassword() return a char array rather than a String?
 A.  It improves performance.
 B.  It improves security.
@@ -386,6 +393,12 @@ F.  None of the above.
                  new FileInputStream(new File("s.data")))) {
           Student record;
           while((record = (Student)ios.readObject()) != null)  // p1
+A.  The code does not compile.
+B.  The code compiles but prints an exception at runtime.
+C.  The program runs and prints all students in the file.
+D.  The program runs but may only print some students in the files.
+E.  Line p1 demonstrates the proper way to check if all records have been read.
+F.  Line p1 does not demonstrate the proper way to check if all records have been read.
 29. Given an instance of Console c, which of the following two method calls are invalid ways of retrieving input from the user? (Choose two.)
 A.  c.read()
 B.  c.reader().read()
@@ -484,6 +497,12 @@ while ((line = is.readLine()) != null)
    os.write(line + "\n"); F.
 while ((chirps = is.read()) > 0)
    os.write(chirps);
+A.  while (is.read(data) > 0) os.write(data);
+B.  while ((chirps = is.read(data)) > 0) os.write(data, 0, chirps);
+C.  while ((chirps = is.read(data)) > 0) os.write(data);
+D.  while ((chirps = is.read(data)) > 0) os.write(data, chirps, data.length);
+E.  String line; while ((line = is.readLine()) != null) os.write(line + "\n");
+F.  while ((chirps = is.read()) > 0) os.write(chirps);
 36. In this question, an instance of Cereal has been serialized to disk, with the source object having a name value of CornLoops and sugar value of 5. What is the value of name and sugar after this object has been read from disk using the ObjectInputStreams readObject() method?
 package breakfast;
 import java.io.Serializable;

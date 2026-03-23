@@ -1,10 +1,10 @@
 1.   What is the name of a file that declares a module?
 A.   mod.java
-B.   mod- data.java
-C.   mod- info.java
+B.   mod-data.java
+C.   mod-info.java
 D.   module.java
-E.   module- data.java
-F.   module- info.java
+E.   module-data.java
+F.   module-info.java
 2.   Suppose you have a module that calls exports(ChocolateLab.class) using a service locator. Which part of the module service contains this class?
 A.   Consumer
 B.   Service locator
@@ -42,7 +42,11 @@ D.  3
 E.  4
 8.   Which of the following statements are true? (Choose two.)
 A.  It is a good practice to add the - - add- exports option to your java command.
-B.  It is permitted, but not recommended, to add the - - add- exports option to your
+B.  It is permitted, but not recommended, to add the - - add- exports option to your java command.
+C.  There is no - - add- exports option on the java command.
+D.  It is a good practice to add the - - add- requires option to your java command.
+E.  It is permitted, but not recommended, to add the - - add- requires option to your java command.
+F.  There is no - - add- requires option on the java command.
 9.   How many of the following are legal module- info.java files?
      module com.koala {
        exports cute;
@@ -109,6 +113,12 @@ C.  Provider.get()
 D.  Provider::get
 E.  None of the above
 17.  Suppose we want to have two modules: com.ny and com.sf. Which is true about the placement of the module- info.java file(s)?
+A.  One module- info.java file is required in position Z.
+B.  Two module- info.java files are required, in positions V and X.
+C.  Two module- info.java files are required, in positions W and Y.
+D.  Three module- info.java files are required, in positions V, X, and Z.
+E.  Three module- info.java files are required, in positions W, Y, and Z.
+F.  None of the above.
 18. Consider the modules in the previous diagram. Suppose we want the code in module com.sf to depend on code in module com.ny. Which of the following directives goes into module com.sfs module- info file to configure that behavior?
 A.  export com.ny;
 B.  exports com.ny;
@@ -186,7 +196,7 @@ B.  Service locator
 C.  Service provider
 D.  Service provider interface
 E.  None of the above
-          28. Suppose we have a com.bird module that contains a com.bird.tweet package and a
+28. Suppose we have a com.bird module that contains a com.bird.tweet package and a
      Tweety class with a main() method. Which of the following can fill in the blank to run this
      program?
      java  - - module- path  mods_______________module
@@ -320,6 +330,12 @@ F.  Code on the module path can reference code in automatic and named modules, b
          duckling
                                             Food.java
                      Duckling.java
+A.  exports com.duckling;
+B.  exports com.duckling from com.park;
+C.  exports com.duckling to com.park;
+D.  exports com.park from com.duckling;
+E.  exports com.park to com.duckling;
+F.  None of the above
 44. Given the diagram in the previous question, what could we add to module- info.java in com.duck to allow the com.park package to reference the Duckling class, but not allow the Egg class to reference the Duckling class?
 A.  exports com.duckling;
 B.  exports com.duckling from com.park;
@@ -547,6 +563,11 @@ F.  caterpillar is an unnamed module.
               com.magic        com.science
                   com.magic.dragon   com.science.bio
                   com.magic.unicorn  com.science.chem
+A.  0
+B.  1
+C.  2
+D.  3
+E.  4
 69. Suppose the two JARs described in the previous question are on the classpath. How many of the four packages in the diagram can a module on the module path access?
 A.  0
 B.  1

@@ -146,7 +146,7 @@ A.  rs.getInt(1)
 B.  rs.getInt(2)
 C.  rs.getInteger(1)
 D.  rs.getInteger(2)
-14. Given the books table in the previous question and the following code, which lines would you add to successfully insert a row? (Choose two.)
+                         14. Given the books table in the previous question and the following code, which lines would you add to successfully insert a row? (Choose two.)
 var url = "jdbc:hsqldb:file:library";
 var sql = "INSERT INTO books (title,num_pages) VALUES(?,?)";
 try (var conn = DriverManager.getConnection(url);
@@ -220,11 +220,6 @@ E.  The code throws an exception.
         var stmt = conn.prepareStatement(sql); // s2
         var rs = stmt.executeQuery()) {__________// s3
         if (rs.next())
-A.  The code terminates successfully without any output.
-B.  The code does not compile due to line s1.
-C.  The code does not compile due to line s2.
-D.  The code does not compile due to line s3.
-E.  None of the above.
 19. What is the correct order to close database resources?
 A.  Connection then PreparedStatement then ResultSet
 B.  Connection then ResultSet then PreparedStatement

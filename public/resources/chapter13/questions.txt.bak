@@ -42,12 +42,6 @@ G.  9million
         stmt.setString(1, "Feathers");
         try (var rs = stmt.executeQuery()) {___________// s2
            while (rs.hasNext()) {
-A.  false
-B.  true
-C.  The code does not compile due to line s1.
-D.  The code does not compile due to line s2.
-E.  The code does not compile due to another line.
-F.  The code throws an exception at runtime.
 4.   What is the output of the following?
      1:  import static java.util.stream.Collectors.*;
      2:  import java.util.*;
@@ -81,11 +75,6 @@ F.  The code compiles but throws an exception at runtime.
      abstract class TShirt {
         abstract int insulate();
         public TShirt() {
-A.  Starting...Insulation:20
-B.  Starting...Insulation:40
-C.  The code does not compile because of line v1.
-D.  The code does not compile because of line v2.
-E.  The code does not compile for a different reason.
 6.   Which of the following use generics and compile without warnings? (Choose two.)
 A.  List<String> a = new ArrayList();
 B.  List<> b = new ArrayList();
@@ -108,12 +97,6 @@ F.  If a collector is used, it must have the concurrent characteristic.
               throw new NumberFormatException();
            } catch (ClassCastException
                  | ArithmeticException e) { // p1
-A.  Math
-B.  Unknown
-C.  Unknown followed by Done!
-D.  The code does not compile due to line p1.
-E.  The code does not compile due to line p2.
-F.  None of the above.
 9.   How many lines contain a compiler error?
      1:  public record Bee(boolean gender, String species) {
      2:     Bee {
@@ -172,11 +155,6 @@ E.
         abstract Long swim();
         boolean test();
      }
-A.  interface CanClimb { default void climb() {} static void climb(int x) {} }
-B.  interface CanDance { int dance() { return 5; } }
-C.  interface CanFly { abstract void fly(); }
-D.  interface CanRun { void run(); static double runFaster() {return 2.0; } }
-E.  interface CanSwim { abstract Long swim(); boolean test(); }
 12. Which are true of jlink? (Choose two.)
 A.  Only the modules specified by - - add- modules are included in the runtime image.
 B.  At least the modules specified by - - add- modules are included in the runtime image.
@@ -255,12 +233,6 @@ boolean hasEggs = switch (numEggs) {
    default -> {return false;}
 };
 System.out.print(hasEggs);
-A.  boolean hasEggs = switch (numEggs) { case 0 ->    true default -> false }; System.out.print(hasEggs);
-B.  boolean hasEggs = switch (numEggs) { case 0 ->    true; default -> false; }; System.out.print(hasEggs);
-C.  boolean hasEggs = switch (numEggs) { case 0 ->   return true; default -> return false; }; System.out.print(hasEggs);
-D.  boolean hasEggs = switch (numEggs) { case 0 ->    {yield true}; default -> {yield false}; }; System.out.print(hasEggs);
-E.  boolean hasEggs = switch (numEggs) { case 0 ->   {yield true;} default -> {yield false;} }; System.out.print(hasEggs);
-F.  boolean hasEggs = switch (numEggs) { case 0 ->    {return true;} default -> {return false;} }; System.out.print(hasEggs);
 16. Which of the following changes, when applied independently, will print the same result as the original implementation? (Choose two.) 10: long sum = IntStream.of(4, 6, 8) 11:    .boxed() 12:    .parallel() 13:    .mapToInt(x -> x)
      14:    .sum();
      15: System.out.print(sum);
@@ -464,12 +436,6 @@ F.  Five
            var length = 5;
            var type = new String[1];
            length = h.adjustPropellers(length, type);
-A.  5,LONG
-B.  6,LONG
-C.  5,null
-D.  6,null
-E.  The code does not compile.
-F.  The code compiles but throws an exception at runtime.
 28. What does the following output?
 var dice = new LinkedList<Integer>();
 dice.offer(3);
@@ -624,13 +590,6 @@ F.  RuntimeException
         public static void main(String[] cost) {
            try {
               final CarbonStructure ring = new Diamond(); // q3
-A.  null
-B.  15
-C.  It does not compile because of line q1.
-D.  It does not compile because of line q2.
-E.  It does not compile because of line q3.
-F.  It does not compile because of line q4.
-G.  The class compiles but produces an exception at runtime.
 39. Which of the following are valid Locale formats? (Choose two.)
 A.  iw
 B.  UA

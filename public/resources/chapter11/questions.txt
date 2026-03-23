@@ -66,6 +66,11 @@ F.  None of the above.
         public static void main(String[] args) {
            LocalDate polarBearDay = LocalDate.of(2022, 2, 27);
            var formatter = DateTimeFormatter.ofPattern("yyyy dd MMM");
+A.  2022 27Jan
+B.  2022 27 Feb
+C.  2022Jan 27
+D.  2022 Feb 27
+E.  None of the above
 8.   Which of the following are valid locale formats? (Choose two.)
 A.  hi
 B.  IN_hi

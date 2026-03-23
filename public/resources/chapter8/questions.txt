@@ -4,9 +4,21 @@
            try {
               Thread.sleep(10_000);
            } catch (InterruptedException e) {
+A.  Zero
+B.  One
+C.  Two
+D.  Three
+E.  The code does not compile.
+F.  The code compiles but an exception is printed at runtime.
 2.   What is the output of the following code snippet?
      Callable c = new Callable() {
         public Object run() {
+A.  XXXXXXXXXXDone!
+B.  Done!XXXXXXXXXX
+C.  The code does not compile.
+D.  The code hangs indefinitely at runtime.
+E.  The code throws an exception at runtime.
+F.  The output cannot be determined ahead of time.
 3.   Which of the following methods is not available on an ExecutorService instance? (Choose two.)
 A.  execute(Callable)
 B.  shutdownNow()
@@ -30,6 +42,12 @@ F.  execute(Runnable)
            }
            s.shutdown();
            Thread.sleep(5000);
+A.  false
+B.  true
+C.  The code does not compile.
+D.  The code hangs indefinitely at runtime.
+E.  The code throws an exception at runtime.
+F.  The output cannot be determined ahead of time.
 5.   Which of the following is a recommended way to define an asynchronous task?
 A.  Create a Callable expression and pass it to an instance of an Executor.
 B.  Create a class that extends Thread and override the start() method.
@@ -50,6 +68,12 @@ E.  All of the above.
               dancer.start();
            dancers.forEach(d -> d.interrupt());
            Thread.sleep(5_000);
+A.  It always prints a number less than 10.
+B.  It always prints 10.
+C.  It may print 10 or a number less than 10.
+D.  The code does not compile.
+E.  The code compiles but an exception is printed at runtime.
+F.  None of the above.
 7.   Given the following program, how many times is Locked! expected to be printed?
      import java.util.concurrent.locks.*;
      public class Padlock {
@@ -57,6 +81,12 @@ E.  All of the above.
         public void lockUp() {
            if (lock.tryLock()) {
               lock.lock();
+A.  One time.
+B.  Five times.
+C.  The code does not compile.
+D.  The code hangs indefinitely at runtime.
+E.  The code throws an exception at runtime.
+F.  The output cannot be determined ahead of time.
 8.   Which statements about the following application are correct? (Choose two.)
      import java.util.concurrent.atomic.*;
      import java.util.stream.*;
@@ -76,6 +106,12 @@ E.  All of the above.
               .parallel()
               .limit(500)
               .forEach(i -> ++ticketsSold);
+A.  The TicketTaker constructor does not compile.
+B.  The performJob() method does not compile.
+C.  The class compiles.
+D.  The first number printed is consistently 100.
+E.  The second number printed is consistently 500.
+F.  A ConcurrentModificationException is thrown at runtime.
 9.   Given the original array, how many of the following for statements result in an exception at runtime, assuming each is executed independently?
      var original = List.of(1,2,3,4,5);
      var copy1 = new CopyOnWriteArrayList<Integer>(original);
@@ -189,6 +225,10 @@ B.
    Thread 1 Shared Memory
            Thread 2
            Time
+A.  Thread 1 Shared Memory Thread 2 Time
+B.  Thread 1 Shared Memory Thread 2 Time
+C.  Thread 1 Shared Memory Thread 2 Time
+D.  Thread 1 Shared Memory Thread 2 Time
 17.  What is the output of the following program? (Choose three.)
      import java.util.concurrent.atomic.*;
      import java.util.stream.*;
@@ -201,6 +241,12 @@ B.
               .parallel()
               .limit(100)
               .forEach(q -> {seal++; tiger++; lion.incrementAndGet();});
+A.  The first number printed may be less than 100.
+B.  The first number printed is always 100.
+C.  The second number printed may be less than 100.
+D.  The second number printed is always 100.
+E.  The third number printed may be less than 100.
+F.  The third number printed is always 100.
 18. What is the output of the following application?
 import java.util.*;
 import java.util.concurrent.*;
@@ -487,6 +533,12 @@ public class Television {
    public void watch() {
       try {
          if (myTurn.lock(5, TimeUnit.SECONDS)) {
+A.  One time.
+B.  Three times.
+C.  The code does not compile.
+D.  The code hangs indefinitely at runtime.
+E.  The code throws an exception at runtime.
+F.  The output cannot be determined ahead of time.
 34. Given the original array, how many of the following for statements enter an infinite loop at runtime, assuming each is executed independently?
 var original = new ArrayList<Integer>(List.of(1,2,3));
 var copy1 = new ArrayList<Integer>(original);
@@ -532,6 +584,12 @@ E.  None of the above
        }
        teller.shutdown();
            teller.awaitTermination(10, TimeUnit.SECONDS);
+A.  0
+B.  125
+C.  - 125
+D.  The code does not compile.
+E.  The result is unknown until runtime.
+F.  An exception is thrown.
 37.  What is the output of the following application?
      import java.util.*;
      public class SearchList<T> {
@@ -554,6 +612,12 @@ E.  None of the above
            List<Integer> data = List.of(1,2,3,4,5,6);
            SearchList<Integer> t = new SearchList<Integer>(data);
            t.exists(5, 0, data.size());
+A.  true
+B.  false
+C.  The code does not compile.
+D.  The result is unknown until runtime.
+E.  An exception is thrown.
+F.  None of the above.
 38. Given the following code snippet, what statement about the values printed on lines q1 and q2 is correct?
 var mitchsWorkout = new CopyOnWriteArrayList<Integer>();
 List.of(1,5,7,9).stream().parallel()
