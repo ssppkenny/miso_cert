@@ -7,8 +7,7 @@
 2.   What is the output of the following code snippet?
      Callable c = new Callable() {
         public Object run() {
-3.   Which of the following methods is not available on an ExecutorService instance?
-     (Choose two.)
+3.   Which of the following methods is not available on an ExecutorService instance? (Choose two.)
 A.  execute(Callable)
 B.  shutdownNow()
 C.  submit(Runnable)
