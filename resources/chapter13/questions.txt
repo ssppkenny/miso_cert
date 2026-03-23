@@ -19,8 +19,7 @@ D.  All of the lines of code compile.
 E.  The code terminates properly at runtime.
 F.  The code hangs indefinitely at runtime.
 G.  The code throws an exception at runtime.
-2.   Assuming the current locale uses dollars ($) and the following method is called with a double
-     value of 960_010, which of the following values are printed? (Choose two.)
+2.   Assuming the current locale uses dollars ($) and the following method is called with a double value of 960_010, which of the following values are printed? (Choose two.)
      public void print(double t) {
         System.out.print(NumberFormat.getCompactNumberInstance().format(t));
         System.out.print(
@@ -35,8 +34,7 @@ D.  $960,010.00
 E.  $960,000.00
 F.  900 thousand
 G.  9million
-3.   Suppose we have a peacocks table with two columns: name and rating. What does the fol-
-     lowing code output if the table is empty?
+3.   Suppose we have a peacocks table with two columns: name and rating. What does the fol- lowing code output if the table is empty?
      var url = "jdbc:hsqldb:file:birds";
      var sql = "SELECT name FROM peacocks WHERE name = ?";
      try (var conn = DriverManager.getConnection(url);
@@ -84,8 +82,7 @@ C.  List<String> c = new ArrayList<>();
 D.  List<> d = new ArrayList<>();
 E.  List<String> e = new ArrayList<String>();
 F.  List<> f = new ArrayList<String>();
-7.   Which of the following statements about performing a concurrent reduction are correct?
-     (Choose two.)
+7.   Which of the following statements about performing a concurrent reduction are correct? (Choose two.)
 A.  If a collector is used, it must have the unordered characteristic.
 B.  The stream must operate on thread-safe collections.
 C.  If the reduce() method is used with a lambda expression, then it should be stateful.
@@ -135,8 +132,7 @@ C.  2023- 05- 14T10:00- 07:00[America/Los_Angeles]
 D.  2023- 05- 14T17:00:00Z
 E.  The code does not compile.
 F.  The code compiles but throws an exception at runtime.
-11.  Which of the following are valid functional interfaces? (Choose two.)
-     A.
+11.  Which of the following are valid functional interfaces? (Choose two.) A.
      interface CanClimb {
         default void climb() {}
         static void climb(int x) {}
@@ -237,12 +233,7 @@ boolean hasEggs = switch (numEggs) {
    default -> {return false;}
 };
 System.out.print(hasEggs);
-16. Which of the following changes, when applied independently, will print the same result as the
-     original implementation? (Choose two.)
-     10: long sum = IntStream.of(4, 6, 8)
-     11:    .boxed()
-     12:    .parallel()
-     13:    .mapToInt(x -> x)
+16. Which of the following changes, when applied independently, will print the same result as the original implementation? (Choose two.) 10: long sum = IntStream.of(4, 6, 8) 11:    .boxed() 12:    .parallel() 13:    .mapToInt(x -> x)
      14:    .sum();
      15: System.out.print(sum);
 A.  Change the type on line 10 to double.
@@ -251,8 +242,7 @@ C.  Change line 11 to unboxed().
 D.  Remove line 11.
 E.  Remove line 12.
 F.  Remove line 13.
-17.  How many objects are eligible for garbage collection immediately before the end of the
-     main() method?
+17.  How many objects are eligible for garbage collection immediately before the end of the main() method?
      public class Tennis {
         public static void main(String[] game) {
            String[] balls = new String[1];
@@ -577,16 +567,14 @@ C.  22445
 D.  223445
 E.  2233445
 F.  None of the above
-37.  Which of the following exceptions need to be handled or declared by the method in which
-     they are thrown? (Choose two.)
+37.  Which of the following exceptions need to be handled or declared by the method in which they are thrown? (Choose two.)
 A.  FileNotFoundException
 B.  ArithmeticException
 C.  IOException
 D.  BigProblem
 E.  IllegalArgumentException
 F.  RuntimeException
-38. Given that FileNotFoundException is a subclass of IOException and Long is a subclass of
-     Number, what is the output of the following application?
+38. Given that FileNotFoundException is a subclass of IOException and Long is a subclass of Number, what is the output of the following application?
      package materials;
      import java.io.*;
      class CarbonStructure {
@@ -649,8 +637,7 @@ C.  2
 D.  The code does not compile.
 E.  The code compiles but throws an exception at runtime.
 F.  The output is not guaranteed.
-44. Which two options when inserted independently can fill in the blank to compile the code? (Choose two.)
- javac       mods -d birds com-__________bird/*.java *.java
+44. Which two options when inserted independently can fill in the blank to compile the code? (Choose two.) javac       mods -d birds com-__________bird/*.java *.java
 A.  - cp
 B.  - m
 C.  - p

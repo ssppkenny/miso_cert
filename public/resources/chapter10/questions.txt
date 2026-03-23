@@ -1,5 +1,4 @@
-1.   How many of Connection, Driver, DriverManager, PreparedStatement, and
-     ResultSet are JDBC interfaces included with the JDK?
+1.   How many of Connection, Driver, DriverManager, PreparedStatement, and ResultSet are JDBC interfaces included with the JDK?
 A.  None
 B.  One
 C.  Two
@@ -32,8 +31,7 @@ B.  Driver.getConnection(url)
 C.  DriverManager.getConnection(url)
 D.  new Connection(url)
 E.  None of the above
-6.   Which method in DriverManager is overloaded to allow passing a username
-     and password?
+6.   Which method in DriverManager is overloaded to allow passing a username and password?
 A.  conn()
 B.  connect()
 C.  forName()
@@ -54,18 +52,14 @@ A.  0
 B.  1
 C.  The code does not compile.
 D.  The code compiles but throws an exception at runtime.
-8.   Consider the three methods execute(), executeQuery(), and executeUpdate().
-     Fill in the blanks:   of these methods is/are allowed to run a DELETE SQL
-     statement while      of these methods is/are allowed to run an UPDATE SQL
-     statement.
+8.   Consider the three methods execute(), executeQuery(), and executeUpdate(). Fill in the blanks:   of these methods is/are allowed to run a DELETE SQL statement while      of these methods is/are allowed to run an UPDATE SQL statement.
 A.  None, one
 B.  One, none
 C.  One, one
 D.  One, two
 E.  Two, two
 F.  Three, three
-9.   Suppose the pandas table has one row with the name Mei Xiang and the location DC.
-     What does the following code output?
+9.   Suppose the pandas table has one row with the name Mei Xiang and the location DC. What does the following code output?
      var url = "jdbc:hsqldb:file:mammals";
      var sql = "SELECT name FROM pandas WHERE location = 'DC'";
      try (var conn = DriverManager.getConnection(url);__________// s1
@@ -98,8 +92,7 @@ C.  The code does not compile due to line s1.
 D.  The code does not compile due to line s2.
 E.  The code does not compile due to another line.
 F.  The code throws an exception at runtime.
-11.  Suppose we have an empty bunny table with two columns: name and color. What is the state
-     of the table after running this code?
+11.  Suppose we have an empty bunny table with two columns: name and color. What is the state of the table after running this code?
      var url = "jdbc:hsqldb:file:rabbits";
      var sql = "INSERT INTO bunny(name, color) VALUES (?, ?)";
      try (var conn = DriverManager.getConnection(url);
@@ -116,8 +109,7 @@ B.  It has two rows, and the color is Brown in both.
 C.  The code does not compile due to line s1.
 D.  The code does not compile due to another line.
 E.  The code throws an exception at runtime.
-12. Suppose cats is an empty table. Where can conn.rollback() be inserted so that the
-     table remains empty?
+12. Suppose cats is an empty table. Where can conn.rollback() be inserted so that the table remains empty?
      try (var conn = DriverManager.getConnection(url)) {
         String insert = "INSERT INTO cats VALUES (? ,?)";
         try (var stmt = conn.prepareStatement(insert,
@@ -196,8 +188,7 @@ B.  registerOutParameter and executeQuery
 C.  setOutParameter and execute
 D.  setOutParameter and executeQuery
 E.  None of the above
-17.  Suppose cats is an empty table. Where can conn.rollback(sp) be inserted so that
-     exactly one row is in the table?
+17.  Suppose cats is an empty table. Where can conn.rollback(sp) be inserted so that exactly one row is in the table?
      try (var conn = DriverManager.getConnection(url)) {
         conn.setAutoCommit(false);
         String insert = "INSERT INTO cats VALUES (?,?)";
@@ -222,8 +213,7 @@ B.  Line y
 C.  Either line x or y
 D.  The code does not compile.
 E.  The code throws an exception.
-18. Assuming the animals database exists and contains one empty table named names, what is
-     the output of the following?
+18. Assuming the animals database exists and contains one empty table named names, what is the output of the following?
      var url = "jdbc:hsqldb:file:animals";
      var sql = "SELECT * FROM names";
      try (var conn = new Connection(url);__________// s1
@@ -367,8 +357,7 @@ B.  It can be used only for SELECT statements.
 C.  It can be used only for UPDATE statements.
 D.  All of these are true.
 E.  None of these are true.
-28. Suppose we have a peacocks table with two columns: name and rating. What does the fol-
-     lowing code output if the table is empty?
+28. Suppose we have a peacocks table with two columns: name and rating. What does the fol- lowing code output if the table is empty?
      var url = "jdbc:hsqldb:file::birds";
      var sql = "SELECT name FROM peacocks WHERE name = ?";
      try (var conn = DriverManager.getConnection(url);

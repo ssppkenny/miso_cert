@@ -15,8 +15,7 @@ C.  59.140102
 D.  59.140103
 E.  The code does not compile.
 F.  The code compiles but throws an exception at runtime.
-3.   Assuming the key green is in all five of the files referenced in the options, which file will the
-     following code use for the resource bundle?
+3.   Assuming the key green is in all five of the files referenced in the options, which file will the following code use for the resource bundle?
      Locale.setDefault(new Locale("en", "US"));
      var rb = ResourceBundle.getBundle("Colors", new Locale("fr"));
      System.out.print(rb.getString("green"));
@@ -25,8 +24,7 @@ B.  Colors.properties
 C.  Colors_en.properties
 D.  Colors_US.properties
 E.  Colors_en_US.properties
-4.   Assuming the following method is called with a double value of 1_900_000.0, which
-     values are printed? (Choose two.)
+4.   Assuming the following method is called with a double value of 1_900_000.0, which values are printed? (Choose two.)
      public void payBill(double t) {
         var nf1 = NumberFormat.getCompactNumberInstance(
            Locale.getDefault(), Style.LONG);
@@ -50,8 +48,7 @@ C.  2022- 01- 21
 D.  2022- 01- 22
 E.  The code does not compile.
 F.  An exception is thrown at runtime.
-6.   Fill in the blank with the option that allows the code snippet to compile and print a message
-     without throwing an exception at runtime.
+6.   Fill in the blank with the option that allows the code snippet to compile and print a message without throwing an exception at runtime.
      var x = LocalDate.of(2022, 3, 1);
      var y = LocalDateTime.of(2022, 3, 1, 5, 55);
      var f = DateTimeFormatter.ofPattern("MMMM' at 'h' o'clock'");
@@ -76,8 +73,7 @@ C.  hi_IN
 D.  HI_IN
 E.  in_hi
 F.  IN
-9.   Assuming the key indigo is in all five of the files referenced in the options, which file will
-     the following code use for the resource bundle?
+9.   Assuming the key indigo is in all five of the files referenced in the options, which file will the following code use for the resource bundle?
      Locale loc = new Locale("fr", "CH");
      Locale.setDefault(new Locale("it", "CH"));
      ResourceBundle rb = ResourceBundle.getBundle("Colors", loc);
@@ -88,9 +84,7 @@ C.  Colors_CH.properties
 D.  Colors_en.properties
 E.  Colors_es.properties
 F.  None of the above
-10. For currency, the United States uses the $ symbol, the UK uses the £ symbol, and Germany
-     uses the  symbol. Given this information, what is the expected output of the following
-     code snippet?
+10. For currency, the United States uses the $ symbol, the UK uses the £ symbol, and Germany uses the  symbol. Given this information, what is the expected output of the following code snippet?
      Locale.setDefault(Locale.US);
      Locale.setDefault(Category.FORMAT, Locale.GERMANY);
      System.out.print(NumberFormat.getCurrencyInstance(Locale.UK)
@@ -166,8 +160,7 @@ C.  Locale.get(Locale.ITALIAN)
 D.  new Locale.Builder().setLanguage("it").build()
 E.  Locale.of("it")
 F.  Locale.ITALIAN
-16. Assuming the key turquoise is in all five of the files referenced in the options, which file
-     will the following code use for the resource bundle?
+16. Assuming the key turquoise is in all five of the files referenced in the options, which file will the following code use for the resource bundle?
      Locale loc = new Locale("zh", "CN");
      Locale.setDefault(new Locale("en", "US"));
      ResourceBundle rb = ResourceBundle.getBundle("Colors", loc);
@@ -178,15 +171,13 @@ C.  Colors.properties
 D.  Colors_default.properties
 E.  Colors_en_CN.properties
 F.  None of the above
-17.  What format pattern would you pass to a DateTimeFormatter so it creates hour and
-     minute output such as 02:33?
+17.  What format pattern would you pass to a DateTimeFormatter so it creates hour and minute output such as 02:33?
 A.  HH:MM
 B.  HH:mm
 C.  hh:MM
 D.  hh:mm
 E.  None of the above
-18. Assuming the following method is called with a double value of 123_456.789, which
-     value is printed?
+18. Assuming the following method is called with a double value of 123_456.789, which value is printed?
      public void printReceipt(double t) {
         var formatter = NumberFormat.getCompactNumberInstance(
            Locale.getDefault(), Style.SHORT);
@@ -313,9 +304,7 @@ C.  f.formatDate(hatDay)
 D.  hatDay.formatDate(f)
 E.  f.format(hatDay) and hatDay.format(f)
 F.  f.formatDate(hatDay) and hatDay.formatDate(f)
-28. Assuming the Forest.properties file is the only resource file available, what is the
-     output of calling the hike() method?
-     Forest.properties
+28. Assuming the Forest.properties file is the only resource file available, what is the output of calling the hike() method? Forest.properties
      trees=evergreen {0}
      animals=squirrels
      static void hike() {

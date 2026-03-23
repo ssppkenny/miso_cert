@@ -38,8 +38,7 @@ C.  // Is this a bug?
 D.  $ Begin method-  performStart() $
 E.  /*** TODO: Call grandma ***/
 F.  # Updated code by Patti
-4.   Suppose the pandas table has one row with the name Mei Xiang and the location DC. What
-     does the following code output?
+4.   Suppose the pandas table has one row with the name Mei Xiang and the location DC. What does the following code output?
      var url = "jdbc:hsqldb:file:mammals";
      var sql = "SELECT name FROM pandas WHERE location = ?";
      try (var conn = DriverManager.getConnection(url);
@@ -47,13 +46,11 @@ F.  # Updated code by Patti
         stmt.setString(1, "DC");
         var rs = stmt.executeQuery()) {
         if (rs.next())
-5.   What does the following code print?
-     // Hare.java
+5.   What does the following code print? // Hare.java
      package com.animal;
      public class Hare {
         void init() {
-6.   Which of the following lambda expressions can be passed to a method that takes
-     IntUnaryOperator as an argument? (Choose three.)
+6.   Which of the following lambda expressions can be passed to a method that takes IntUnaryOperator as an argument? (Choose three.)
 A.  v -> {System.out.print(Hello!); return 2%1;}
 B.  (Integer w) -> w.intValue()
 C.  (int j) -> (int) 30L
@@ -98,8 +95,7 @@ C.  Three
 D.  Four
 E.  Five
 F.  Six
-10. Given the following, what can we infer about subtypes of First, called Chicken and Egg?
-     (Choose two.)
+10. Given the following, what can we infer about subtypes of First, called Chicken and Egg? (Choose two.)
      public sealed interface First permits Chicken, Egg { }
 A.  Chicken and Egg must be interfaces.
 B.  Chicken and Egg can be classes or interfaces.
@@ -148,10 +144,7 @@ B.  Service locator
 C.  Service provider
 D.  Service provider interface
 E.  None of the above
-16. Starting with DoubleBinaryOperator and going downward, fill in the values for the table. The method signature refers to the abstract method associated with each functional interface. Functional Interface__________# Parameters in Method Signature DoubleBinaryOperator LongToIntFunction ToLongBiFunction
-     Functional Interface__________# Parameters in Method Signature
-     IntSupplier
-     ObjLongConsumer
+16. Starting with DoubleBinaryOperator and going downward, fill in the values for the table. The method signature refers to the abstract method associated with each functional interface. Functional Interface__________# Parameters in Method Signature DoubleBinaryOperator LongToIntFunction ToLongBiFunction Functional Interface__________# Parameters in Method Signature IntSupplier ObjLongConsumer
 A.  1, 0, 0, 0, 2
 B.  1, 2, 1, 0, 1
 C.  2, 1, 0, 1, 2
@@ -166,8 +159,7 @@ F.  3, 0, 2, 1, 1
            LocalDateTime pi = LocalDateTime.of(2022, 3, 14, 1, 59);
            DateTimeFormatter formatter = DateTimeFormatter
               .ofPattern("m.ddhh'MM'");
-18. Suppose cats is an empty table. How many rows are in this table when the code has
-     completed?
+18. Suppose cats is an empty table. How many rows are in this table when the code has completed?
      10: try (var conn = DriverManager.getConnection(url)) {
      11:    conn.setAutoCommit(false);
      12:    String insert = "INSERT INTO cats VALUES (? ,?)";
@@ -498,10 +490,7 @@ A.  0
 B.  3
 C.  30
 D.  The code does not compile.
-38. Given the following three class declarations, which sets of access modifiers can be inserted,
-     in order, into the following blank lines that would allow all of the classes to compile?
-     (Choose three.)
-     // Alarm.java
+38. Given the following three class declarations, which sets of access modifiers can be inserted, in order, into the following blank lines that would allow all of the classes to compile? (Choose three.) // Alarm.java
      package wake;
      public class Alarm {
                      static int clock;
@@ -690,8 +679,7 @@ C.  2
 D.  3
 E.  4
 F.  The code does not compile.
-47.  What is the result of the following code?
-     // Hopper.java
+47.  What is the result of the following code? // Hopper.java
      package com.animals;
      public class Hopper {
         protected void hop() {

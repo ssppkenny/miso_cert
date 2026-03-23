@@ -14,9 +14,7 @@ C.  submit(Runnable)
 D.  exit()
 E.  submit(Callable)
 F.  execute(Runnable)
-4.   The following program simulates flipping a coin an even number of times. Assuming five
-     seconds is enough time for all of the tasks to finish, what is the output of the following
-     application?
+4.   The following program simulates flipping a coin an even number of times. Assuming five seconds is enough time for all of the tasks to finish, what is the output of the following application?
      import java.util.concurrent.*;
      import java.util.concurrent.atomic.*;
      public class Luck {
@@ -38,8 +36,7 @@ B.  Create a class that extends Thread and override the start() method.
 C.  Create a Runnable lambda expression and pass it to a Thread constructor.
 D.  Create an anonymous Runnable class that overrides the begin() method.
 E.  All of the above.
-6.   Assuming five seconds is enough time for the threads in this program to complete, what is
-     the expected result of executing the following program?
+6.   Assuming five seconds is enough time for the threads in this program to complete, what is the expected result of executing the following program?
      import java.util.*;
      public class Dance {
         int count = 0;
@@ -79,8 +76,7 @@ E.  All of the above.
               .parallel()
               .limit(500)
               .forEach(i -> ++ticketsSold);
-9.   Given the original array, how many of the following for statements result in an
-     exception at runtime, assuming each is executed independently?
+9.   Given the original array, how many of the following for statements result in an exception at runtime, assuming each is executed independently?
      var original = List.of(1,2,3,4,5);
      var copy1 = new CopyOnWriteArrayList<Integer>(original);
      for(Integer w : copy1)
@@ -100,8 +96,7 @@ C.  Two
 D.  Three
 E.  Four
 F.  The code does not compile.
-10. Fill in the blanks: ______________ is a special case of ______________, in which two or more
-     active threads try to acquire the same set of locks and are repeatedly unsuccessful.
+10. Fill in the blanks: ______________ is a special case of ______________, in which two or more active threads try to acquire the same set of locks and are repeatedly unsuccessful.
 A.  Deadlock, livelock
 B.  Deadlock, resource starvation
 C.  Livelock, resource starvation
@@ -174,18 +169,13 @@ B.  One
 C.  Three
 D.  The code does not compile.
 E.  An exception is thrown at runtime.
-15. Lets say you needed a thread executor to create tasks for a CyclicBarrier that has a barrier
-     limit of five threads. Which static method in ExecutorService should you use to obtain it?
+15. Lets say you needed a thread executor to create tasks for a CyclicBarrier that has a barrier limit of five threads. Which static method in ExecutorService should you use to obtain it?
 A.  newSingleThreadExecutor()
 B.  newSingleThreadScheduledExecutor()
 C.  newCachedThreadPool()
 D.  newFixedThreadPool(2)
 E.  None of the above
-16. The following diagrams represent the order of read/write operations of two threads sharing
-     a common variable. Each thread first reads the value of the variable from memory and then
-     writes a new value of the variable back to memory. Which diagram demonstrates proper
-     synchronization?
-     A.
+16. The following diagrams represent the order of read/write operations of two threads sharing a common variable. Each thread first reads the value of the variable from memory and then writes a new value of the variable back to memory. Which diagram demonstrates proper synchronization? A.
           Thread 1
           Shared Memory
        Thread 2
@@ -396,9 +386,7 @@ C.  The code does not compile because of the size() method.
 D.  The code does not compile because of the getValue() method.
 E.  The code does not compile for another reason.
 F.  None of the above.
-27.  Which two method names, when filled into the print2() method, produce the same output
-     as the print1() method? Assume the input arguments for each represent the same non-null
-     numeric value.
+27.  Which two method names, when filled into the print2() method, produce the same output as the print1() method? Assume the input arguments for each represent the same non-null numeric value.
      public static synchronized void print1(int counter) {
         System.out.println(counter--  );
         System.out.println(++counter);

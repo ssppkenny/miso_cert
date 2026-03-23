@@ -5,8 +5,7 @@
          D.   module.java
          E.   module- data.java
          F.   module- info.java
-2.   Suppose you have a module that calls exports(ChocolateLab.class) using a service
-         locator. Which part of the module service contains this class?
+2.   Suppose you have a module that calls exports(ChocolateLab.class) using a service locator. Which part of the module service contains this class?
          A.   Consumer
          B.   Service locator
          C.   Service provider
@@ -73,21 +72,14 @@ C.  Consumer and service provider interface
 D.  Service locator and service provider interface
 E.  Service locator and service provider
 F.  Service provider and service provider interface
-11.  Which command could you run to print output similar to the following?
-     java.base@17
-     java.compiler@17
-     java.datatransfer@17
-     java.desktop@17
-     ...
+11.  Which command could you run to print output similar to the following? java.base@17 java.compiler@17 java.datatransfer@17 java.desktop@17 ...
 A.  java    - - all- modules
 B.  java    - - describe- modules
 C.  java    - - list- modules
 D.  java    - - output- modules
 E.  java    - - show- modules
 F.  None of the above
-12. Suppose we have an automatic module on the module path named dog- arthur2.jar and
-     no Automatic- Module- Name specified. What module name should named modules use to
-     reference it?
+12. Suppose we have an automatic module on the module path named dog- arthur2.jar and no Automatic- Module- Name specified. What module name should named modules use to reference it?
 A.  dog- arthur
 B.  dog- arthur2
 C.  dog.arthur
@@ -113,22 +105,15 @@ B.  1
 C.  2
 D.  3
 E.  4
-16. Fill in the blank with code to look up and call a service.
- String cheese = ServiceLoader.load(Mouse.class)
-    .map(__________)
-    .map(Mouse::favoriteFood)
-    .findFirst()
+16. Fill in the blank with code to look up and call a service. String cheese = ServiceLoader.load(Mouse.class) .map(__________) .map(Mouse::favoriteFood) .findFirst()
     .orElse("");
 A.  Mouse.get()
 B.  Mouse::get
 C.  Provider.get()
 D.  Provider::get
 E.  None of the above
-17.  Suppose we want to have two modules: com.ny and com.sf. Which is true about the
-     placement of the module- info.java file(s)?
-18. Consider the modules in the previous diagram. Suppose we want the code in module com.sf
-     to depend on code in module com.ny. Which of the following directives goes into module
-     com.sfs module- info file to configure that behavior?
+17.  Suppose we want to have two modules: com.ny and com.sf. Which is true about the placement of the module- info.java file(s)?
+18. Consider the modules in the previous diagram. Suppose we want the code in module com.sf to depend on code in module com.ny. Which of the following directives goes into module com.sfs module- info file to configure that behavior?
 A.  export com.ny;
 B.  exports com.ny;
 C.  require com.ny;
@@ -189,16 +174,13 @@ B.  Add them to the classpath.
 C.  Create a third module to contain the common code.
 D.  Merge them into one module to break the cyclic dependency.
 E.  Rename the modules to use dashes instead of dots.
-26. Which command produces output such as the following?
-     animal.puppy -> animal.dog
+26. Which command produces output such as the following? animal.puppy -> animal.dog
 A.  jdeps d zoo.animal.puppy.jar
 B.  jdeps s zoo.animal.puppy.jar
 C.  jmod d zoo.animal.puppy.jar
 D.  jmod s zoo.animal.puppy.jar
 E.  None of the above
-27.  Suppose the consumer, service locator, service provider, and service provider interface
-     are each in separate modules. Which of the following best describes the following
-     module- info file?
+27.  Suppose the consumer, service locator, service provider, and service provider interface are each in separate modules. Which of the following best describes the following module- info file?
      module nature.tree{
         requires nature.sapling;
         provides nature.sapling.Tree with nature.tree.Maple
@@ -269,16 +251,14 @@ B.  The first line that fails to compile is line 2.
 C.  The first line that fails to compile is line 3.
 D.  The first line that fails to compile is line 4.
 E.  The code compiles.
-35. How many of these directives can be used in a module- info.java file: closes, export,
-     import, require, and uses?
+35. How many of these directives can be used in a module- info.java file: closes, export, import, require, and uses?
 A.  None
 B.  One
 C.  Two
 D.  Three
 E.  Four
 F.  Five
-36. Suppose the consumer, service locator, service provider, and service provider interface are
-     each in separate modules. Which of the following best describes this module- info file?
+36. Suppose the consumer, service locator, service provider, and service provider interface are each in separate modules. Which of the following best describes this module- info file?
      module nature.tree{
        exports nature.tree.leaf;
      }
@@ -338,26 +318,20 @@ E.  Code on the module path can reference code in named modules, but not automat
      unnamed modules.
 F.  Code on the module path can reference code in automatic and named modules, but not
      unnamed modules.
-43. Suppose we have the packages in the diagram. What could we add to the module- info.java in com.duck to allow the com.park module to reference the Duckling class but not allow the com.bread module to do the same?
-         com.duck    com.bread
+43. Suppose we have the packages in the diagram. What could we add to the module- info.java in com.duck to allow the com.park module to reference the Duckling class but not allow the com.bread module to do the same? com.duck    com.bread
            com             com
                          bread
          duckling
                                             Food.java
                      Duckling.java
-44. Given the diagram in the previous question, what could we add to module- info.java in
-     com.duck to allow the com.park package to reference the Duckling class, but not allow
-     the Egg class to reference the Duckling class?
+44. Given the diagram in the previous question, what could we add to module- info.java in com.duck to allow the com.park package to reference the Duckling class, but not allow the Egg class to reference the Duckling class?
 A.  exports com.duckling;
 B.  exports com.duckling from com.park;
 C.  exports com.duckling to com.park;
 D.  exports com.park from com.duckling;
 E.  exports com.park to com.duckling;
 F.  None of the above
-45. Given the diagram in Question 43 and the correct export statement to share only
-     com.duckling, which of the following should be included in the module- info.java file
-     of com.park to specify that com.park should have access to the com.duckling and
-     com.bread packages, but not the com.egg package?
+45. Given the diagram in Question 43 and the correct export statement to share only com.duckling, which of the following should be included in the module- info.java file of com.park to specify that com.park should have access to the com.duckling and com.bread packages, but not the com.egg package?
 A.  require com.duck, com.bread;
 B.  requires com.duck; com.bread;
 C.  require com.duckling, com.bread;
@@ -416,8 +390,7 @@ C.  Y and Z
 D.  Z and Z
 E.  Z and Y
 F.  None of the above
-53. Which command is the simplest way to list what modules a JAR depends on without listing
- package names?
+53. Which command is the simplest way to list what modules a JAR depends on without listing package names?
 A.  jdeps cookie.jar
 B.  jdeps s cookie.jar
 C.  jdeps jdkinternals cookie.jar
@@ -451,9 +424,7 @@ C.  exports animal.insect.api.bugs.Bug;
 D.  requires animal.insect.api;
 E.  requires animal.insect.api.bugs;
 F.  requires animal.insect.api.bugs.Bug;
-57.  Suppose you have the following class in a module named animal.insect.impl and
-     the service provider interface module from Question 56. What needs to be included in the
-     module- info for it to be a service provider? (Choose two.)
+57.  Suppose you have the following class in a module named animal.insect.impl and the service provider interface module from Question 56. What needs to be included in the module- info for it to be a service provider? (Choose two.)
      package animal.insect.impl;
      import animal.insect.api.bugs.Bug;
      public class Worm implements Bug {
@@ -469,10 +440,7 @@ E.  provides animal.insect.api.bugs.Bug with
           animal.insect.impl.Worm;
 F.  provides animal.insect.impl.Worm with
           animal.insect.api.bugs.Bug;
-58. Suppose you have the following class in a module named animal.insect.lookup, the
-     service provider interface from Question 56, and the service provider from Question 57.
-     What needs to be included in the module- info file besides an exports directive for it to
-     be a service locator? (Choose two.)
+58. Suppose you have the following class in a module named animal.insect.lookup, the service provider interface from Question 56, and the service provider from Question 57. What needs to be included in the module- info file besides an exports directive for it to be a service locator? (Choose two.)
      package animal.insect.lookup;
      import animal.insect.api.bugs.Bug;
      import java.util.List;
@@ -545,8 +513,7 @@ C.  It can be used with the jar and java commands and serves the same purpose fo
 D.  It can be used with the jar and java commands, but means directory for the former
       and describe module for the latter.
 E.  None of the above.
-63. Assuming all referenced files and directories exist and are correct, what does this code do? javac m mods d mouse mouse/com/mouse/*.java
-    mouse/module-info.java jar cvf mods/com.mouse.jar C mouse/ .
+63. Assuming all referenced files and directories exist and are correct, what does this code do? javac m mods d mouse mouse/com/mouse/*.java mouse/module-info.java jar cvf mods/com.mouse.jar C mouse/ .
 A.  Creates a JAR file representing the com.mouse module
 B.  Creates a JAR file that is not a module
 C.  Fails on the javac command
@@ -573,23 +540,18 @@ A.  Bottom- up
 B.  Side- to- side
 C.  Top- down
 D.  There is not enough information to determine which type it is.
-67.  Which are true statements about the diagram and scenario in the previous question?
-     (Choose two.)
+67.  Which are true statements about the diagram and scenario in the previous question? (Choose two.)
 A.  butterfly is an automatic module.
 B.  butterfly is a named module.
 C.  butterfly is an unnamed module.
 D.  caterpillar is an automatic module.
 E.  caterpillar is a named module.
 F.  caterpillar is an unnamed module.
-68. Suppose we have the two JARs in the diagram on the module path and the module- info
-     in the com.magic JAR only exports one package: com.magic.unicorn. There is no
-     module- info file in the com.science JAR. How many of the four packages in the
-     diagram can a third module on the module path access?
+68. Suppose we have the two JARs in the diagram on the module path and the module- info in the com.magic JAR only exports one package: com.magic.unicorn. There is no module- info file in the com.science JAR. How many of the four packages in the diagram can a third module on the module path access?
               com.magic        com.science
                   com.magic.dragon   com.science.bio
                   com.magic.unicorn  com.science.chem
-69. Suppose the two JARs described in the previous question are on the classpath. How many of
-     the four packages in the diagram can a module on the module path access?
+69. Suppose the two JARs described in the previous question are on the classpath. How many of the four packages in the diagram can a module on the module path access?
 A.  0
 B.  1
 C.  2
@@ -628,8 +590,7 @@ D.  Both jdeps and jlink
 E.  Both jlink and jmod
 F.  All of the above
 G.  None of the above
-75. Suppose you have the following class in a module named animal.insect.impl. Which
-     two most likely go in the module- info of the service locator? (Choose two.)
+75. Suppose you have the following class in a module named animal.insect.impl. Which two most likely go in the module- info of the service locator? (Choose two.)
      package animal.insect.impl;
      import animal.insect.api.bugs.Bug;
      public class Worm implements Bug {
@@ -652,12 +613,7 @@ C.  Both types of migration have the same number of steps involving the classpat
 D.  A bottom-up migration has unnamed modules on the module path.
 E.  A top- down migration has unnamed modules on the module path.
 F.  Neither migration type has unnamed modules on the module path.
-77.  Fill in the blank with code to look up and call a service.
-     String cheese = ServiceLoader.load(Mouse.class)
-        .stream()
-        .map(__________)
-        .map(Mouse::favoriteFood)
-        .findFirst()
+77.  Fill in the blank with code to look up and call a service. String cheese = ServiceLoader.load(Mouse.class) .stream() .map(__________) .map(Mouse::favoriteFood) .findFirst()
         .orElse("");
 A.  Mouse.get()
 B.  Mouse::get
@@ -720,17 +676,14 @@ C.  Y and Z
 D.  Z and Z
 E.  Z and Y
 F.  None of the above
-85. Which of the following statements are most accurate about the ServiceLoader class?
-     (Choose two.)
+85. Which of the following statements are most accurate about the ServiceLoader class? (Choose two.)
 A.  load() does not take any parameters.
 B.  load() takes the class type as a parameter.
 C.  When looping through the results of load(), you need to call the get() method on
           Provider.
 D.  When using the results of load() in a Stream, you need to call the get() method on
           Provider.
-86. Suppose we have an automatic module on the module path named
-     lizard- ^- cricket- ^- 1.0.0- SNAPSHOT.jar and no Automatic- Module- Name
-     specified. What module name should named modules use to reference it?
+86. Suppose we have an automatic module on the module path named lizard- ^- cricket- ^- 1.0.0- SNAPSHOT.jar and no Automatic- Module- Name specified. What module name should named modules use to reference it?
 A.  lizard- cricket
 B.  lizard.cricket
 C.  lizard- cricket- SNAPSHOT

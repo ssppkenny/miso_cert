@@ -68,10 +68,7 @@ F.  None of the above.
            var hide = Stream.of(true, false, true);
            Predicate<Boolean> pred = b -> b;
            var found = hide.filter(pred).__________(pred);
-7.   Suppose you have a consumer that calls the lion() method within a Lion service. You have
-     four distinct modules: consumer, service locator, service provider, and service provider
-     interface. If you add a parameter to the lion() method, how many of the modules require
-     recompilation?
+7.   Suppose you have a consumer that calls the lion() method within a Lion service. You have four distinct modules: consumer, service locator, service provider, and service provider interface. If you add a parameter to the lion() method, how many of the modules require recompilation?
 A.  Zero
 B.  One
 C.  Two
@@ -219,8 +216,7 @@ C.  choices() and stillMoreChoices()
 D.  moreChoices() and stillMoreChoices()
 E.  All three methods
 F.  None of the above
-17.  In most of the United States, daylight saving time ends on November 6 at 02:00 and we
-     repeat that hour. What is the output of the following?
+17.  In most of the United States, daylight saving time ends on November 6 at 02:00 and we repeat that hour. What is the output of the following?
      var localDate = LocalDate.of(2022, Month.NOVEMBER, 6);
      var localTime = LocalTime.of(1, 0);
      var zone = ZoneId.of("America/New_York");
@@ -343,11 +339,7 @@ D.  2 2
 E.  The code does not compile.
 F.  The code compiles but produces an exception at runtime.
 G.  The answer cannot be determined ahead of time.
-25. Fill in the blank to make this code compile:
- String cheese = ServiceLoader.stream(Mouse.class)
-    .map(__________)
-    .map(Mouse::favoriteFood)
-    .findFirst()
+25. Fill in the blank to make this code compile: String cheese = ServiceLoader.stream(Mouse.class) .map(__________) .map(Mouse::favoriteFood) .findFirst()
     .orElse("");
 A.  Mouse.get()
 B.  Mouse::get
@@ -387,10 +379,7 @@ public boolean passed() {
      public boolean passed() {
         return super.passed();
      }
-27.  How many of these lines print false?
-     23: var smart = """
-     24:    barn owl\n\n
-     25:    wise
+27.  How many of these lines print false? 23: var smart = """ 24:    barn owl\n\n 25:    wise
      26:    """;
      27: var clever = """
      28:      barn owl\n\n
@@ -547,9 +536,7 @@ C.  Three lines need to be changed for this code to compile.
 D.  If the code is fixed to compile, none of the cells in the 2D array have a value of 0.
 E.  If the code is fixed to compile, half of the cells in the 2D array have a value of 0.
 F.  If the code is fixed to compile, all of the cells in the 2D array have a value of 0.
-37.  Which of the following can fill in the blank to output sea lion, bald eagle?
-     String names = Stream.of(
-        "bald eagle", "pronghorn", "puma", "sea lion")
+37.  Which of the following can fill in the blank to output sea lion, bald eagle? String names = Stream.of( "bald eagle", "pronghorn", "puma", "sea lion")
         .collect(Collectors.joining(", "));
      System.out.println(names); A.
 .filter(s -> s.contains(" "))
@@ -639,8 +626,7 @@ C.  Two
 D.  Three
 E.  Four
 F.  Five
-40. Fill in the blanks: Using ________ and ________ together allows a variable to be accessed
-     from any class, without requiring an instance variable.
+40. Fill in the blanks: Using ________ and ________ together allows a variable to be accessed from any class, without requiring an instance variable.
 A.  class, static
 B.  default, public
 C.  final, package (no modifier)
