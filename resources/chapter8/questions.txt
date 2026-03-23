@@ -180,7 +180,7 @@ E.  None of the above
           Shared Memory
        Thread 2
           Time
-    B.
+B.
        Thread 1
           Shared Memory Thread 2 Time C.
    Thread 1 Shared Memory

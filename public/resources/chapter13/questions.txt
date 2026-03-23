@@ -137,20 +137,20 @@ F.  The code compiles but throws an exception at runtime.
         default void climb() {}
         static void climb(int x) {}
      }
-     B.
+B.
      interface CanDance {
         int dance() { return 5; }
      }
-     C.
+C.
      interface CanFly {
         abstract void fly();
      }
-     D.
+D.
      interface CanRun {
         void run();
         static double runFaster() {return 2.0; }
      }
-     E.
+E.
      interface CanSwim {
         abstract Long swim();
         boolean test();

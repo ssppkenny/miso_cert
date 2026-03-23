@@ -1,31 +1,27 @@
 1.   What is the name of a file that declares a module?
-         A.   mod.java
-         B.   mod- data.java
-         C.   mod- info.java
-         D.   module.java
-         E.   module- data.java
-         F.   module- info.java
+A.   mod.java
+B.   mod- data.java
+C.   mod- info.java
+D.   module.java
+E.   module- data.java
+F.   module- info.java
 2.   Suppose you have a module that calls exports(ChocolateLab.class) using a service locator. Which part of the module service contains this class?
-         A.   Consumer
-         B.   Service locator
-         C.   Service provider
-         D.   Service provider interface
-         E.   None of the above
+A.   Consumer
+B.   Service locator
+C.   Service provider
+D.   Service provider interface
+E.   None of the above
 3.   Which are considered part of a service? (Choose two.)
-         A.   Consumer
-         B.   Service locator
-         C.   Service provider
-         D.   Service provider interface
+A.   Consumer
+B.   Service locator
+C.   Service provider
+D.   Service provider interface
 4.   Given the following diagram, how many of the following are named modules?
-                  classpath        module path
-                  dog.uffy.jar        dog.hair.jar
-                  dog.uffy        dog.hair
-                  dog.husky.jar        dog.bark.jar dog.husky       dog.bark module-info    module-info
-         A.   0
-         B.   1
-         C.   2
-         D.   3
-         E.   4
+A.   0
+B.   1
+C.   2
+D.   3
+E.   4
 5.   Given the diagram from the previous question, which is an automatic module?
 A.  dog.bark
 B.  dog.fluffy

@@ -375,7 +375,7 @@ E.
 public boolean passed() {
    return part1.pass && part2.pass;
 }
-     F.
+F.
      public boolean passed() {
         return super.passed();
      }
