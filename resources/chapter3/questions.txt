@@ -112,13 +112,11 @@ D.  0, 2, 0
 E.  2, 1, 1
 F.  The class does not compile.
 10.  Given the following code, what values inserted, in order, into the blank lines allow the code to compile? (Choose two.)
- agent;
- Banker {
-public 
-   private static 
+_______ agent;
+public ______ Banker {
+   private static _______ getMaxWithdrawal() {
       return 10;
    } }
- getMaxWithdrawal() {
 A.  package, new, int
 B.  package, class, long
 C.  import, class, null
