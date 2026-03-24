@@ -1,0 +1,758 @@
+1.   What is the result of the following?
+     import java.util.stream.*;
+     public class StreamOfStreams {
+        public static void main(String[] args) {
+          var result =
+             Stream.of(getNums(9, 8), getNums(22, 33))  // c1
+                .flatMap(x -> x)___________________________// c2
+                .map((a, b) -> a -__________b)___________________// c3
+                .filter(x -> !x.isEmpty())_________________// c4
+                .get();
+2.   Which statements about the following class are correct? (Choose two.)
+     package knowledge;
+     class InformationException extends Exception {}
+     public class LackOfInformationException
+           extends InformationException {
+       public LackOfInformationException() {_____________// t1
+           super("");
+        }
+        public LackOfInformationException(String s) {__________// t2
+           this(new Exception(s));
+        }
+        public LackOfInformationException(Exception c) {  // t3
+           super();
+        }
+        public String getMessage() throws ArithmeticException {
+           return "lackOf";
+        } }
+A.  LackOfInformationException compiles without issue.
+B.  The constructor declared at line t1 does not compile.
+C.  The constructor declared at line t2 does not compile.
+D.  The constructor declared at line t3 does not compile.
+E.  The getMessage()method does not compile because it is an invalid override.
+F.  LackOfInformationException is a checked exception.
+3.   Which of the following are valid code comments in Java? (Choose three.)
+A.  /** Insert */ in next method **/
+B.  /****** Find the kitty cat */
+C.  // Is this a bug?
+D.  $ Begin method-  performStart() $
+E.  /*** TODO: Call grandma ***/
+F.  # Updated code by Patti
+4.   Suppose the pandas table has one row with the name Mei Xiang and the location DC. What does the following code output?
+     var url = "jdbc:hsqldb:file:mammals";
+     var sql = "SELECT name FROM pandas WHERE location = ?";
+     try (var conn = DriverManager.getConnection(url);
+        var stmt = conn.prepareStatement(sql);__________// s1
+        stmt.setString(1, "DC");
+        var rs = stmt.executeQuery()) {
+        if (rs.next())
+5.   What does the following code print? // Hare.java
+     package com.animal;
+     public class Hare {
+        void init() {
+6.   Which of the following lambda expressions can be passed to a method that takes IntUnaryOperator as an argument? (Choose three.)
+A.  v -> {System.out.print(Hello!); return 2%1;}
+B.  (Integer w) -> w.intValue()
+C.  (int j) -> (int) 30L
+D.  (int q) -> q / 3.1
+E.  (long x) -> (int) x
+F.  z -> z
+7.   Which of the following is a valid method name in Java? (Choose two.)
+A.  _____
+B.  %run
+C.  check- Activity
+D.  $Hum2
+E.  sing\\3
+F.  po#ut
+8.   Which of the following is true of this module declaration?
+     1: module com.mammal {
+     2:    exports com.mammal.cat;
+     3:    exports com.mammal.mouse to com.mice;
+     4:    uses com.animal;
+     5: }
+A.  The first line that fails to compile is line 1.
+B.  The first line that fails to compile is line 2.
+C.  The first line that fails to compile is line 3.
+D.  The first line that fails to compile is line 4.
+E.  The code compiles.
+9.   How many lines fail to compile?
+     class Roller<E extends Wheel> {
+        public void roll(E e) { }
+     }
+     class Wheel { }
+     class CartWheel extends Wheel { }
+     public class RollingContest {
+        Roller<CartWheel> wheel1 = new Roller<CartWheel>();
+        Roller<Wheel> wheel2 = new Roller<CartWheel>();
+        Roller<? extends Wheel> wheel3 = new Roller<CartWheel>();
+        Roller<? extends Wheel> wheel4 = new Roller<Wheel>();
+        Roller<? super Wheel> wheel5 = new Roller<CartWheel>();
+        Roller<? super Wheel> wheel6 = new Roller<Wheel>();
+     }
+A.  One
+B.  Two
+C.  Three
+D.  Four
+E.  Five
+F.  Six
+10. Given the following, what can we infer about subtypes of First, called Chicken and Egg? (Choose two.)
+     public sealed interface First permits Chicken, Egg { }
+A.  Chicken and Egg must be interfaces.
+B.  Chicken and Egg can be classes or interfaces.
+C.  Chicken and Egg must be located in a file other than First.
+D.  Chicken and Egg must be located in the same file as First.
+E.  Chicken and Egg must be located as nested classes of First.
+F.  Chicken and Egg may be located in the same file or a different file as First.
+11.  What is the output of the following?
+     var listing = new String[][] { { "Book", "34.99" },
+        { "Game", "29.99" }, { "Pen", ".99" } };
+     System.out.println(listing.length + " " + listing[0].length);
+A.  2 2
+B.  2 3
+C.  3 2
+D.  3 3
+E.  The code does not compile.
+F.  The code compiles but throws an exception at runtime.
+12. What does the following do?
+     public class Player {
+        interface Basket {
+           boolean needToAim(double angle);
+        }
+        static void prepare(double angle, Basket t) {
+           boolean ready = t.needToAim(angle);  // k1
+13. What does ServiceLocator.load(ChocolateLab.class) return?
+A.  Collection
+B.  List
+C.  Stream
+D.  None of the above
+14. What is the output of the following when run as java EchoFirst.java seed flower plant?
+ import java.util.*;
+ public class EchoFirst {
+    public static void main(String[] args) {
+       var result = Arrays.binarySearch(args, args[0]);
+       System.out.println(result);
+    } }
+A.  0
+B.  1
+C.  2
+D.  The code does not compile.
+E.  The code compiles but throws an exception at runtime.
+F.  The output is not guaranteed.
+15. Which is part of the module service and has a requires directive?
+A.  Consumer
+B.  Service locator
+C.  Service provider
+D.  Service provider interface
+E.  None of the above
+16. Starting with DoubleBinaryOperator and going downward, fill in the values for the table. The method signature refers to the abstract method associated with each functional interface. Functional Interface__________# Parameters in Method Signature DoubleBinaryOperator LongToIntFunction ToLongBiFunction Functional Interface__________# Parameters in Method Signature IntSupplier ObjLongConsumer
+A.  1, 0, 0, 0, 2
+B.  1, 2, 1, 0, 1
+C.  2, 1, 0, 1, 2
+D.  2, 1, 1, 0, 1
+E.  2, 1, 2, 0, 2
+F.  3, 0, 2, 1, 1
+17.  What is the result of the following?
+     import java.time.*;
+     import java.time.format.*;
+     public class PiDay {
+        public static void main(String[] args) {
+           LocalDateTime pi = LocalDateTime.of(2022, 3, 14, 1, 59);
+           DateTimeFormatter formatter = DateTimeFormatter
+              .ofPattern("m.ddhh'MM'");
+18. Suppose cats is an empty table. How many rows are in this table when the code has completed?
+     10: try (var conn = DriverManager.getConnection(url)) {
+     11:    conn.setAutoCommit(false);
+     12:    String insert = "INSERT INTO cats VALUES (? ,?)";
+     13:
+     14:    var sp1 = conn.setSavepoint();
+     15:    try (var stmt = conn.prepareStatement(insert)) {
+     16:       stmt.setInt(1, 1);
+     17:       stmt.setString(2, "Kitty");
+     18:       stmt.executeUpdate();
+19:    }
+20:    var sp2 = conn.setSavepoint();
+21:    conn.rollback(sp1);
+22:    try (var stmt = conn.prepareStatement(insert)) {
+23:       stmt.setInt(1, 2);
+24:       stmt.setString(2, "Beverly");
+25:       stmt.executeUpdate();
+26:    }
+27:    conn.rollback(sp2);
+28:    conn.commit();
+29: }
+A.  Zero
+B.  One
+C.  Two
+D.  The code does not compile.
+E.  The code throws an exception.
+19. Given the following class structure, what are valid ways to create a Spinner instance inside the bake() method? (Choose three.)
+public class Kitchen {
+   class Mixer {
+      class Spinner {}
+   }
+   public void bake() {
+      // INSERT CODE HERE
+   } }
+A.  var a = new Kitchen().new Mixer().new Spinner();
+B.  Mixer.Spinner b = Mixer.new Spinner();
+C.  var c = new Spinner();
+D.  var d = new Mixer().new Spinner();
+E.  Kitchen.Mixer.Spinner e = new Kitchen().new Mixer().new Spinner();
+F.  Spinner f = new Kitchen().new Mixer().new Spinner();
+20. Which sets of lines can be removed without stopping the code from compiling and while printing the same output? (Choose three.)
+14: String race = ""; 15: outer:
+16: do { 17: inner:
+18:    do
+19:    {
+20:       race += "x";
+21:    }
+22:    while (race.length() <= 4);
+23: } while (race.length() < 4);
+24: System.out.println(race);
+A.  Lines 15 and 17
+B.  Lines 16 and 23
+C.  Lines 17, 18, and 22
+D.  Line 17
+E.  Line 22
+F.  Line 23
+21. How many of these module declarations are valid?
+module com.apple { exports com.apple; }
+module com.4apple { requires com.apple;}
+module com.apple4 { declares com.apple; }
+module com.apple-four { }
+module com.apple$ {}
+A.  None
+B.  One
+C.  Two
+D.  Three
+E.  Four
+F.  Five
+22. Assuming - g:vars is used when the code is compiled to include debug information, what is the output of the following code snippet?
+51: Double tea = null;
+52: Object coffee = (Integer)null;
+53: String juice = "";
+54: if(coffee instanceof Integer x) {
+55:    System.out.println(x.intValue());
+56: } else if (tea < juice.length()) {
+57:    System.out.println(tea);
+58: }
+A.  A NullPointerException naming tea in the stack trace
+B.  A NullPointerException naming coffee in the stack trace
+C.  A NullPointerException naming juice in the stack trace
+D.  A NullPointerException naming tea and coffee in the stack trace
+E.  None of the above
+23. What is the minimum number of requires directives that need to be removed to break the cyclic dependency?
+module com.animal {
+   exports com.animal;
+   requires com.plant;
+}
+module com.plant {
+   exports com.plant;
+   requires com.animal;
+}
+module com.worm {
+   exports com.worm;
+   requires com.animal;
+   requires com.plant;
+}
+module com.hedgehog {
+   exports com.hedgehog;
+   requires com.animal;
+   requires com.plant;
+}
+A.  None, as there is no cyclic dependency
+B.  1
+C.  2
+D.  3
+E.  4
+24. Which of the following lambda expressions can be inserted into both blanks while still allow- ing the application to compile? (Choose three.)
+package spooky;
+import java.util.function.*;
+abstract class Phantom {
+   public void bustLater(DoubleConsumer buster, double value) {
+      buster.accept(value);
+   }
+}
+public class Ghost extends Phantom {
+   public void bustNow(Consumer<Double> buster, double value) {
+      buster.accept(value);
+   }
+   void call() {
+      var value = 10.0;
+      bustNow(__________, value);
+      bustLater(__________, value);
+   } }
+A.  System.out::print
+B.  a -> {System.out.println(a.intValue());}
+C.  g -> {System.out.println();}
+D.  u -> System.out.println((long)u)
+E.  v -> System.out.print(v)
+F.  w -> System.out::println
+25. Which statements best describe the result of executing this code? (Choose two.)
+package nyc;
+public class TouristBus {
+   public static void main(String... args) {
+      var tour = new String[] {
+         "Downtown", "Uptown", "Brooklyn" };
+      var times = new String[] { "Day", "Night" };
+      for (int i = 0, j = 0; i < tour.length; i++, j++)
+         System.out.println(tour[i] + " " + times[j]);
+   } }
+A.  The println() causes one line of output.
+B.  The println() causes two lines of output.
+C.  The println() causes three lines of output.
+D.  The code terminates successfully.
+E.  The code throws an exception at runtime.
+26. What is the output of the following application?
+package rope;
+import java.util.concurrent.*;
+public class Jump {
+   private static void await(CyclicBarrier b) {
+           try { b.await(); } catch (Exception e) {}
+        }
+        public static void main(String[] chalk) {
+           ExecutorService s = Executors.newFixedThreadPool(4);
+           final var b = new CyclicBarrier(4,
+              () -> System.out.print("Jump!"));
+           for(int i=0; i<10; i++)
+              s.execute(() -> await(b));
+           s.shutdown();
+        } }
+A.  Jump! is printed once, and the program exits.
+B.  Jump! is printed twice, and the program exits.
+C.  The code does not compile.
+D.  The output cannot be determined ahead of time.
+E.  A deadlock is produced at runtime.
+F.  None of the above.
+27.  Which statements about try-with-     resources are true? (Choose two.)
+A.  Any resource used must implement Closeable.
+B.  If more than one resource is used, then the order in which they are closed is the reverse
+          of the order in which they were created.
+C.  If the try block and close() method both throw an exception, the one thrown by the try
+          block is suppressed.
+D.  Neither a catch nor a finally block is required.
+E.  The close() method of the resources must throw a checked exception.
+28. What is the result of calling the following method?
+     public static void printLength() {
+        record Earthworm(int length) {
+           Earthworm {
+     __________ length = 4;
+           }
+        }
+        var worm = new Earthworm(6);
+        System.out.println(worm.length());
+     }
+A.  Earthworm does not compile because records are not allowed inside methods.
+B.  Earthworm does not compile because record fields are immutable.
+C.  Earthworm does not compile because length is not allowed as a field.
+D.  The code does not compile for another reason.
+E.  4
+F.  6
+29. What is the output of the following application?
+package homework;
+import java.util.*;
+import java.util.stream.*;
+public class QuickSolution {
+   public static int findFast(Stream<Integer> s) {
+      return s.findAny().get();
+   }
+   public static int findSlow(Stream<Integer> s) {
+      return s.parallel().findFirst().get();
+   }
+   public static void main(String[] pencil) {
+      var s1 = List.of(1,2,3,4,5).stream();
+      var s2 = List.of(1,2,3,4,5).stream();
+      int val1 = findFast(s1);
+      int val2 = findSlow(s2);
+      System.out.print(val1 + " " + val2);
+   } }
+A.  1 1
+B.  3 1
+C.  The answer cannot be determined until runtime.
+D.  The code does not compile.
+E.  The code compiles but throws an exception at runtime.
+F.  None of the above.
+30. Which statements are correct about the following text block? (Choose three.)
+var cute = """
+   otter\
+   pup \s
+   play
+   "toy"
+   """;
+A.  There are no whitespace characters between otter and pup.
+B.  There are one or more whitespace characters between otter and pup.
+C.  There is exactly one whitespace character between pup and play.
+D.  There are exactly two whitespace characters between pup and play.
+E.  There are exactly three whitespace characters between pup and play.
+F.  Adding escape characters to the quotes around toy changes the value of the text block.
+G.  Adding escape characters to the quotes around toy does not change the value of the
+     text block.
+31. What is the output of the following program?
+public class Ghost {
+   private final String name;
+   public Ghost() {
+      this(null);
+      this.name = "Casper";
+   }
+   public Ghost(String n) {
+      name = "Boo";
+   }
+   public static void main(String[] sound) {
+      var d = new Ghost("Space");
+      System.out.println(d.name);
+   } }
+A.  Casper
+B.  Boo
+C.  Space
+D.  The code does not compile.
+E.  The answer cannot be determined with the information given.
+F.  None of the above.
+32. Which method can fill in the blank that would cause the program to consistently print Tie! 10 times?
+import java.util.concurrent.*;
+import java.util.concurrent.locks.*;
+public class TieShoes {
+   private volatile Lock shoes = new ReentrantLock();
+   public void tie() {
+      try {
+         if (shoes.__________) {
+33. What is the output of the following program?
+var bed = List.of((short)2,(short)5);
+var pillow = bed.parallelStream().reduce(0,
+   (a,b) -> b.doubleValue() + a.doubleValue(),
+   (c,d) -> d.doubleValue() + c.doubleValue());
+System.out.println(pillow);
+A.  0
+B.  0.0
+C.  7
+D.  7.0
+E.  The code does not compile.
+F.  None of the above.
+34. What is the output of the following application?
+package woods;
+interface Plant {
+   default String grow() { return "Grow!"; }
+}
+interface Living {
+   public default String grow() { return "Super Growing!"; }
+}
+public class Tree implements Plant, Living {  // m1
+   public String grow() { return super.Plant.grow(); }
+   public static void main(String[] leaves) {
+      Plant p = new Tree();___________________// m2
+      System.out.print(((Living)p).grow());   // m3
+   } }
+A.  Grow!
+B.  Super Growing!
+C.  It does not compile because of line m1.
+D.  It does not compile because of line m2.
+E.  It does not compile because of line m3.
+F.  None of the above.
+35. How many lines of the following interface do not compile?
+15: public interface Piano {
+16:    String type = "Grand";
+17:    void play();
+18:    public static int getNumberOfKeys() {
+19:       return type.equals("Grand") ? 88 : 61;
+20:    }
+21:    private static void printPianoInfo() {
+22:       play();
+23:       System.out.println("Key Count: "+getNumberOfKeys());
+24:    }
+25:    default void tune() {
+26:       play();
+27:       printPianoInfo();
+28:    } }
+A.  Zero
+B.  One
+C.  Two
+D.  Three
+E.  Four
+F.  None of the above
+36. Assume the file system is accessible, /flower/rose.txt exists, and the other two direc- tories /garden and /nursery do not exist. What is the expected result after executing the following code snippet?
+Files.createDirectories(Path.of("/garden"));
+Files.createDirectory(Path.of("/nursery")); Files.move(Path.of("/flower/rose.txt"),
+   Paths.get("/garden"), StandardCopyOption.REPLACE_EXISTING); Files.move(new File("/garden/rose.txt").toPath(),
+   Paths.get("/nursery"), StandardCopyOption.ATOMIC_MOVE);
+A.  There is a file at /nursery/rose.txt.
+B.  There is a file at /flower/rose.txt.
+C.  The code does not compile.
+D.  The first move() statement throws an exception.
+E.  The second move() statement throws an exception.
+F.  None of the above.
+37.  What is the output of the following?
+     String chicken = "hen";
+     int numEggs = switch (chicken) {
+        "hen" -> 3;
+        default -> 0;
+     };
+     System.out.println(numEggs);
+A.  0
+B.  3
+C.  30
+D.  The code does not compile.
+38. Given the following three class declarations, which sets of access modifiers can be inserted, in order, into the following blank lines that would allow all of the classes to compile? (Choose three.) // Alarm.java
+     package wake;
+     public class Alarm {
+                     static int clock;
+                     long getTime() {return clock;}
+     }
+     // Coffee.java
+     package wake;
+     public class Coffee {
+        private boolean bringCoffee() {
+           return new Alarm().clock<10;
+        }
+     }
+     // Snooze.java
+     package sleep;
+     public class Snooze extends wake.Alarm {
+        private boolean checkTime() { return getTime()>10;}
+     }
+A.  package (blank) and package (blank)
+B.  package (blank) and protected
+C.  protected and package (blank)
+D.  protected and protected
+E.  private and public
+F.  public and public
+39. How many times does this code print [2, 7, 8]?
+1:  import java.util.*;
+2:  import java.util.stream.*; 3:
+4:  public class RemoveMe<T> {
+5:     private List<T> values;
+6:     public RemoveMe(T... values) {
+7:        this.values = Arrays.stream(values)
+8:           .collect(Collectors.toList());
+9:     }
+10:    public void remove(T value) {
+11:       values.remove(value);
+12:    }
+13:    public static void main(String[] args) {
+14:       var integer = new RemoveMe<Integer>(2, 7, 1, 8);
+15:       var longs = new RemoveMe<Long>(2L, 7L, 1L, 8L);
+16:       integer.remove(1);
+17:       longs.remove(1L); 18:
+19:       System.out.println(integer.values);
+20:       System.out.println(longs.values); 21:
+22:       var values = new ArrayList<Integer>();
+23:       values.add(2);
+24:       values.add(7);
+25:       values.add(1);
+26:       values.add(8);
+27:       values.remove(1);
+28:       System.out.println(values);
+29:    } }
+A.  Zero
+B.  One
+C.  Two
+D.  Three
+E.  The code does not compile.
+F.  The code compiles but throws an exception.
+40. What is the result of executing the following code snippet?
+var name = "Desiree";
+int _number = 694;
+boolean profit$$$;
+System.out.println(name + " won. "
+   + _number + " profit? " + profit$$$);
+A.  The declaration of name does not compile.
+B.  The declaration of _number does not compile.
+C.  The declaration of profit$$$ does not compile.
+D.  The println() statement does not compile.
+E.  The code compiles and runs successfully.
+F.  The code compiles and throws an exception at runtime.
+41. Which are true of the following? (Choose two.)
+public class Hippo {
+   private static void hippo(short num1, short num2) {
+      System.out.println("shorts");
+   }
+   private static void hippo(int... nums) {
+      System.out.println("varargs");
+   }
+   private static void hippo(Integer num1, Integer num2) {
+      System.out.println("Integers");
+   }
+   private static void hippo(long num1, long num2) {
+      System.out.println("longs");
+   }
+   public static void main(String... args) {
+      hippo(1, 5);
+   } }
+A.  It outputs Integers.
+B.  It outputs longs.
+C.  It outputs shorts.
+D.  It outputs varargs.
+E.  If the method originally called by hippo() were commented out, the code would output
+     Integers.
+F.  If the method originally called by hippo() were commented out, the code would
+     output longs.
+G.  If the method originally called by hippo() were commented out, the code would
+     output shorts.
+H.  If the method originally called by hippo() were commented out, the code would output
+     varargs.
+42. In most of the United States, daylight saving time ends on November 6, 2022 at 02:00 and we repeat that hour. What is the output of the following?
+var localDate = LocalDate.of(2022, 10, 6);
+var localTime = LocalTime.of(1, 0);
+var zone = ZoneId.of("America/New_York");
+var z = ZonedDateTime.of(localDate, localTime, zone);
+var offset = z.getOffset();
+for (int i = 0; i < 6; i++)
+   z = z.plusHours(1);
+System.out.println(z.getHour() + " "
+   + offset.equals(z.getOffset()));
+A.  5 false
+B.  5 true
+C.  6 false
+D.  6 true
+E.  7 false
+F.  7 true
+G.  The code does not compile.
+H.  The code compiles but throws an exception at runtime.
+43. What is the result of executing the Clownfish program?
+package ocean;
+class BubbleException extends Exception {}
+abstract class Fish {
+   Fish getFish() {
+      throw new RuntimeException("fish!");
+   } }
+public final class Clownfish extends Fish {
+   public final Clownfish getFish() throws BubbleException {
+      throw new RuntimeException("clown!");
+   }
+   public static void main(String[] bubbles) throws Exception {
+      final var v = (Fish)new Clownfish();
+      Clownfish f = v;
+      f.getFish();
+      System.out.println("swim!");
+   } }
+A.  The code compiles and prints swim!.
+B.  The code compiles and prints fish!.
+C.  The code compiles and prints a stack trace.
+D.  One line of the program does not compile.
+E.  Two lines of the program do not compile.
+F.  None of the above.
+44. What is the output of the following code?
+var sum = 0.0;
+sum = sum + Math.round(11.2);
+sum = sum + Math.ceil(8.1);
+sum = sum + Math.abs(sum);
+System.out.println(sum);
+A.  39
+B.  39.0
+C.  40
+D.  40.0
+E.  41
+F.  41.0
+G.  None of the above
+45. Given the following classes, what is the output of the Watch program?
+1:  class SmartWatch extends Watch {
+2:     private String getType() { return "smart watch"; }
+3:     public String getName() {
+4:        return getType() + ",";
+5:     }
+6:  }
+7:  public class Watch {
+8:     private String getType() { return "watch"; }
+9:     public String getName(String suffix) {
+10:       return getType() + suffix;
+11:    }
+12:    public static void main(String[] args) {
+13:       Watch watch = new Watch();
+14:       Watch smartWatch = new SmartWatch();
+15:       System.out.print(watch.getName(","));
+16:       System.out.print(smartWatch.getName(""));
+17:    } }
+A.  smart watch,smart watch
+B.  smart watch,watch
+C.  watch,smart watch
+D.  watch,watch
+E.  The code does not compile.
+F.  None of the above.
+46. Assuming the heart.txt and romance.txt files are accessible within the file system with the contents shown, what is the output of the code snippet?
+// heart.txt happy
+// romance.txt Hapless
+12: var x = Path.of("heart.txt");
+13: var y = Paths.get("romance.txt");
+14: var v = Files.mismatch(x, y);
+15: System.out.println(v);
+A.  - 1
+B.  0
+C.  2
+D.  3
+E.  4
+F.  The code does not compile.
+47.  What is the result of the following code? // Hopper.java
+     package com.animals;
+     public class Hopper {
+        protected void hop() {
+48. Given the following class, how many lines contain compilation errors?
+     1:  import java.io.*;
+     2:  class StungException extends Exception {}
+     3:  class Suit implements Closeable {
+     4:     public void close() throws IOException {}
+     5:  }
+6:  public class BeeCatcher {
+7:     public static void main(String[] b) throws IOException {
+8:        var s = new Suit();
+9:        var t = new Suit();
+10:       try (s; t) {
+11:          throw new StungException();
+12:       } catch (StungException | Exception e) {
+13:          s = null;
+14:       } finally {
+15:       } } }
+A.  One
+B.  Two
+C.  Three
+D.  Four
+E.  None. The code compiles as is.
+49. Which of the following can fill in the blank to print out just the number 161?
+import java.util.*;
+import java.util.stream.*;
+record Runner(int numberMinutes) { }
+public class Marathon {
+   public static void main(String[] args) {
+      var match = Optional.ofNullable(161);  // line z
+      var runners = Stream.of(new Runner(183),
+         new Runner(161), new Runner(201));
+      var opt = runners.map(Runner::numberMinutes)
+                                    ;
+   } }
+A.
+.filter(m -> match.get().equals(m))
+.peek(System.out::println)
+.count()
+B.
+.filter(m -> match.get().equals(m))
+.peek(System.out::println)
+.max()
+C.
+.peek(System.out::println)
+.filter(m -> match.get().equals(m))
+.count()
+D.
+.peek(System.out::println)
+.filter(m -> match.get().equals(m))
+.max()
+E.  The code does not compile due to line z.
+F.  None of the above.
+50. How many lines of the following application contain compilation errors?
+1:  package percussion; 2:
+3:  interface MakesNoise {}
+4:  abstract class Instrument implements MakesNoise {
+5:     public Instrument(int beats) {}
+6:     public void play() {}
+7:  }
+8:  public class Drum extends Instrument {
+9:     public void play(int count) {}
+10:    public void concert() {
+11:       super.play(5);
+12:    }
+13:    public static void main(String[] beats) {
+14:       MakesNoise mn = new Drum();
+15:       mn.concert();
+16:    } }
+A.  The code compiles and runs without issue.
+B.  One
+C.  Two
+D.  Three
+E.  Four
+F.  None of the above

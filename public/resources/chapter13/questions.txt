@@ -1,0 +1,787 @@
+1.   Which statements about the following application are true? (Choose two.)
+     package party;
+     import java.util.concurrent.*;
+     public class Plan {
+        ExecutorService s = Executors.newScheduledThreadPool(10);
+        public void planEvents() {
+           Runnable r1 = () -> System.out.print("Check food");
+           Runnable r2 = () -> System.out.print("Check drinks");
+           Runnable r3 = () -> System.out.print("Take out trash");
+           s.scheduleWithFixedDelay(r1,1,TimeUnit.HOURS);__________// g1
+           s.scheduleAtFixedRate(r2,1,1000,TimeUnit.SECONDS);  // g2
+           s.execute(r3);______________________________________// g3
+           s.shutdownNow();
+        } }
+A.  Line g1 does not compile.
+B.  Line g2 does not compile.
+C.  Line g3 does not compile.
+D.  All of the lines of code compile.
+E.  The code terminates properly at runtime.
+F.  The code hangs indefinitely at runtime.
+G.  The code throws an exception at runtime.
+2.   Assuming the current locale uses dollars ($) and the following method is called with a double value of 960_010, which of the following values are printed? (Choose two.)
+     public void print(double t) {
+        System.out.print(NumberFormat.getCompactNumberInstance().format(t));
+        System.out.print(
+           NumberFormat.getCompactNumberInstance(
+              Locale.getDefault(), Style.SHORT).format(t));
+        System.out.print(NumberFormat.getCurrencyInstance().format(t));
+     }
+A.  960K
+B.  9M
+C.  9.6M
+D.  $960,010.00
+E.  $960,000.00
+F.  900 thousand
+G.  9million
+3.   Suppose we have a peacocks table with two columns: name and rating. What does the fol- lowing code output if the table is empty?
+     var url = "jdbc:hsqldb:file:birds";
+     var sql = "SELECT name FROM peacocks WHERE name = ?";
+     try (var conn = DriverManager.getConnection(url);
+        var stmt = conn.prepareStatement(sql)) {__________// s1
+        stmt.setString(1, "Feathers");
+        try (var rs = stmt.executeQuery()) {___________// s2
+           while (rs.hasNext()) {
+A.  false
+B.  true
+C.  The code does not compile due to line s1.
+D.  The code does not compile due to line s2.
+E.  The code does not compile due to another line.
+F.  The code throws an exception at runtime.
+4.   What is the output of the following?
+     1:  import static java.util.stream.Collectors.*;
+     2:  import java.util.*;
+     3:  public record Goat(String food) {
+     4:     public static void main(String[] args) {
+     5:        var goats = List.of(
+     6:           new Goat("can"),
+     7:           new Goat("hay"),
+     8:           new Goat("shorts"),
+     9:           new Goat("hay"));
+     10:
+     11:       goats.stream()
+     12:          .collect(groupingBy(Goat::food))
+     13:          .entrySet()
+     14:          .stream()
+     15:          .filter(e -> e.getValue().size() == 2)
+     16:          .map(e -> e.getKey())
+     17:          .collect(partitioningBy(e -> e.isEmpty()))
+     18:          .get(false)
+     19:          .stream()
+     20:          .sorted()
+     21:          .forEach(System.out::print);
+     22:    } }
+A.  canshorts
+B.  hay
+C.  hayhay
+D.  shortscan
+E.  The code does not compile.
+F.  The code compiles but throws an exception at runtime.
+5.   What is the output of the following application?
+     abstract class TShirt {
+        abstract int insulate();
+        public TShirt() {
+A.  Starting...Insulation:20
+B.  Starting...Insulation:40
+C.  The code does not compile because of line v1.
+D.  The code does not compile because of line v2.
+E.  The code does not compile for a different reason.
+6.   Which of the following use generics and compile without warnings? (Choose two.)
+A.  List<String> a = new ArrayList();
+B.  List<> b = new ArrayList();
+C.  List<String> c = new ArrayList<>();
+D.  List<> d = new ArrayList<>();
+E.  List<String> e = new ArrayList<String>();
+F.  List<> f = new ArrayList<String>();
+7.   Which of the following statements about performing a concurrent reduction are correct? (Choose two.)
+A.  If a collector is used, it must have the unordered characteristic.
+B.  The stream must operate on thread-safe collections.
+C.  If the reduce() method is used with a lambda expression, then it should be stateful.
+D.  The stream must inherit ParallelStream<T>.
+E.  The stream must be parallel.
+F.  If a collector is used, it must have the concurrent characteristic.
+8.   What is the output of the following application?
+     package tax;
+     public class Accountant {
+        public void doTaxes() throws Throwable {
+           try {
+              throw new NumberFormatException();
+           } catch (ClassCastException
+                 | ArithmeticException e) { // p1
+A.  Math
+B.  Unknown
+C.  Unknown followed by Done!
+D.  The code does not compile due to line p1.
+E.  The code does not compile due to line p2.
+F.  None of the above.
+9.   How many lines contain a compiler error?
+     1:  public record Bee(boolean gender, String species) {
+     2:     Bee {
+     3:        this.gender = gender;
+     4:        this.species = species;
+     5:     }
+     6:     Bee(boolean gender) {
+     7:        this(gender, "Honeybee");
+     8:     }
+     9:     @Override public String getSpecies() {
+     10:       return species;
+     11:    }
+     12:    @Override public String toString() {
+     13:       return species;
+     14:    } }
+A.  Zero
+B.  One
+C.  Two
+D.  Three
+E.  Four
+F.  Five
+10. What is a possible output of the following?
+     var trainDay = LocalDate.of(2022, 5, 14);
+     var time = LocalTime.of(10, 0);
+     var zone = ZoneId.of("America/Los_Angeles");
+     var zdt = ZonedDateTime.of(trainDay, time, zone);
+     var instant = zdt.toInstant();
+     instant = instant.plus(1, ChronoUnit.YEARS);
+     System.out.println(instant);
+A.  2022- 05- 14T10:00- 07:00[America/Los_Angeles]
+B.  2022- 05- 14T17:00:00Z
+C.  2023- 05- 14T10:00- 07:00[America/Los_Angeles]
+D.  2023- 05- 14T17:00:00Z
+E.  The code does not compile.
+F.  The code compiles but throws an exception at runtime.
+11.  Which of the following are valid functional interfaces? (Choose two.) A.
+     interface CanClimb {
+        default void climb() {}
+        static void climb(int x) {}
+     }
+B.
+     interface CanDance {
+        int dance() { return 5; }
+     }
+C.
+     interface CanFly {
+        abstract void fly();
+     }
+D.
+     interface CanRun {
+        void run();
+        static double runFaster() {return 2.0; }
+     }
+E.
+     interface CanSwim {
+        abstract Long swim();
+        boolean test();
+     }
+A.  interface CanClimb { default void climb() {} static void climb(int x) {} }
+B.  interface CanDance { int dance() { return 5; } }
+C.  interface CanFly { abstract void fly(); }
+D.  interface CanRun { void run(); static double runFaster() {return 2.0; } }
+E.  interface CanSwim { abstract Long swim(); boolean test(); }
+12. Which are true of jlink? (Choose two.)
+A.  Only the modules specified by - - add- modules are included in the runtime image.
+B.  At least the modules specified by - - add- modules are included in the runtime image.
+C.  Only the modules with a requires directive in the module- info file are included in the
+          runtime image.
+D.  Only the modules with a requires directive in the module- info
+              file and their transitive
+          dependencies are included in the runtime image.
+E.  The output is a directory.
+F.  The output is a ZIP file.
+13. What is the output of the following?
+var builder = new StringBuilder("Leaves growing");
+do {
+   builder.delete(0, 5);
+} while (builder.length() > 5);
+System.out.println(builder);
+A.  Leaves growing
+B.  ing
+C.  wing
+D.  The code does not compile.
+E.  The code compiles but throws an exception at runtime.
+14. What is the output of the following application?
+1:  package fruit;
+2:  enum Season {
+3:     SPRING(1), SUMMER(2), FALL(3), WINTER(4);
+4:     public Season(int orderId) {}
+5:  }
+6:  public class PickApples {
+7:     public static void main(String... orchard) {
+8:        final Season s = Season.FALL;
+9:        switch(s) {
+10:__________case Season.FALL:
+11:             System.out.println("Time to pick!"); 12:__________default:
+13:             System.out.println("Not yet!");
+14:       } } }
+A.  Time to pick!
+B.  Time to pick! followed by Not yet!
+C.  One line of code does not compile.
+D.  Two lines of code do not compile.
+E.  Three lines of code do not compile.
+F.  The code compiles but prints an exception at runtime.
+15. Which are equivalent to this switch statement that takes an int value for numEggs? (Choose two.)
+boolean hasEggs;
+switch (numEggs) {
+   case 0 : hasEggs = true; break;
+   default : hasEggs = false; break;
+}
+System.out.print(hasEggs); A.
+boolean hasEggs = switch (numEggs) {
+   case 0 ->__________true
+   default -> false
+};
+System.out.print(hasEggs); B.
+boolean hasEggs = switch (numEggs) {
+   case 0 ->__________true;
+   default -> false;
+};
+System.out.print(hasEggs); C.
+boolean hasEggs = switch (numEggs) {
+   case 0 ->   return true;
+   default -> return false;
+};
+System.out.print(hasEggs); D.
+boolean hasEggs = switch (numEggs) {
+   case 0 ->__________{yield true};
+   default -> {yield false};
+};
+System.out.print(hasEggs); E.
+boolean hasEggs = switch (numEggs) {
+   case 0 ->   {yield true;}
+   default -> {yield false;}
+};
+System.out.print(hasEggs); F.
+boolean hasEggs = switch (numEggs) {
+   case 0 ->__________{return true;}
+   default -> {return false;}
+};
+System.out.print(hasEggs);
+A.  boolean hasEggs = switch (numEggs) { case 0 ->    true default -> false }; System.out.print(hasEggs);
+B.  boolean hasEggs = switch (numEggs) { case 0 ->    true; default -> false; }; System.out.print(hasEggs);
+C.  boolean hasEggs = switch (numEggs) { case 0 ->   return true; default -> return false; }; System.out.print(hasEggs);
+D.  boolean hasEggs = switch (numEggs) { case 0 ->    {yield true}; default -> {yield false}; }; System.out.print(hasEggs);
+E.  boolean hasEggs = switch (numEggs) { case 0 ->   {yield true;} default -> {yield false;} }; System.out.print(hasEggs);
+F.  boolean hasEggs = switch (numEggs) { case 0 ->    {return true;} default -> {return false;} }; System.out.print(hasEggs);
+16. Which of the following changes, when applied independently, will print the same result as the original implementation? (Choose two.) 10: long sum = IntStream.of(4, 6, 8) 11:    .boxed() 12:    .parallel() 13:    .mapToInt(x -> x)
+     14:    .sum();
+     15: System.out.print(sum);
+A.  Change the type on line 10 to double.
+B.  Change the type on line 10 to int.
+C.  Change line 11 to unboxed().
+D.  Remove line 11.
+E.  Remove line 12.
+F.  Remove line 13.
+17.  How many objects are eligible for garbage collection immediately before the end of the main() method?
+     public class Tennis {
+        public static void main(String[] game) {
+           String[] balls = new String[1];
+           int[] scores = new int[1];
+           balls = null;
+           scores = null;
+        } }
+A.  None
+B.  One
+C.  Two
+D.  Three
+E.  The code does not compile.
+F.  None of the above.
+18. What is true about the following?
+     import java.util.*;
+     public class Yellow {
+        public static void main(String[] args) {
+           List list = Arrays.asList("Sunny");
+           method(list);________________________________// c1
+        }
+   private static void method(Collection<?> x) {   // c2
+      x.forEach(a -> {});_____________________________// c3
+  } }
+A.  The code doesnt compile due to line c1.
+B.  The code doesnt compile due to line c2.
+C.  The code doesnt compile due to line c3.
+D.  The code compiles and runs without output.
+E.  The code compiles but throws an exception at runtime.
+19. What is true of the equals() method in this record?
+public record Coin(boolean heads) {
+   public boolean equals(Object obj) {
+      if (! (obj instanceof Coin coin)) {
+         return false;
+     }
+     return heads == coin.heads;
+   } }
+A.  It returns true when passed in a null.
+B.  It throws an exception when passed a Boolean instead of a Coin.
+C.  It does not compile due to the instanceof.
+D.  It does not compile because equals() is not allowed to be implemented in a record.
+E.  None of the above.
+20. Which message does the following application print?
+package ranch;
+public class Cowboy {
+   private int space = 5;
+   private double ship = space < 2 ? 3L : 10.0f;  // g1
+   public void printMessage() {
+      if(ship>1) {
+         System.out.print("Goodbye!");
+      } if(ship<10 && space>=2)___________________// g2
+         System.out.print("Hello!");
+      else System.out.print("See you again!");
+   }
+   public static final void main(String... stars) {
+      new Cowboy().printMessage();
+   } }
+A.  Hello!
+B.  Goodbye!
+C.  See you again!
+D.  It does not compile because of line g1.
+E.  It does not compile because of line g2.
+F.  None of the above.
+21. What is the result of compiling and running the following application?
+package names;
+import java.util.*;
+import java.util.function.*;
+interface ApplyFilter {
+   void filter(List<String> input);
+}
+public class FilterBobs {
+   static Function<String,String> first = s ->
+      {System.out.println(s); return s;};
+   static Predicate second = t -> "bob".equalsIgnoreCase(t);
+   public void process(ApplyFilter a, List<String> list) {
+      a.filter(list);
+   }
+   public static void main(String[] contestants) {
+      final List<String> people = new ArrayList<>();
+      people.add("Bob");
+      people.add("bob");
+      people.add("Tina");
+      people.add("Louise");
+      final FilterBobs f = new FilterBobs();
+      f.process(q -> {
+         q.removeIf(second);
+         q.forEach(first);
+      }, people);
+   } }
+A.  It prints two lines.
+B.  It prints three lines.
+C.  One line of code does not compile.
+D.  Two lines of code do not compile.
+E.  Three lines of code do not compile.
+F.  The code compiles but prints an exception at runtime.
+22. How many of the following variable declarations compile?
+1:  import java.util.*;
+2:  public class ListOfList {
+3:     public void create() {
+4:        List<?> n = new ArrayList<>(); 5:
+6:__________List<? extends RuntimeException> o
+7:           = new ArrayList<Exception>(); 8:
+9:__________List<? super RuntimeException> p
+10:          = new ArrayList<Exception>(); 11:
+12:       List<T> q = new ArrayList<?>(); 13:
+14:       List<T extends RuntimeException> r
+15:          = new ArrayList<Exception>(); 16:
+17:       List<T super RuntimeException> s
+18:          = new ArrayList<Exception>();
+19:    } }
+A.  None
+B.  One
+C.  Two
+D.  Three
+E.  Four
+F.  Five
+23. What is the result of running the following program?
+1: package fun;
+2: public class Sudoku {
+3:    static int[][] game;
+4:    public static void main(String args[]) {
+5:       game[3][3] = 6;
+6:       Object[] obj = game;
+7:       obj[3] = 'X';
+8:       System.out.println(game[3][3]);
+9:    } }
+A.  6
+B.  X
+C.  The code does not compile.
+D.  The code compiles but throws a NullPointerException at runtime.
+E.  The code compiles but throws a different exception at runtime.
+F.  The output is not guaranteed.
+24. Which commands can include the following output? (Choose two.) JDK Internal API   Suggested Replacement sun.misc.Unsafe    See http://openjdk.java.net/jeps/260
+A.  jdeps sneaky.jar
+B.  jdeps j sneaky.jar
+C.  jdeps s sneaky.jar
+D.  jdeps  - - internals  sneaky.jar
+E.  jdeps -jdkinternals sneaky.jar
+F.  jdeps  - - jdk- internals  sneaky.jar
+25. Assuming the following class is concurrently accessed by numerous threads, which statement about the CountSheep class is correct?
+package fence;
+import java.util.concurrent.atomic.*;
+public class CountSheep {
+   private static AtomicInteger counter = new AtomicInteger();
+   private Object lock = new Object();
+   public synchronized int increment1() {
+      return counter.incrementAndGet();
+   }
+   public static synchronized int increment2() {
+      return counter.getAndIncrement();
+   }
+   public int increment3() {
+      synchronized(lock) {
+         return counter.getAndIncrement();
+      } } }
+A.  The class is thread-safe only if    increment1() is removed.
+B.  The class is thread-safe only if    increment2() is removed.
+C.  The class is thread-safe only if    increment3() is removed.
+D.  The class is already thread-safe.
+E.  The class does not compile.
+F.  The class compiles but may throw an exception at runtime.
+26. How many lines of the main method fail to compile?
+     10: public class Transport {
+     11:    static interface Vehicle {}
+     12:    static class Bus implements Vehicle {}
+     13:
+     14:    public static void main(String[] args) {
+     15:       Bus bus = new Bus();
+     16:
+     17:       System.out.println(null instanceof Bus);
+     18:       System.out.println(bus instanceof Vehicle);
+     19:       System.out.println(bus instanceof Bus);
+     20:       System.out.println(bus instanceof ArrayList);
+     21:       System.out.println(bus instanceof Collection);
+     22: } }
+A.  None
+B.  One
+C.  Two
+D.  Three
+E.  Four
+F.  Five
+27.  What is the output of the following application?
+     package fly;
+     public class Helicopter {
+        public int adjustPropellers(int length, String[] type) {
+           length++;
+           type[0] = "LONG";
+           return length;
+        }
+        public static void main(String[] climb) {
+           final var h = new Helicopter();
+           var length = 5;
+           var type = new String[1];
+           length = h.adjustPropellers(length, type);
+A.  5,LONG
+B.  6,LONG
+C.  5,null
+D.  6,null
+E.  The code does not compile.
+F.  The code compiles but throws an exception at runtime.
+28. What does the following output?
+var dice = new LinkedList<Integer>();
+dice.offer(3);
+dice.offer(2);
+dice.offer(4);
+System.out.print(dice.stream().filter(n -> n != 4));
+A.  2
+B.  3
+C.  [3 2]
+D.  The code does not compile.
+E.  None of the above.
+29. How many of these classes cause a compiler error?
+final class Chimp extends Primate { }
+non- sealed class Bonabo extends Primate { }
+final class Gorilla { }
+public abstract sealed class Primate permits Chimp, Bonabo {
+   abstract String getName();
+}
+A.  Zero
+B.  One
+C.  Two
+D.  Three
+E.  Four
+30. Which statements are true about the requires directive? (Choose two.)
+A.  Changing it to a requires direct directive is always allowed.
+B.  Changing it to a requires direct directive is never allowed.
+C.  Changing it to a requires direct directive is sometimes allowed.
+D.  Including requires java.base is allowed, but redundant.
+E.  Including requires java.base is never allowed.
+F.  Including requires java.base is sometimes needed to change the meaning of a file.
+31. Which of the following are true right before the transformation() method ends? (Choose two.)
+public static void transformation() {
+   String state1 = new String("ice");
+   String state2 = new String("water");
+   String state3 = new String("mist");
+   state1 = state2;
+   state2 = state3;
+   state3 = state1;
+}
+A.  No objects are eligible for garbage collection.
+B.  One object is eligible for garbage collection.
+C.  Two objects are eligible for garbage collection.
+D.  No objects are guaranteed to be garbage collected.
+E.  One object is guaranteed to be garbage collected.
+F.  Two objects are guaranteed to be garbage collected.
+32. Suppose we have a peacocks table with two columns: name and rating. What does the fol- lowing code output if the table is empty?
+8:  var url = "jdbc:hsqldb:file:birds";
+9:  var sql = "SELECT name FROM peacocks WHERE name = ?";
+10: try (var conn = DriverManager.getConnection(url); 11:    var stmt = conn.prepareStatement(sql, 12:       ResultSet.TYPE_FORWARD_ONLY,
+13:       ResultSet.CONCUR_READ_ONLY)) { 14:
+15:    stmt.setString(1, "Feathers"); 16:
+17:    try (var rs = stmt.execute()) {
+18:       System.out.println(rs.next());
+19:    }
+20: }
+A.  false
+B.  true
+C.  The code does not compile due to lines 1013.
+D.  The code does not compile due to lines 1718.
+E.  The code does not compile due to another line.
+F.  The code throws an exception at runtime.
+33. Which two numbers does the following code print? (Choose two.)
+10: int numWorms = 0;
+11: ++numWorms;
+12: System.out.println(numWorms++);
+13: int mask = ~numWorms;
+14: System.out.println(mask);
+A.  1
+B.  2
+C.  3
+D.  - 1
+E.  - 2
+F.  - 3
+34. Bill wants to create a program that reads all of the lines of all of his books using NIO.2. Unfortunately, Bill may have made a few mistakes writing his program. How many lines of the following class contain compilation errors?
+1:  package bookworm;
+2:  import java.io.*;
+3:  import java.nio.file.*;
+4:  public class ReadEverything {
+5:     public void readFile(Path p) {
+6:        try {
+7:___________Files.readAllLines(p)
+8:___________.parallel()
+9:           .forEach(System.out::println);
+10:       } catch (Exception e) {}
+11:    }
+12:    public void read(Path directory) throws Exception { 13:       Files.walk(directory)
+14:__________.filter(p -> File.isRegularFile(p))
+15:          .forEach(x -> readFile(x));
+16:    }
+17:    public static void main(String[] b) throws IOException {
+18:       Path p = Path.get("collection");
+19:       new ReadEverything().read(p);
+20:    } }
+A.  None. Bills implementation is correct.
+B.  One
+C.  Two
+D.  Three
+E.  Four
+F.  Five
+35. Fill in the blank with the pair that compiles and runs without throwing any exceptions. (Choose three.)
+var x = new ArrayDeque<>();
+x.offer(18);
+x._____________________();
+x._____________________();
+A.  peek, peek
+B.  peekFirst, peekLast
+C.  poll, poll
+D.  pop, pop
+E.  remove, remove
+F.  removeFirst, removeLast
+36. What is the output of the following?
+public class InitOrder {
+   { System.out.print("1"); }
+   static { System.out.print("2"); }
+   public InitOrder() {
+      System.out.print("3");
+   }
+   public static void callMe() {
+      System.out.print("4");
+   }
+   public static void main(String[] args) {
+      callMe();
+      callMe();
+      System.out.print("5");
+   } }
+A.  1223445
+B.  2445
+C.  22445
+D.  223445
+E.  2233445
+F.  None of the above
+37.  Which of the following exceptions need to be handled or declared by the method in which they are thrown? (Choose two.)
+A.  FileNotFoundException
+B.  ArithmeticException
+C.  IOException
+D.  BigProblem
+E.  IllegalArgumentException
+F.  RuntimeException
+38. Given that FileNotFoundException is a subclass of IOException and Long is a subclass of Number, what is the output of the following application?
+     package materials;
+     import java.io.*;
+     class CarbonStructure {
+         protected long count;
+         public abstract Number getCount() throws IOException; // q1
+         public CarbonStructure(int count) { this.count = count; }
+     }
+     public class Diamond extends CarbonStructure {
+        public Diamond() { super(15); }
+        public Long getCount() throws FileNotFoundException { // q2
+           return count;
+        }
+        public static void main(String[] cost) {
+           try {
+              final CarbonStructure ring = new Diamond(); // q3
+A.  null
+B.  15
+C.  It does not compile because of line q1.
+D.  It does not compile because of line q2.
+E.  It does not compile because of line q3.
+F.  It does not compile because of line q4.
+G.  The class compiles but produces an exception at runtime.
+39. Which of the following are valid Locale formats? (Choose two.)
+A.  iw
+B.  UA
+C.  it_ch
+D.  JA_JP
+E.  th_TH
+F.  ES_hn
+40. Which are true statements about the majority of steps in migrating to a modular application? (Choose two.)
+A.  In a bottom-up migration, automatic modules turn into named modules.
+B.  In a bottom-up migration, named modules turn into automatic modules.
+C.  In a bottom-up migration, unnamed modules turn into named modules.
+D.  In a top-down migration, automatic modules turn into named modules.
+E.  In a top-down migration, named modules turn into automatic modules.
+F.  In a top-down migration, unnamed modules turn into named modules.
+41. What is the result of the following?
+ import java.util.*;
+ public class Museums {
+    public static void main(String[] args) {
+       String[] array = {"Natural History", "Science", "Art"};
+       List<String> museums = Arrays.asList(array);
+       museums.remove(2);
+       System.out.println(museums);
+    } }
+A.  [Natural History, Science]
+B.  [Natural History, Science, Art]
+C.  The code does not compile.
+D.  The code compiles but throws an exception at runtime.
+42. Which of the following statements about nested classes are correct? (Choose three.)
+A.  An anonymous class can declare that it implements multiple interfaces.
+B.  All nested classes can contain constant variables.
+C.  A local class can declare that it implements multiple interfaces.
+D.  A member inner class cannot contain static methods.
+E.  A static nested class can contain static methods.
+F.  A local class can access all local variables prior to its declaration within a method.
+43. What is the output of the following?
+ var list = Arrays.asList("flower", "seed", "plant");
+ Collections.sort(list);
+ Collections.reverse(list);
+ var result = Collections.binarySearch(list,
+    list.get(0), Comparator.reverseOrder());
+ System.out.println(result);
+A.  0
+B.  1
+C.  2
+D.  The code does not compile.
+E.  The code compiles but throws an exception at runtime.
+F.  The output is not guaranteed.
+44. Which two options when inserted independently can fill in the blank to compile the code? (Choose two.) javac       mods -d birds com-__________bird/*.java *.java
+A.  - cp
+B.  - m
+C.  - p
+D.  - classpath
+E.  - - classpath
+F.  - - module- path
+45. What is the result of calling this method?
+ 16: void play() {
+ 17:    record Toy(String name){ }
+ 18:
+ 19:    var toys = Stream.of( 20:       new Toy("Jack in the Box"), 21:       new Toy("Slinky"), 22:       new Toy("Yo-Yo"),
+ 23:       new Toy("Rubik's Cube")); 24:
+25:    var spliterator = toys.spliterator();
+26:    var batch1 = spliterator.trySplit();
+27:    var batch2 = spliterator.trySplit();
+28:    var batch3 = spliterator.trySplit(); 29:
+30:    batch1.forEachRemaining(System.out::print);
+31: }
+A.  Toy[name=Jack in the Box]
+B.  Toy[name=Slinky]
+C.  Toy[name=Yo- Yo]
+D.  Toy[name= Rubik's Cube]
+E.  Toy[name=Jack in the Box]Toy[name=Slinky]
+F.  Toy[name=Yo- Yo]Toy[name=Rubik's  Cube]
+G.  No output is printed.
+H.  An exception is thrown.
+46. How many lines of the following application need to be changed to make the code compile?
+1:  package castles;
+2:  import java.io.*;
+3:  public class Palace {
+4:     public void openDrawbridge() throws Exception {
+5:        try {
+6:           throw new Exception("Problem");
+7:        } catch (IOException e) {
+8:           throw new IOException();
+9:        } catch (FileNotFoundException e) {
+10:          try {
+11:             throw new IOException();
+12:          } catch (Exception e) {
+13:          } finally {
+14:             System.out.println("Almost done");
+15:          }
+16:       } finally {
+17:          throw new RuntimeException("Unending problem");
+18:       } }
+19:    public static void main(String[] moat)
+20:          throws IllegalArgumentException {
+21:       new Palace().openDrawbridge();
+22:    } }
+A.  None. The code compiles and produces a stack trace at runtime.
+B.  One
+C.  Two
+D.  Three
+E.  Four
+F.  Five
+47.  How many lines need to be changed to make this code compile?
+     1: public class Massage {
+     2:    var name = "Sherrin";
+     3:    public void massage(var num) {
+     4:       var zip = 10017;
+     5:       var underscores = 1_001_7;
+     6:       var _ = "";
+     7:    } }
+A.  Zero
+B.  One
+C.  Two
+D.  Three
+E.  Four
+48. How many of these variables are true?
+     var lol = "lol";
+     var moreLols = """
+        lol
+     """;
+     var smiley = lol.toUpperCase() == lol;
+     var smirk = lol.toUpperCase() == lol.toUpperCase();
+     var blush = lol.toUpperCase().equals(lol);
+     var cool = lol.toUpperCase().equals(lol.toUpperCase());
+     var wink = lol.toUpperCase().equalsIgnoreCase(lol);
+     var yawn = lol.toUpperCase().equalsIgnoreCase(
+        lol.toUpperCase());
+     var sigh = lol.equals(moreLols);
+A.  One
+B.  Two
+C.  Three
+D.  Four
+E.  Five
+F.  Six
+G.  None. The code does not compile.
+49. Which of the following are valid lambda expressions? (Choose three.)
+A.  () -> {}
+B.  (Double adder) -> {int y; System.out.print(adder);
+      return adder;}
+C.  (Long w) -> {Long w=5; return 5;}
+D.  (int count, vote) -> count*vote
+E.  dog -> dog
+F.  name -> {name.toUpperCase()}
+50. What can fill in the blank so the play() method can be called from all classes in the com.mammal.eland package, but not the com.mammal.gopher package?
+ package com.mammal;
+ public class Enrichment {
+            void play() {}
+ }
+A.  Leave it blank
+B.  private
+C.  protected
+D.  public
+E.  None of the above

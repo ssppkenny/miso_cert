@@ -1,0 +1,608 @@
+1.   How many times does the following code print How rude! at runtime?
+     public class Speaking {
+        void talk() {
+           try {
+              Thread.sleep(10_000);
+           } catch (InterruptedException e) {
+2.   What is the output of the following code snippet?
+     Callable c = new Callable() {
+        public Object run() {
+3.   Which of the following methods is not available on an ExecutorService instance? (Choose two.)
+A.  execute(Callable)
+B.  shutdownNow()
+C.  submit(Runnable)
+D.  exit()
+E.  submit(Callable)
+F.  execute(Runnable)
+4.   The following program simulates flipping a coin an even number of times. Assuming five seconds is enough time for all of the tasks to finish, what is the output of the following application?
+     import java.util.concurrent.*;
+     import java.util.concurrent.atomic.*;
+     public class Luck {
+        private AtomicBoolean coin = new AtomicBoolean(false);
+        void flip() {
+           coin.getAndSet(!coin.get());
+        }
+        public static void main(String[] gamble) throws Exception {
+           var luck = new Luck();
+           ExecutorService s = Executors.newCachedThreadPool();
+           for(int i=0; i<1000; i++) {
+              s.execute(() -> luck.flip());
+           }
+           s.shutdown();
+           Thread.sleep(5000);
+5.   Which of the following is a recommended way to define an asynchronous task?
+A.  Create a Callable expression and pass it to an instance of an Executor.
+B.  Create a class that extends Thread and override the start() method.
+C.  Create a Runnable lambda expression and pass it to a Thread constructor.
+D.  Create an anonymous Runnable class that overrides the begin() method.
+E.  All of the above.
+6.   Assuming five seconds is enough time for the threads in this program to complete, what is the expected result of executing the following program?
+     import java.util.*;
+     public class Dance {
+        int count = 0;
+        synchronized int step() { return count++; }
+        public static void main(String[] args) throws InterruptedException {
+           var waltz = new Dance();
+           var dancers = new ArrayList<Thread>();
+           for(int i=0; i<10; i++)
+              dancers.add(new Thread(() -> waltz.step()));
+           for(Thread dancer : dancers)
+              dancer.start();
+           dancers.forEach(d -> d.interrupt());
+           Thread.sleep(5_000);
+7.   Given the following program, how many times is Locked! expected to be printed?
+     import java.util.concurrent.locks.*;
+     public class Padlock {
+        private Lock lock = new ReentrantLock();
+        public void lockUp() {
+           if (lock.tryLock()) {
+              lock.lock();
+8.   Which statements about the following application are correct? (Choose two.)
+     import java.util.concurrent.atomic.*;
+     import java.util.stream.*;
+     public class TicketTaker {
+        long ticketsSold;
+        final AtomicInteger ticketsTaken;
+        public TicketTaker() {
+           ticketsSold = 0;
+           ticketsTaken = new AtomicInteger(0);
+        }
+        public void performJob() {
+           IntStream.iterate(1, p -> p+1)
+              .parallel()
+              .limit(100)
+              .forEach(i -> ticketsTaken.getAndIncrement());
+           IntStream.iterate(1, q -> q+1)
+              .parallel()
+              .limit(500)
+              .forEach(i -> ++ticketsSold);
+9.   Given the original array, how many of the following for statements result in an exception at runtime, assuming each is executed independently?
+     var original = List.of(1,2,3,4,5);
+     var copy1 = new CopyOnWriteArrayList<Integer>(original);
+     for(Integer w : copy1)
+        copy1.remove(w);
+     var copy2 = Collections.synchronizedList(original);
+     for(Integer w : copy2)
+        copy2.remove(w);
+     var copy3 = new ArrayList<Integer>(original);
+     for(Integer w : copy3)
+        copy3.remove(w);
+     var copy4 = new ConcurrentLinkedQueue<Integer>(original);
+     for(Integer w : copy4)
+        copy4.remove(w);
+A.  Zero
+B.  One
+C.  Two
+D.  Three
+E.  Four
+F.  The code does not compile.
+10. Fill in the blanks: ______________ is a special case of ______________, in which two or more active threads try to acquire the same set of locks and are repeatedly unsuccessful.
+A.  Deadlock, livelock
+B.  Deadlock, resource starvation
+C.  Livelock, resource starvation
+D.  Resource starvation, race conditions
+E.  Resource starvation, livelock
+F.  None of the above
+11.  What is the output of the following program?
+     import java.util.stream.*;
+     public class Bull {
+        void charge() {
+           IntStream.range(1,6)
+              .parallel()
+              .forEachOrdered(System.out::print);
+        }
+        public static void main(String[] args) {
+           var b = new Bull();
+           b.charge();
+        } }
+A.  12345
+B.  54321
+C.  The output cannot be determined ahead of time.
+D.  The code does not compile.
+E.  An exception is thrown at runtime.
+F.  None of the above.
+12. What is the output of the following application?
+     3:  public class TpsReport {
+     4:     public void submitReports() {
+     5:        var s = Executors.newCachedThreadPool();
+     6:        Future bosses = s.submit(() -> System.out.print("1"));
+     7:        s.shutdown();
+     8:        System.out.print(bosses.get());
+     9:     }
+ 10:    public static void main(String[] memo) {
+ 11:       new TpsReport().submitReports();
+ 12:    } }
+A.  null
+B.  1null
+C.  1
+D.  Line 6 does not compile.
+E.  Line 8 does not compile.
+F.  An exception is thrown at runtime.
+13. Which of the following static methods do not exist in the Executors class? (Choose two.)
+A.  newFixedScheduledThreadPool()
+B.  newThreadPool()
+C.  newFixedThreadPool(int)
+D.  newSingleThreadExecutor()
+E.  newScheduledThreadPool(int)
+F.  newSingleThreadScheduledExecutor()
+14. How many times does the following application print Ready at runtime?
+ package parade;
+ import java.util.concurrent.*;
+ public class CartoonCat {
+    private void await(CyclicBarrier c) {
+       try {
+          c.await();
+       } catch (Exception e) {}
+    }
+    public void march(CyclicBarrier c) {
+       var s = Executors.newSingleThreadExecutor();
+       for(int i=0; i<12; i++)
+          s.execute(() -> await(c));
+       s.shutdown();
+    }
+    public static void main(String... strings) {
+       new CartoonCat().march(new CyclicBarrier(4,
+             () -> System.out.println("Ready")));
+    } }
+A.  Zero
+B.  One
+C.  Three
+D.  The code does not compile.
+E.  An exception is thrown at runtime.
+15. Lets say you needed a thread executor to create tasks for a CyclicBarrier that has a barrier limit of five threads. Which static method in ExecutorService should you use to obtain it?
+A.  newSingleThreadExecutor()
+B.  newSingleThreadScheduledExecutor()
+C.  newCachedThreadPool()
+D.  newFixedThreadPool(2)
+E.  None of the above
+16. The following diagrams represent the order of read/write operations of two threads sharing a common variable. Each thread first reads the value of the variable from memory and then writes a new value of the variable back to memory. Which diagram demonstrates proper synchronization? A.
+          Thread 1
+          Shared Memory
+       Thread 2
+          Time
+B.
+       Thread 1
+          Shared Memory Thread 2 Time C.
+   Thread 1 Shared Memory
+   Thread 2
+   Time D.
+   Thread 1 Shared Memory
+           Thread 2
+           Time
+17.  What is the output of the following program? (Choose three.)
+     import java.util.concurrent.atomic.*;
+     import java.util.stream.*;
+     public class Circus {
+        private static int seal = 0;
+        private static volatile int tiger = 0;
+        private static AtomicInteger lion = new AtomicInteger(0);
+        public static void main(String[] tent) {
+           Stream.iterate(0, x -> x + 1)
+              .parallel()
+              .limit(100)
+              .forEach(q -> {seal++; tiger++; lion.incrementAndGet();});
+18. What is the output of the following application?
+import java.util.*;
+import java.util.concurrent.*;
+public class Race {
+   ExecutorService service = Executors.newFixedThreadPool(8);
+   public static int sleep() {
+      try { Thread.sleep(1000); } catch (Exception e) {}
+      return 1;
+   }
+   public void hare() {
+      try {
+         Callable<Integer> c = () -> sleep();
+         final var r = List.of(c,c,c);
+         var results = service.invokeAll(r);
+         System.out.println("Hare won the race!");
+      } catch (Exception e) {e.printStackTrace();}
+   }
+   public void tortoise() {
+      try {
+         Callable<Integer> c = () -> sleep();
+         final var r = List.of(c,c,c);
+         Integer result = service.invokeAny(r);
+         System.out.println("Tortoise won the race!");
+      } catch (Exception e) {e.printStackTrace();}
+   }
+   public static void main(String[] p) throws Exception {
+      var race = new Race();
+      race.service.execute(() -> race.hare());
+      race.service.execute(() -> race.tortoise());
+   } }
+A.  Hare won the race! is printed first.
+B.  Tortoise won the race! is printed first.
+C.  The code does not compile.
+D.  The code hangs indefinitely at runtime.
+E.  The code throws an exception at runtime.
+F.  The output cannot be determined ahead of time.
+19. Which of the following concurrent collections is sorted? (Choose two.)
+A.  ConcurrentSkipList
+B.  ConcurrentSkipListSet
+C.  CopyOnWriteArrayList
+D.  ConcurrentSkipListMap
+E.  ConcurrentLinkedQueue
+F.  LinkedBlockingQueue
+20. What is the output of the following application?
+ package taxes;
+ import java.util.concurrent.*;
+ public class Accountant {
+    public static void completePaperwork() {
+       System.out.print("[Filing]");
+    }
+    public static double getPi() {
+       return 3.14159;
+    }
+    public static void main(String[] args) throws Exception {
+       ExecutorService x = Executors.newSingleThreadExecutor();
+       Future<?> f1 = x.submit(() -> completePaperwork());
+       Future<Object> f2 = x.submit(() -> getPi());
+       System.out.print(f1.get()+" "+f2.get());
+       x.shutdown();
+    } }
+A.  [Filing]
+B.  [Filing]3.14159
+C.  [Filing]null 3.14159
+D.  The declaration of f1 does not compile.
+E.  The declaration of f2 does not compile.
+F.  The output cannot be determined ahead of time.
+21. Assuming 10 seconds is enough time for all the tasks to finish, what statements about the fol- lowing program are correct? (Choose two.)
+import java.util.concurrent.*;
+import java.util.concurrent.atomic.*;
+public class Clock {
+   private AtomicLong bigHand = new AtomicLong(0);
+   void incrementBy10() {
+      bigHand.getAndSet(bigHand.get() + 10);
+   }
+   public static void main(String[] c) throws Exception {
+      var smartWatch = new Clock();
+      ExecutorService s = Executors.newCachedThreadPool();
+      for(int i=0; i<100; i++) {
+         s.submit(() -> smartWatch.incrementBy10()).get();
+      }
+      s.shutdown();
+      s.awaitTermination(10, TimeUnit.SECONDS);
+      System.out.println(smartWatch.bigHand.get());
+   } }
+A.  The code does not compile.
+B.  The incrementBy10() method is thread-safe.
+C.  The incrementBy10() method is not thread-safe.
+D.  The output is 1000 on every execution.
+E.  The output cannot be determined ahead of time.
+F.  The code hangs indefinitely at runtime.
+22. What is the most likely result of executing the following application?
+package jokes;
+import java.util.concurrent.*;
+public class Riddle {
+   public void sleep() {
+      try { Thread.sleep(5000); } catch (Exception e) {}
+   }
+   public String getQuestion(Riddle r) {
+      synchronized {
+         sleep();
+         if(r != null) r.getAnswer(null);
+         return "How many programmers does it take "
+               + "to change a light bulb?";
+      } }
+    public synchronized String getAnswer(Riddle r) {
+       sleep();
+       if(r != null) r.getAnswer(null);
+       return "None, that's a hardware problem";
+    }
+    public static void main(String... ununused) {
+       var r1 = new Riddle();
+       var r2 = new Riddle();
+       var s = Executors.newFixedThreadPool(2);
+       s.submit(() -> r1.getQuestion(r2));
+       s.execute(() -> r2.getAnswer(r1));
+       s.shutdown();
+    } }
+A.  A deadlock is produced at runtime.
+B.  A livelock is produced at runtime.
+C.  The application completes successfully.
+D.  The code does not compile.
+E.  The code hangs indefinitely at runtime.
+F.  The output cannot be determined ahead of time.
+23. Which ScheduledExecutorService method can result in the same action being executed by two threads at the same time?
+A.  scheduleAtFixedDelay()
+B.  scheduleAtFixedRate()
+C.  scheduleWithFixedDelay()
+D.  scheduleAtSameRate()
+E.  scheduleWithRate()
+F.  None of the above
+24. What is the output of the following application?
+ package olympics;
+ import java.util.concurrent.*;
+ public class Athlete {
+    int stroke = 0;
+    public synchronized void swimming() {
+       stroke++;
+    }
+    private int getStroke() {
+       synchronized(this) { return stroke; }
+    }
+    public static void main(String... laps) {
+       ExecutorService s = Executors.newFixedThreadPool(10);
+       Athlete a = new Athlete();
+       for(int i=0; i<1000; i++) {
+          s.execute(() -> a.swimming());
+       }
+       s.shutdown();
+       System.out.print(a.getStroke());
+    } }
+A.  A deadlock is produced at runtime.
+B.  A livelock is produced at runtime.
+C.  1000
+D.  The code does not compile.
+E.  The result is unknown until runtime because stroke is not written in a thread-safe
+      manner and a write may be lost.
+F.  None of the above.
+25. Which of the following is most likely to be caused by a race condition?
+A.  A thread perpetually denied access to a resource
+B.  A program hanging indefinitely
+C.  An int variable incorrectly reporting the number of times an operation was performed
+D.  Two threads actively trying to restart a blocked process that is guaranteed to always end
+      the same way
+E.  Two threads endlessly waiting on each other to release shared locks
+26. Which statement about the following class is correct?
+ package my;
+ import java.util.*;
+ public class ThreadSafeList {
+    private List<Integer> data = new ArrayList<>();
+    public synchronized void addValue(int value) {
+       data.add(value);
+    }
+    public int getValue(int index) {
+       return data.get(index);
+    }
+        public int size() {
+           synchronized(ThreadSafeList.class) {
+              return data.size();
+           } } }
+A.  The code compiles and is thread-safe.
+B.  The code compiles and is not thread-safe.
+C.  The code does not compile because of the size() method.
+D.  The code does not compile because of the getValue() method.
+E.  The code does not compile for another reason.
+F.  None of the above.
+27.  Which two method names, when filled into the print2() method, produce the same output as the print1() method? Assume the input arguments for each represent the same non-null numeric value.
+     public static synchronized void print1(int counter) {
+        System.out.println(counter--  );
+        System.out.println(++counter);
+     }
+     public static synchronized void print2(AtomicInteger counter) {
+        System.out.println(counter.____________________);
+        System.out.println(counter.____________________);
+     }
+A.  decrementAndGet() and getAndIncrement()
+B.  decrementAndGet() and incrementAndGet()
+C.  getAndDecrement() and getAndIncrement()
+D.  getAndDecrement() and incrementAndGet()
+E.  None of the above
+28. What is the result of executing the following application multiple times?
+     package bears;
+     import java.util.*;
+     public class Bounce {
+        public static void main(String... legend) {
+           List.of(1,2,3,4).stream()
+              .forEach(System.out::println);
+           List.of(1,2,3,4).parallel()
+              .forEach(System.out::println);
+      List.of(1,2,3,4).parallel()
+         .forEachOrdered(System.out::println);
+   } }
+A.  Only the first stream prints the same order every time.
+B.  Only the first and second streams print the same order every time.
+C.  Only the first and third streams print the same order every time.
+D.  All of the streams print the same order every time.
+E.  None of the streams prints the same order every time.
+F.  None of the above.
+29. How many lines of the following code snippet contain compilation errors? 11: ScheduledExecutorService t = Executors
+12:    .newSingleThreadScheduledExecutor();
+13: Future result = t.execute(System.out::println);
+14: t.invokeAll(null);
+15: t.scheduleAtFixedRate(() -> {return;},5,TimeUnit.MINUTES);
+A.  None
+B.  One
+C.  Two
+D.  Three
+E.  None of the above
+30. How many times does the following application print W at runtime?
+package crew;
+import java.util.concurrent.*;
+import java.util.stream.*;
+public class Boat {
+   private void waitTillFinished(CyclicBarrier c) {
+      try {
+         c.await();
+         System.out.print("W");
+      } catch (Exception e) {}
+   }
+   public void row(ExecutorService s) {
+      var cb = new CyclicBarrier(5);
+      IntStream.iterate(1, i-> i+1)
+         .limit(12)
+         .forEach(i -> s.submit(() -__________> waitTillFinished(cb)));
+   }
+    public static void main(String[] oars) {
+       ExecutorService service = null;
+       try {
+          service = Executors.newCachedThreadPool();
+          new Boat().row(service);
+       } finally {
+          service.isShutdown();
+       } } }
+A.  Zero.
+B.  Ten.
+C.  Twelve.
+D.  The code does not compile.
+E.  The output cannot be determined ahead of time.
+F.  None of the above.
+31. Using the Boat class from the previous question, what is the final state of the application?
+A.  The application produces an exception at runtime.
+B.  The application terminates successfully.
+C.  The application hangs indefinitely because the ExecutorService is never shut down.
+D.  The application hangs at runtime.
+E.  None of the above.
+32. Given the following code snippet, what statement about the values printed on lines p1 and p2 is correct?
+ var db = Collections.synchronizedList(new ArrayList<>());
+ IntStream.range(1,6)
+    .parallel()
+    .map(i -> {db.add(i); return i;})
+    .forEachOrdered(System.out::print);  // p1
+ System.out.println();
+ db.forEach(System.out::print);__________// p2
+A.  They are always the same.
+B.  They are sometimes the same.
+C.  They are never the same.
+D.  The code does not compile.
+E.  The code will produce a ConcurrentModificationException at runtime.
+F.  None of the above.
+33. Given the following program, how many times is TV Time expected to be printed? Assume 10 seconds is enough time for each task created by the program to complete.
+import java.util.concurrent.*;
+import java.util.concurrent.locks.*;
+public class Television {
+   private static Lock myTurn = new ReentrantLock();
+   public void watch() {
+      try {
+         if (myTurn.lock(5, TimeUnit.SECONDS)) {
+34. Given the original array, how many of the following for statements enter an infinite loop at runtime, assuming each is executed independently?
+var original = new ArrayList<Integer>(List.of(1,2,3));
+var copy1 = new ArrayList<Integer>(original);
+for(Integer q : copy1)
+   copy1.add(1);
+var copy2 = new CopyOnWriteArrayList<Integer>(original);
+for(Integer q : copy2)
+   copy2.add(2);
+ var copy3 = new LinkedBlockingQueue<Integer>(original);
+ for(Integer q : copy3)
+    copy3.offer(3);
+ var copy4 = Collections.synchronizedList(original);
+ for(Integer q : copy4)
+    copy4.add(4);
+A.  Zero
+B.  One
+C.  Two
+D.  Three
+E.  Four
+F.  The code does not compile.
+35. Which ExecutorService method guarantees all running tasks are stopped in an orderly fashion?
+A.  shutdown()
+B.  shutdownNow()
+C.  halt()
+D.  shutdownAndTerminate()
+E.  None of the above
+36. Assuming 10 seconds is enough time for all of the tasks to finish, what is the output of the following application?
+ import java.util.concurrent.*;
+ public class Bank {
+    static int cookies = 0;
+    public synchronized void deposit(int amount) {
+       cookies += amount;
+    }
+    public static synchronized void withdrawal(int amount) {
+       cookies -= amount;
+    }
+    public static void main(String[] amount) throws Exception {
+       var teller = Executors.newScheduledThreadPool(50);
+       Bank bank = new Bank();
+       for(int i=0; i<25; i++) {
+          teller.submit(() -> bank.deposit(5));
+          teller.submit(() -> bank.withdrawal(5));
+       }
+       teller.shutdown();
+           teller.awaitTermination(10, TimeUnit.SECONDS);
+37.  What is the output of the following application?
+     import java.util.*;
+     public class SearchList<T> {
+        private List<T> data;
+        private boolean foundMatch = false;
+        public SearchList(List<T> list) {
+           this.data = list;
+        }
+        public void exists(T v,int start, int end) {
+           if(end-start==0) {}
+           else if(end-start==1) {
+     __________ foundMatch = foundMatch || v.equals(data.get(start));
+           } else {
+              final int middle = start + (end-start)/2;
+              new Thread(() -> exists(v,start,middle)).run();
+              new Thread(() -> exists(v,middle,end)).run();
+           }
+        }
+        public static void main(String[] a) throws Exception {
+           List<Integer> data = List.of(1,2,3,4,5,6);
+           SearchList<Integer> t = new SearchList<Integer>(data);
+           t.exists(5, 0, data.size());
+38. Given the following code snippet, what statement about the values printed on lines q1 and q2 is correct?
+var mitchsWorkout = new CopyOnWriteArrayList<Integer>();
+List.of(1,5,7,9).stream().parallel()
+   .forEach(mitchsWorkout::add); mitchsWorkout
+   .forEachOrdered(System.out::print);  // q1
+List.of(1,5,7,9).stream().parallel()
+   .forEachOrdered(System.out::print);  // q2
+A.  They are always the same.
+B.  They are sometimes the same.
+C.  They are never the same.
+D.  The code does not compile.
+E.  The code will produce a ConcurrentModificationException at runtime.
+F.  None of the above.
+39. What is the output of the following program? (Choose three.)
+import java.util.concurrent.atomic.*;
+import java.util.stream.*;
+public class Moon {
+   private volatile AtomicLong green = new AtomicLong(0);
+   private volatile int cheese = 0;
+   private volatile int rocket = 0;
+   private void takeOff() {
+      Stream.iterate(0, x -> x + 1).parallel().limit(1000).forEach(q -__________> {
+         green.getAndIncrement();
+         cheese++;
+         synchronized (this) {
+            ++rocket;
+         }
+      });
+      System.out.println(green + "," + cheese + "," + rocket);
+   }
+   public static void main(String[] tent) {
+      new Moon().takeOff();
+   } }
+A.  The first number printed may be less than 1000.
+B.  The first number printed is always 1000.
+C.  The second number printed may be less than 1000.
+D.  The second number printed is always 1000.
+E.  The third number printed may be less than 1000.
+F.  The third number printed is always 1000.
+40. Assuming the two stream operators are compiled and executed independently, which statements are correct? (Choose two.)
+var drink = List.of("coke", "soda", "pop");
+System.out.print(drink.parallelStream()
+   .parallel()
+   .reduce(0, (c1, c2) -> c1 + c2.length(), (s1, s2) -__________> s1 + s2));
+System.out.print(drink.stream()
+   .reduce(0, (c1, c2) -> c1 + c2.length(), (s1, s2) -__________> s1 + s2));
+A.  The first number printed is sometimes 11.
+B.  The first number printed is always 11.
+C.  The second number printed is sometimes 11.
+D.  The second number printed is always 11.
+E.  The first stream operation does not compile.
+F.  The second stream operation does not compile.
