@@ -43,58 +43,47 @@ cert/
 
 ## Building and Running
 
-### Native build (recommended for development)
+### Build
 
-The native build uses `jsaddle-warp`: Haskell runs on a local server and communicates with the browser via WebSocket.
-
-```bash
-stack build
-stack exec cert-exe
-# Open http://localhost:3000
-```
-
-Set the `PORT` environment variable to change the port (default: `3000`).
-
-For an optimized build:
+The project builds to WebAssembly using the GHC WASM toolchain via Nix:
 
 ```bash
-stack build --ghc-options='-O2'
+nix develop .#wasm --command bash -c "make build"
 ```
 
-For a static binary suitable for deployment:
+This will:
+1. Run `wasm32-wasi-cabal build`
+2. Assemble the `public/` directory with `static/` files and `resources/`
+3. Generate `images.txt` manifests for each chapter
+4. Copy the compiled `app.wasm` and generate `ghc_wasm_jsffi.js`
+
+To also optimize the WASM binary (recommended for deployment):
 
 ```bash
-stack build --ghc-options='-optl-static -optl-pthread'
+nix develop .#wasm --command bash -c "make"
 ```
 
-See [DEPLOYMENT.md](DEPLOYMENT.md) for deployment details.
+`make` runs `build` followed by `optim`, which applies `wasm-opt -O2` and strips debug info.
 
-### WASM build
-
-Requires the GHC WASM toolchain. Install it once:
+### Serve
 
 ```bash
-curl https://gitlab.haskell.org/haskell/ghc-wasm-meta/-/raw/master/bootstrap.sh \
-  | GHCUP_SKIP_UPDATE_CHECK=1 sh
-source ~/.ghc-wasm/env
+nix develop .#wasm --command bash -c "make serve"
+# Open http://localhost:8080
 ```
 
-Then build:
+`make serve` runs `http-server public --cors`.
 
-```bash
-./build-wasm.sh            # outputs to ./dist/
-./build-wasm.sh --serve    # build and serve on http://localhost:8080
-```
+### Other Makefile targets
 
-Or use the Makefile inside the Nix WASM shell:
-
-```bash
-nix develop .#wasm
-make        # build + optimize
-make serve  # serve public/ on http://localhost:8080
-```
-
-> **Note:** The WASM build compiles successfully but the app does not render to the DOM at runtime due to a `JSM`→`IO` bridge issue between Miso and the GHC WASM backend. The native build is recommended. See [WASM-STATUS.md](WASM-STATUS.md) for details.
+| Target | Description |
+|---|---|
+| `make build` | Compile WASM, assemble `public/` |
+| `make optim` | Optimize and strip `public/app.wasm` |
+| `make serve` | Serve `public/` on http://localhost:8080 |
+| `make clean` | Remove `dist-newstyle/` and `public/` |
+| `make repl` | Interactive browser REPL via `wasm32-wasi-cabal` |
+| `make watch` | Hot-reload with `ghciwatch` |
 
 ### Nix dev shells
 
